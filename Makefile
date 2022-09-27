@@ -1,7 +1,7 @@
 # MODIFIABLE
 CFLAGS 		:= -Werror -Wall -Wextra
 LDFLAGS		:=
-LIBS 		:= -lsfml-graphics -lsfml-window -lsfml-system
+LIBS 		:= -lfmt -lsfml-graphics -lsfml-window -lsfml-system
 
 # NOT MODIFIABLE
 # all what's below must not be modified
@@ -13,7 +13,7 @@ LIBS 		:= -lsfml-graphics -lsfml-window -lsfml-system
 SRCEXT		?= cpp
 HDREXT		?= hpp
 CVERSION	?= 17
-CPPVERSION	?= 20
+CPPVERSION	?= 17
 
 LIB_STATIC_EXT := .a
 LIB_SHARED_EXT := .so

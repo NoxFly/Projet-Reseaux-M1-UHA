@@ -19,7 +19,7 @@ srcDir="./src"
 incDir="./include" # availible only on projectMode = 0
 outDir="./bin"
 buildDir="./build"
-cppVersion=20 # 98, 03, 11, 17, 20, 23
+cppVersion=17 # 98, 03, 11, 17, 20, 23
 cVersion=17 # 89, 99, 11, 17
 # --------------------------------------
 

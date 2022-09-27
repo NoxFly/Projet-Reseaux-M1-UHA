@@ -1,10 +1,12 @@
 #include <iostream>
 
+#include <fmt/core.h>
+
 int main(int argc, char **argv) {
 	(void)argc;
 	(void)argv;
 
-	std::cout << "Hello World" << std::endl;
+	fmt::print("Hello World\n");
 
-	return 0;
+	return EXIT_SUCCESS;
 }
