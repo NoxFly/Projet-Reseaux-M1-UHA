@@ -1,7 +1,7 @@
 # MODIFIABLE
 CFLAGS 		:= -Werror -Wall -Wextra
 LDFLAGS		:=
-LIBS 		:= -lfmt -lsfml-graphics -lsfml-window -lsfml-system
+LIBS 		:= -lsfml-graphics -lsfml-window -lsfml-system
 
 # NOT MODIFIABLE
 # all what's below must not be modified
@@ -132,6 +132,14 @@ ifneq (, $(firstword $(wildcard $(INCDIR)/**/*)))
 	BUILDLIST 	:= $(patsubst $(INCDIR)/%, $(BUILDDIR)/%, $(INCDIRS))
 	INC 		+= $(INCLIST)
 endif # incdir
+
+# project specific
+# windows libs include
+ifeq ($(OS), WINDOWS)
+	INC += -I./libs/include
+	LDFLAGS := -L./libs/lib $(LDFLAGS)
+endif
+
 
 
 ifdef DEBUG

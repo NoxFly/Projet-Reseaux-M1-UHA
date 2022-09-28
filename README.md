@@ -6,7 +6,6 @@ Outil | Version
 ------|--------
 C++   | 20
 SFML  | 2.5
-FMT   | 9.0.0
 OS    | Linux
 
 # Dependencies
@@ -14,7 +13,7 @@ OS    | Linux
 Of course a compiler (gcc or clang), and a bash support.
 
 ```sh
-sudo apt-get install make libsfml-dev libfmt-dev
+sudo apt-get install make libfmt-dev
 ```
 
 
