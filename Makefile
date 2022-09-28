@@ -1,7 +1,7 @@
 # MODIFIABLE
 CFLAGS 		:= -Werror -Wall -Wextra
 LDFLAGS		:=
-LIBS 		:= -lfmt -lsfml-graphics -lsfml-window -lsfml-system
+LIBS 		:= -lsfml-graphics -lsfml-window -lsfml-system
 
 # NOT MODIFIABLE
 # all what's below must not be modified
@@ -133,26 +133,34 @@ ifneq (, $(firstword $(wildcard $(INCDIR)/**/*)))
 	INC 		+= $(INCLIST)
 endif # incdir
 
+# project specific
+# windows libs include
+ifeq ($(OS), WINDOWS)
+	INC += -I./libs/include
+	LDFLAGS := -L./libs/lib $(LDFLAGS)
+endif
+
+
 
 ifdef DEBUG
 OBJECTS 	:= $(patsubst $(SRCDIR)/%, $(BUILDDIR)/%, $(SOURCES:.$(SRCEXT)=.o))
 
 build: $(OBJECTS)
-	@mkdir -p $(TARGETDIR)
+	mkdir -p $(TARGETDIR)
 ifeq ($(VERBOSE), 1)
 	@echo "Linking $(TARGET)..."
 endif
-	@$(LDCC) $(LDFLAGS) $(TARGET) $^ $(LIBS)
+	$(LDCC) $(LDFLAGS) $(TARGET) $^ $(LIBS)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@mkdir -p $(BUILDDIR)
+	mkdir -p $(BUILDDIR)
 ifdef BUILDLIST
-	@mkdir -p $(BUILDLIST)
+	mkdir -p $(BUILDLIST)
 endif
 ifeq ($(VERBOSE), 1)
 	@echo "Compiling $<...";
 endif
-	@$(CC) $(INC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(INC) $(CFLAGS) -c -o $@ $<
 
 else # RELEASE
 
