@@ -13,7 +13,7 @@ OS    | Linux
 Of course a compiler (gcc or clang), and a bash support.
 
 ```sh
-sudo apt-get install make libfmt-dev
+sudo apt-get install make libsfml-dev
 ```
 
 
