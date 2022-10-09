@@ -22,15 +22,13 @@ class Application {
 		~Application();
 
 		/**
-		 * @returns either the application is still running or not.
+		 * @returns Either the application is still running or not.
 		 */
 		bool isRunning() const;
 
 		/**
 		 * Starts the application if it hasn't.
-		 * Hence, generates a new window with loaded configuration.
-		 * Starts the main process in another thread, allowing the rest
-		 * of the application to proceed some stuff, like loading map, etc...
+		 * Calls the launch method.
 		 */
 		void start();
 
@@ -50,6 +48,14 @@ class Application {
 		 * Renders the models on the window.
 		 */
 		void render();
+
+		/**
+		 * Used in a new sf::Thread, allowing the rest
+		 * of the application to proceed some stuff, like loading map, etc...
+		 * Generates a new window with loaded configuration.
+		 * Then calls the animate method.
+		 */
+		void launch();
 
 		/**
 		 * Main loop.

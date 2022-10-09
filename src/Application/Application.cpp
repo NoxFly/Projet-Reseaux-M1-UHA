@@ -4,7 +4,7 @@ Application::Application(int argc, char** argv):
     m_running(false),
     m_mapLayer{}, m_guiLayer{}, m_networkLayer{},
     m_window(nullptr),
-    m_thread(&Application::animate, this)
+    m_thread(&Application::launch, this)
 {
     // TODO : do arg verification & config loader
     (void)argc;
@@ -23,12 +23,11 @@ void Application::start() {
     if(!m_running) {
         m_running = true;
 
-        generateNewWindow();
-
         // TODO : create new MVC for map, gui and network
         // then create their layer and update Application's layers
 
         m_thread.launch();
+        // launch();
     }
 }
 
@@ -88,6 +87,12 @@ void Application::render() {
         m_guiLayer.view->render(m_window);
 
     m_window->display();
+}
+
+
+void Application::launch() {
+    generateNewWindow();
+    animate();
 }
 
 void Application::animate() {
