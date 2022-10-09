@@ -9,7 +9,8 @@
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
-            "intelliSenseMode": "windows-gcc-x64"
+            "intelliSenseMode": "linux-clang-x64",
+            "cppStandard": "c++17"
         },
         {
             "name": "Win32",

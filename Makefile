@@ -1,7 +1,7 @@
 # MODIFIABLE
 CFLAGS 		:= -Werror -Wall -Wextra
 LDFLAGS		:=
-LIBS 		:= -lsfml-graphics -lsfml-window -lsfml-system
+LIBS 		:= sfml-graphics sfml-window sfml-system
 
 # NOT MODIFIABLE
 # all what's below must not be modified
@@ -139,6 +139,9 @@ ifeq ($(OS), WINDOWS)
 	INC += -I./libs/include
 	LDFLAGS := -L./libs/lib $(LDFLAGS)
 endif
+
+
+LIBS := $(patsubst %, -l%, $(LIBS))
 
 
 

@@ -4,17 +4,39 @@
 
 Outil | Version
 ------|--------
-C++   | 20
+C++   | 17
 SFML  | 2.5
-OS    | Linux
+OS    | Linux or Windows with MingW
 
 # Dependencies
 
 Of course a compiler (gcc or clang), and a bash support.
 
+## Linux
+
+Install dependencies :
+
 ```sh
 sudo apt-get install make libsfml-dev
 ```
+
+The `libs/` folder is only for Windows's users.
+
+## Windows
+
+You only need to have a [MingW](https://www.msys2.org/) compiler with a `make` command.<br>
+Usually, this is located in `C:\\msys64\\mingw64\\bin\\mingw32-make.exe`.<br>
+You have to create a soft link of it in the same folder :
+```sh
+# on a terminal
+# mklink src dest
+mklink /d C:\\msys64\\mingw64\\bin\\mingw32-make.exe C:\\msys64\\mingw64\\bin\\make
+```
+Don't forget to add this folder in the PATH environment variable.
+
+You don't have to install any libraries, these already are part of the project :
+- The `.dll` are in the `bin/` folder
+- The `.h[pp]` and `.lib` are in the `libs/` folder.
 
 
 # Run
