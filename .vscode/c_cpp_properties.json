@@ -9,7 +9,8 @@
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
-            "intelliSenseMode": "windows-gcc-x64"
+            "intelliSenseMode": "linux-clang-x64",
+            "cppStandard": "c++17"
         },
         {
             "name": "Win32",
@@ -20,7 +21,8 @@
             ],
             "defines": [],
             "compilerPath": "C:\\msys64\\mingw64\\bin\\g++.exe",
-            "intelliSenseMode": "windows-gcc-x64"
+            "intelliSenseMode": "windows-gcc-x64",
+            "cppStandard": "c++17"
         }
     ],
     "version": 4

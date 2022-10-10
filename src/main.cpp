@@ -1,10 +1,12 @@
 #include <iostream>
 
-int main(int argc, char **argv) {
-	(void)argc;
-	(void)argv;
+#include "Application.hpp"
 
-	std::cout << "Hello World" << std::endl;
+int main(int argc, char **argv) {
+	
+	Application app(argc, argv);
+
+	app.start();
 
 	return EXIT_SUCCESS;
 }
