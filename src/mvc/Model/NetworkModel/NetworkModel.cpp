@@ -1,7 +1,7 @@
 #include "NetworkModel.hpp"
 
-NetworkModel::NetworkModel() {
-
+NetworkModel::NetworkModel(const NetworkConfig& config) {
+    (void)config;
 }
 
 NetworkModel::~NetworkModel() {

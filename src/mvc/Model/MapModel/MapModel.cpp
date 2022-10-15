@@ -1,7 +1,7 @@
 #include "MapModel.hpp"
 
-MapModel::MapModel() {
-
+MapModel::MapModel(const MapConfig& config) {
+    (void)config;
 }
 
 MapModel::~MapModel() {

@@ -2,10 +2,11 @@
 #define NETWORKMODEL_HPP
 
 #include "Model.hpp"
+#include "config_interfaces.hpp"
 
 class NetworkModel: public Model {
 	public:
-		NetworkModel();
+		NetworkModel(const NetworkConfig& config);
 		~NetworkModel();
 };
 

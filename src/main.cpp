@@ -4,9 +4,9 @@
 
 int main(int argc, char **argv) {
 	
-	Application app(argc, argv);
+	auto app = std::make_unique<Application>(argc, argv);
 
-	app.start();
+	app->start();
 
 	return EXIT_SUCCESS;
 }
