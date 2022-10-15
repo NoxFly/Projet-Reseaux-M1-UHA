@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "MVCLayer.hpp"
+#include "config_interfaces.hpp"
+
 
 /**
  * Main application manager.
@@ -74,6 +76,7 @@ class Application {
 		void generateNewWindow();
 
 		bool m_running;
+		AppConfig m_config;
 		MVCLayer m_mapLayer, m_guiLayer, m_networkLayer;
 
 		sf::RenderWindow* m_window;

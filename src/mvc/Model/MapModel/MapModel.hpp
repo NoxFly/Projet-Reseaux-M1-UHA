@@ -2,10 +2,11 @@
 #define MAPMODEL_HPP
 
 #include "Model.hpp"
+#include "config_interfaces.hpp"
 
 class MapModel: public Model {
 	public:
-		MapModel();
+		MapModel(const MapConfig& config);
 		~MapModel();
 };
 

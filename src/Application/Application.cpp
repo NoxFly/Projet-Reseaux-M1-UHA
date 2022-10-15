@@ -1,14 +1,34 @@
 #include "Application.hpp"
 
+#include "ConfigReader.hpp"
+
+#include "MapModel.hpp"
+#include "NetworkModel.hpp"
+#include "GuiModel.hpp"
+
+#include "MapController.hpp"
+#include "NetworkController.hpp"
+#include "GuiController.hpp"
+
+#include "MapRenderer.hpp"
+#include "NetworkRenderer.hpp"
+#include "GuiRenderer.hpp"
+
+
 Application::Application(int argc, char** argv):
     m_running(false),
+    m_config{},
     m_mapLayer{}, m_guiLayer{}, m_networkLayer{},
     m_window(nullptr),
     m_thread(&Application::launch, this)
 {
-    // TODO : do arg verification & config loader
-    (void)argc;
-    (void)argv;
+    if(argc < 2) {
+        throw std::runtime_error("Missing configuration file path !\nAborting.");
+    }
+
+    ConfigReader reader;
+
+    m_config = reader.loadFromFile(argv[1]);
 }
 
 Application::~Application() {
@@ -23,11 +43,7 @@ void Application::start() {
     if(!m_running) {
         m_running = true;
 
-        // TODO : create new MVC for map, gui and network
-        // then create their layer and update Application's layers
-
         m_thread.launch();
-        // launch();
     }
 }
 
@@ -38,10 +54,8 @@ void Application::stop() {
 }
 
 void Application::generateNewWindow() {
-    // TODO : do it with loaded configuration
-
     // create window
-    m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Test window", sf::Style::Close | sf::Style::Titlebar);
+    m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Mulhouse Networking", sf::Style::Close | sf::Style::Titlebar);
     m_window->setFramerateLimit(60);
     m_window->setKeyRepeatEnabled(false);
 
@@ -91,6 +105,28 @@ void Application::render() {
 
 
 void Application::launch() {
+    // === MVC ===
+    // map MVC
+    auto mm = std::make_shared<MapModel>(m_config.map);
+    auto mc = std::make_shared<MapController>();
+    auto mr = std::make_shared<MapRenderer>();
+    // network MVC
+    auto nm = std::make_shared<NetworkModel>(m_config.network);
+    auto nc = std::make_shared<NetworkController>();
+    auto nr = std::make_shared<NetworkRenderer>();
+    // gui MVC
+    auto gm = std::make_shared<GuiModel>();
+    auto gc = std::make_shared<GuiController>();
+    auto gr = std::make_shared<GuiRenderer>();
+    // === === ===
+
+    // layers
+    m_mapLayer = MVCLayer(mm, mr, mc);
+    m_networkLayer = MVCLayer(nm, nr, nc);
+    m_guiLayer = MVCLayer(gm, gr, gc);
+    // ===
+
+    //
     generateNewWindow();
     animate();
 }
