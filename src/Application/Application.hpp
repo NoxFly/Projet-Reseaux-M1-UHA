@@ -4,19 +4,16 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "MVCLayer.hpp"
 #include "config_interfaces.hpp"
+#include "Model.hpp"
+#include "Renderer.hpp"
+#include "Controller.hpp"
 
 
 /**
  * Main application manager.
  * Loads the configuration, owns the main window, and MVC layers.
  * Has an animate methods that loops to update & render.
- * 
- * @note
- * Using SFML Thread instead of STL Thread
- * It's a bit powerless, using old methods,
- * but it ensure a compatibility / portability.
  */
 class Application {
 	public:
@@ -77,10 +74,11 @@ class Application {
 
 		bool m_running;
 		AppConfig m_config;
-		MVCLayer m_mapLayer, m_guiLayer, m_networkLayer;
+		Model m_model;
+		Renderer m_renderer;
+		Controller m_controller;
 
 		sf::RenderWindow* m_window;
-		sf::Thread m_thread;
 };
 
 #endif // APPLICATION_HPP
