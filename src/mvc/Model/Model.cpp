@@ -9,7 +9,7 @@ Model::~Model() {
     
 }
 
-void Model::loadFromConfig(AppConfig config) {
+void Model::loadFromConfig(const AppConfig& config) {
     // TODO : apply the config for the right models
     (void)config;
 }

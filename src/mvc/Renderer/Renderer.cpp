@@ -9,7 +9,7 @@ Renderer::~Renderer() {
     
 }
 
-void Renderer::render(sf::RenderWindow* window, Model model) {
+void Renderer::render(sf::RenderWindow* window, const Model& model) {
     (void)window;
     (void)model;
 }

@@ -12,7 +12,7 @@ class Renderer {
         Renderer();
 		~Renderer();
 
-		void render(sf::RenderWindow* window, Model model);
+		void render(sf::RenderWindow* window, const Model& model);
 };
 
 #endif // RENDERER_HPP

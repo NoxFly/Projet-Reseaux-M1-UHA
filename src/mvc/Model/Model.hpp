@@ -13,7 +13,7 @@ class Model {
         Model();
 		~Model();
 
-        void loadFromConfig(AppConfig config);
+        void loadFromConfig(const AppConfig& config);
 
         GuiModel getGui() const noexcept;
         MapModel getMap() const noexcept;
