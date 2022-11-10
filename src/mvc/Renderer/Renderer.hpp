@@ -6,25 +6,13 @@
 
 #include "Model.hpp"
 
-/**
- * Pure Abstract class.
- * Defines the Renderer box model.
- */
+
 class Renderer {
 	public:
-		virtual ~Renderer() {};
+        Renderer();
+		~Renderer();
 
-		/**
-		 * Can be called to render on the given window, with its associated model.
-		 */
-		virtual void render(sf::RenderWindow* window) = 0;
-
-		void bindModel(std::shared_ptr<Model> model) {
-			m_model = model;
-		}
-
-	protected:
-		std::weak_ptr<Model> m_model;
+		void render(sf::RenderWindow* window, Model model);
 };
 
 #endif // RENDERER_HPP

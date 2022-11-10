@@ -2,25 +2,11 @@
 
 #include "ConfigReader.hpp"
 
-#include "MapModel.hpp"
-#include "NetworkModel.hpp"
-#include "GuiModel.hpp"
-
-#include "MapController.hpp"
-#include "NetworkController.hpp"
-#include "GuiController.hpp"
-
-#include "MapRenderer.hpp"
-#include "NetworkRenderer.hpp"
-#include "GuiRenderer.hpp"
-
-
 Application::Application(int argc, char** argv):
     m_running(false),
     m_config{},
-    m_mapLayer{}, m_guiLayer{}, m_networkLayer{},
-    m_window(nullptr),
-    m_thread(&Application::launch, this)
+    m_model(), m_renderer(), m_controller(),
+    m_window(nullptr)
 {
     if(argc < 2) {
         throw std::runtime_error("Missing configuration file path !\nAborting.");
@@ -29,6 +15,8 @@ Application::Application(int argc, char** argv):
     ConfigReader reader;
 
     m_config = reader.loadFromFile(argv[1]);
+
+    m_model.loadFromConfig(m_config);
 }
 
 Application::~Application() {
@@ -42,8 +30,7 @@ bool Application::isRunning() const {
 void Application::start() {
     if(!m_running) {
         m_running = true;
-
-        m_thread.launch();
+        launch();
     }
 }
 
@@ -76,57 +63,19 @@ void Application::generateNewWindow() {
 }
 
 void Application::update() {
-    // update view input (poll event)
-    sf::Event e;
-
-    while(m_window->pollEvent(e)) {
-        if(e.type == sf::Event::Closed) {
-            m_running = false;
-        }
-    }
-
-    // TODO : update controllers
+    m_controller.update(m_window, m_model, &m_running);
 }
 
 void Application::render() {
     m_window->clear();
 
-    if(m_mapLayer.view)
-        m_mapLayer.view->render(m_window);
-
-    if(m_networkLayer.view)
-        m_networkLayer.view->render(m_window);
-
-    if(m_guiLayer.view)
-        m_guiLayer.view->render(m_window);
+    m_renderer.render(m_window, m_model);
 
     m_window->display();
 }
 
 
 void Application::launch() {
-    // === MVC ===
-    // map MVC
-    auto mm = std::make_shared<MapModel>(m_config.map);
-    auto mc = std::make_shared<MapController>();
-    auto mr = std::make_shared<MapRenderer>();
-    // network MVC
-    auto nm = std::make_shared<NetworkModel>(m_config.network);
-    auto nc = std::make_shared<NetworkController>();
-    auto nr = std::make_shared<NetworkRenderer>();
-    // gui MVC
-    auto gm = std::make_shared<GuiModel>();
-    auto gc = std::make_shared<GuiController>();
-    auto gr = std::make_shared<GuiRenderer>();
-    // === === ===
-
-    // layers
-    m_mapLayer = MVCLayer(mm, mr, mc);
-    m_networkLayer = MVCLayer(nm, nr, nc);
-    m_guiLayer = MVCLayer(gm, gr, gc);
-    // ===
-
-    //
     generateNewWindow();
     animate();
 }
