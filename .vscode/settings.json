@@ -1,5 +1,14 @@
 {
     "files.associations": {
+        "*.ejs": "html",
+        "*.am": "makefile",
+        ".env": "ignore",
+        ".project": "xml",
+        ".classpath": "xml",
+        ".htaccess": "bat",
+        "*.pgsql": "sql",
+        "*.lex": "lex",
+        "*.sql": "sql",
         "string_view": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -57,6 +66,15 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "charconv": "cpp",
+        "codecvt": "cpp",
+        "cstring": "cpp",
+        "forward_list": "cpp",
+        "optional": "cpp",
+        "iomanip": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "variant": "cpp"
     }
 }
