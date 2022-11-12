@@ -67,11 +67,7 @@ void Application::update() {
 }
 
 void Application::render() {
-    m_window->clear();
-
     m_renderer.render(m_window, m_model);
-
-    m_window->display();
 }
 
 

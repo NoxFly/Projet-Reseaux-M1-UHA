@@ -57,6 +57,7 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
         m_tiles[index].position.y = row;
         m_tiles[index].hasLoaded = true;
 
+
         int l = std::to_string(i).size() + std::to_string(tileCount).size() + 1;
 
         for(int j=0; j < l; j++)

@@ -1,6 +1,9 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
+//#define TILE_DEBUG
+
+
 #include <map>
 #include <memory>
 #include <SFML/Graphics.hpp>
@@ -17,6 +20,7 @@ class Renderer {
 
     protected:
         std::map<std::string, sf::Font> m_fonts;
+        sf::Color m_background;
 };
 
 #endif // RENDERER_HPP

@@ -1,14 +1,12 @@
 #include "Renderer.hpp"
 
-#define TILE_DEBUG
-
-
 #include <iostream>
 
 
 Renderer::Renderer():
-    m_fonts{}
+    m_fonts{}, m_background(232, 234, 237)
 {
+    // init font(s)
     sf::Font font;
 
     std::string fontName = "Roboto";
@@ -29,6 +27,9 @@ Renderer::~Renderer() {
 }
 
 void Renderer::render(sf::RenderWindow* window, Model& model) {
+    window->clear(m_background);
+
+    // map
     const TileMap& tiles = model.getMap().getTilesOfLevel(1);
 
     for(const Tile& t : tiles.tiles()) {
@@ -36,6 +37,7 @@ void Renderer::render(sf::RenderWindow* window, Model& model) {
             window->draw(t.tile);
         }
 
+    // red debug grid
 #ifdef TILE_DEBUG
         sf::RectangleShape r;
         r.setSize((sf::Vector2f)tiles.getTileSize());
@@ -58,4 +60,7 @@ void Renderer::render(sf::RenderWindow* window, Model& model) {
         window->draw(txt);
 #endif
     }
+
+
+    window->display();
 }
