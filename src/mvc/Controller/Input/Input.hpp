@@ -25,15 +25,15 @@ class Input {
         bool isMouseButtonUp(sf::Mouse::Button key) const; // mouse button released
         bool isMouseButtonPressed(sf::Mouse::Button btn) const; // mouse button pressed
 
+    private:
+        void treatEvent(const sf::Event& event);
+
         // keyboard keys (true = down, false = up)
         bool m_keys[sf::Keyboard::KeyCount];
         bool m_pressed_keys[sf::Keyboard::KeyCount];
         // mouse buttons (true = down, false = up)
         bool m_mouseButtons[sf::Mouse::ButtonCount];
         bool m_mouseButtons_pressed[sf::Mouse::ButtonCount];
-
-    private:
-        void treatEvent(const sf::Event& event);
 };
 
 #endif // INPUT_HPP
