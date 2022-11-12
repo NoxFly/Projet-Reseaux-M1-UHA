@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${workspaceRoot}/bin/debug/NetworkGraph",
             "cwd": "${workspaceRoot}/bin",
-            "preLaunchTask": "${defaultBuildTask}"
+            "preLaunchTask": "${defaultBuildTask}",
+            "args": ["res/config.ini"]
         }
     ]
 }

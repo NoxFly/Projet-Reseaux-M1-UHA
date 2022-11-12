@@ -5,7 +5,7 @@
 
 struct MapConfig {
     std::string tileFolder;
-    std::string tileSuffix;
+    std::string tilePrefix;
     int zoomLevel;
     int tileCountX;
     int tileCountY;

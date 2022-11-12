@@ -15,9 +15,13 @@ class Model {
 
         void loadFromConfig(const AppConfig& config);
 
-        GuiModel getGui() const noexcept;
-        MapModel getMap() const noexcept;
-        NetworkModel getNetwork() const noexcept;
+        GuiModel& getGui();
+        MapModel& getMap();
+        NetworkModel& getNetwork();
+
+        const GuiModel& getGui() const;
+        const MapModel& getMap() const;
+        const NetworkModel& getNetwork() const;
 
     protected:
         GuiModel m_gui;

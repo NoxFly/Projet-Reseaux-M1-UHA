@@ -21,7 +21,7 @@ AppConfig ConfigReader::loadFromFile(char* filepath) {
     NetworkConfig n;
 
     m.tileFolder = m_config.getValue("MAP", "TILE_FOLDER");
-    m.tileSuffix = m_config.getValue("MAP", "TILE_SUFFIX");
+    m.tilePrefix = m_config.getValue("MAP", "TILE_PREFIX");
     m.zoomLevel = m_config.getIntValue("MAP", "ZOOM_LEVEL", 0);
     m.tileCountX = m_config.getIntValue("MAP", "CHESS_X", 0);
     m.tileCountY = m_config.getIntValue("MAP", "CHESS_Y", 0);
