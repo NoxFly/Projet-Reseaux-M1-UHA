@@ -1,4 +1,5 @@
 #include "Controller.hpp"
+#include <iostream>
 
 Controller::Controller() {
 
@@ -9,15 +10,13 @@ Controller::~Controller() {
 }
 
 
-void Controller::update(sf::RenderWindow* window, Model model, bool* running) {
+void Controller::update(Renderer& renderer, Model model) {
     (void)model;
 
     // update view input (poll event)
-    sf::Event e;
+    m_input.update(renderer);
 
-    while(window->pollEvent(e)) {
-        if(e.type == sf::Event::Closed) {
-            *running = false;
-        }
+    if(m_input.isKeyPress(sf::Keyboard::F)) {
+        renderer.toggleFullscreen();
     }
 }

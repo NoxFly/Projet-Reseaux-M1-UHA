@@ -3,12 +3,20 @@
 
 #include <string>
 
+struct RendererConfig {
+    uint windowWidth;
+    uint windowHeight;
+    std::string windowTitle;
+    std::string icon;
+    uint frameRate;
+};
+
 struct MapConfig {
     std::string tileFolder;
     std::string tilePrefix;
-    int zoomLevel;
-    int tileCountX;
-    int tileCountY;
+    uint zoomLevel;
+    uint tileCountX;
+    uint tileCountY;
 };
 
 struct NetworkConfig {
@@ -16,6 +24,7 @@ struct NetworkConfig {
 };
 
 struct AppConfig {
+    RendererConfig renderer;
     MapConfig map;
     NetworkConfig network;
 };
