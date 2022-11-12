@@ -78,7 +78,7 @@ bool Input::isKeyUp(sf::Keyboard::Key key) const {
     return !m_keys[key];
 }
 
-bool Input::isKeyPress(sf::Keyboard::Key key) const {
+bool Input::isKeyPressed(sf::Keyboard::Key key) const {
     return m_pressed_keys[key];
 }
 

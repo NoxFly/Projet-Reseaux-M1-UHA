@@ -16,7 +16,7 @@ void Controller::update(Renderer& renderer, Model model) {
     // update view input (poll event)
     m_input.update(renderer);
 
-    if(m_input.isKeyPress(sf::Keyboard::F)) {
+    if(m_input.isKeyPressed(sf::Keyboard::F)) {
         renderer.toggleFullscreen();
     }
 }

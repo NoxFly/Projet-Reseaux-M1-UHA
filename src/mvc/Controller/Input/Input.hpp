@@ -20,7 +20,7 @@ class Input {
          */
         bool isKeyDown(sf::Keyboard::Key key) const; // key is down
         bool isKeyUp(sf::Keyboard::Key key) const; // key is released
-        bool isKeyPress(sf::Keyboard::Key key) const; // key is pressed
+        bool isKeyPressed(sf::Keyboard::Key key) const; // key is pressed
         bool isMouseButtonDown(sf::Mouse::Button key) const; // mouse button down
         bool isMouseButtonUp(sf::Mouse::Button key) const; // mouse button released
         bool isMouseButtonPressed(sf::Mouse::Button btn) const; // mouse button pressed
