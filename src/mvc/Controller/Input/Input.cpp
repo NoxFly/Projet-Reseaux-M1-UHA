@@ -10,7 +10,7 @@ Input::Input() {
     // init to false all the buttons state
     for(auto i=0; i < sf::Mouse::ButtonCount; i++) {
         m_mouseButtons[i] = false;
-        m_mouseButtons_pressed[i] = false;
+        m_pressed_mouseButtons[i] = false;
     }
 }
 
@@ -27,7 +27,7 @@ void Input::update(Renderer& renderer) {
 
     // reset mouse button pressed
     for(auto i=0; i < sf::Mouse::ButtonCount; i++)
-        m_mouseButtons_pressed[i] = false;
+        m_pressed_mouseButtons[i] = false;
 
     // update
     while(renderer.getWindow()->pollEvent(event)) {
@@ -55,13 +55,13 @@ void Input::treatEvent(const sf::Event& event) {
 
         // mouse's button pressed
         case sf::Event::MouseButtonPressed:
-            m_mouseButtons_pressed[event.mouseButton.button] = false;
+            m_pressed_mouseButtons[event.mouseButton.button] = false;
             m_mouseButtons[event.mouseButton.button] = true;
             break;
 
         // mouse's button released
         case sf::Event::MouseButtonReleased:
-            if(m_mouseButtons[event.mouseButton.button]) m_mouseButtons_pressed[event.mouseButton.button] = true;
+            if(m_mouseButtons[event.mouseButton.button]) m_pressed_mouseButtons[event.mouseButton.button] = true;
             m_mouseButtons[event.mouseButton.button] = false;
             break;
 
@@ -91,5 +91,5 @@ bool Input::isMouseButtonUp(sf::Mouse::Button btn) const {
 }
 
 bool Input::isMouseButtonPressed(sf::Mouse::Button btn) const {
-    return m_mouseButtons_pressed[btn];
+    return m_pressed_mouseButtons[btn];
 }

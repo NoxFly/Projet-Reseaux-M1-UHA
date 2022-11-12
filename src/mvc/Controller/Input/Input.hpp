@@ -33,7 +33,7 @@ class Input {
         bool m_pressed_keys[sf::Keyboard::KeyCount];
         // mouse buttons (true = down, false = up)
         bool m_mouseButtons[sf::Mouse::ButtonCount];
-        bool m_mouseButtons_pressed[sf::Mouse::ButtonCount];
+        bool m_pressed_mouseButtons[sf::Mouse::ButtonCount];
 };
 
 #endif // INPUT_HPP
