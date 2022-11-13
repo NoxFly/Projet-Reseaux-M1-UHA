@@ -1,7 +1,7 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
-//#define TILE_DEBUG
+// #define TILE_DEBUG
 
 
 #include <map>
@@ -21,6 +21,7 @@ class Renderer {
 		void render(Model& model);
 
         sf::RenderWindow* getWindow() const;
+        sf::RenderWindow* getWindow();
         bool isClosed() const;
         void close();
 
@@ -28,11 +29,19 @@ class Renderer {
         void toggleFullscreen();
 
     protected:
+        void fillText(const std::string& str, int x, int y, int fontSize=20, const sf::Color& color=sf::Color::Black);
+        void fillText(const std::string& str, const sf::Vector2f& position, int fontSize=20, const sf::Color& color=sf::Color::Black);
+
+
+        // void __fix_image_pixels__(sf::Image);
+
 		sf::RenderWindow* m_window;
         sf::VideoMode m_screen;
         std::map<std::string, sf::Font> m_fonts;
         sf::Color m_background;
         sf::View m_view;
+    
+        sf::Cursor m_cursorDefault, m_cursorGrab, m_cursorGrabbing;
 
         bool m_isFullscreen;
         sf::Vector2u m_defaultWindowSize;

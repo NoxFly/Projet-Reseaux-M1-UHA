@@ -24,9 +24,14 @@ class Input {
         bool isMouseButtonDown(sf::Mouse::Button key) const; // mouse button down
         bool isMouseButtonUp(sf::Mouse::Button key) const; // mouse button released
         bool isMouseButtonPressed(sf::Mouse::Button btn) const; // mouse button pressed
+        bool mouseMoved() const;
+        bool mouseWheeled() const;
+        sf::Vector2i getMousePosition() const;
+        sf::Vector2i getMouseOffset() const;
+        float getMouseWheelDirection() const;
 
     private:
-        void treatEvent(const sf::Event& event);
+        void treatEvent(const sf::Event& event, Renderer& renderer);
 
         // keyboard keys (true = down, false = up)
         bool m_keys[sf::Keyboard::KeyCount];
@@ -34,6 +39,11 @@ class Input {
         // mouse buttons (true = down, false = up)
         bool m_mouseButtons[sf::Mouse::ButtonCount];
         bool m_pressed_mouseButtons[sf::Mouse::ButtonCount];
+        bool m_hasMouseMoved;
+        bool m_hasMouseWheeled;
+        float m_mouseWheelDelta;
+        sf::Vector2i m_mousePosition;
+        sf::Vector2i m_mouseOffset;
 };
 
 #endif // INPUT_HPP

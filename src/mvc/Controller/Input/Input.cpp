@@ -29,6 +29,9 @@ void Input::update(Renderer& renderer) {
     for(auto i=0; i < sf::Mouse::ButtonCount; i++)
         m_pressed_mouseButtons[i] = false;
 
+    m_hasMouseMoved = false;
+    m_hasMouseWheeled = false;
+
     // update
     while(renderer.getWindow()->pollEvent(event)) {
         if(event.type == sf::Event::Closed) {
@@ -36,11 +39,13 @@ void Input::update(Renderer& renderer) {
             return;
         }
 
-        treatEvent(event);
+        treatEvent(event, renderer);
     }
 }
 
-void Input::treatEvent(const sf::Event& event) {
+void Input::treatEvent(const sf::Event& event, Renderer& renderer) {
+    sf::Vector2i mousep;
+
     switch(event.type) {
         case sf::Event::KeyPressed:
             m_pressed_keys[event.key.code] = false;
@@ -61,8 +66,23 @@ void Input::treatEvent(const sf::Event& event) {
 
         // mouse's button released
         case sf::Event::MouseButtonReleased:
-            if(m_mouseButtons[event.mouseButton.button]) m_pressed_mouseButtons[event.mouseButton.button] = true;
+            if(m_mouseButtons[event.mouseButton.button])
+                m_pressed_mouseButtons[event.mouseButton.button] = true;
             m_mouseButtons[event.mouseButton.button] = false;
+            break;
+
+        case sf::Event::MouseMoved:
+            m_hasMouseMoved = true;
+            mousep = sf::Mouse::getPosition(*renderer.getWindow());
+            m_mouseOffset = m_mousePosition - mousep;
+            m_mousePosition = mousep;
+            break;
+
+        case sf::Event::MouseWheelScrolled:
+            if(event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+                m_hasMouseWheeled = true;
+                m_mouseWheelDelta = event.mouseWheelScroll.delta;
+            }
             break;
 
         default:
@@ -92,4 +112,24 @@ bool Input::isMouseButtonUp(sf::Mouse::Button btn) const {
 
 bool Input::isMouseButtonPressed(sf::Mouse::Button btn) const {
     return m_pressed_mouseButtons[btn];
+}
+
+bool Input::mouseMoved() const {
+    return m_hasMouseMoved;
+}
+
+bool Input::mouseWheeled() const {
+    return m_hasMouseWheeled;
+}
+
+sf::Vector2i Input::getMousePosition() const {
+    return m_mousePosition;
+}
+
+sf::Vector2i Input::getMouseOffset() const {
+    return m_mouseOffset;
+}
+
+float Input::getMouseWheelDirection() const {
+    return m_mouseWheelDelta;
 }

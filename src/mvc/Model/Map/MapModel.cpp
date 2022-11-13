@@ -7,6 +7,9 @@ MapModel::MapModel():
     m_tiles{},
     m_zoomRatio{},
     m_currentZoomLevel(1),
+    m_grabbing(false),
+    m_oldPosition(0, 0),
+    m_grabPoint(0, 0),
     m_position(0, 0)
 {
 
@@ -17,6 +20,7 @@ MapModel::~MapModel() {
 }
 
 void MapModel::loadFromConfig(const MapConfig& config) {
+    m_config = config;
     m_tiles.resize(config.zoomLevel);
     m_zoomRatio.resize(config.zoomLevel-1);
 
@@ -48,11 +52,11 @@ void MapModel::loadFromConfig(const MapConfig& config) {
     centerPosition();
 }
 
-const TileMap& MapModel::getTilesOfLevel(uint level) const {
+const TileMap& MapModel::getTilesOfLevel(const uint level) const {
     return m_tiles.at(level-1);
 }
 
-TileMap& MapModel::getTilesOfLevel(uint level) {
+TileMap& MapModel::getTilesOfLevel(const uint level) {
     return m_tiles.at(level-1);
 }
 
@@ -68,7 +72,7 @@ sf::Vector2u MapModel::getMapDimension() {
     return getMapDimension(m_currentZoomLevel);
 }
 
-sf::Vector2u MapModel::getMapDimension(uint level) {
+sf::Vector2u MapModel::getMapDimension(const uint level) {
     return m_tiles.at(level-1).getDimension();
 }
 
@@ -76,14 +80,34 @@ uint MapModel::getZoomLevel() const {
     return m_currentZoomLevel;
 }
 
-void MapModel::setZoomLevel(uint level) {
+void MapModel::setZoomLevel(const uint level) {
     if(level > 0 && level <= m_config.zoomLevel) {
+        const auto oldPos = m_position;
+        const auto oldDim = getMapDimension();
+        
         m_currentZoomLevel = level;
+
+        const auto newDim = getMapDimension();
+        
+        const auto newPos = sf::Vector2i(
+            (float)oldPos.x / oldDim.x * newDim.x,
+            (float)oldPos.y / oldDim.y * newDim.y
+        );
+
+        m_oldPosition = newPos;
+
+        clampPosition();
+        
+        m_oldPosition = m_position;
     }
 }
 
 const std::vector<Tile>& MapModel::getTiles() const {
-    return m_tiles.at(m_currentZoomLevel).getTiles();
+    return m_tiles.at(m_currentZoomLevel-1).getTiles();
+}
+
+const sf::Vector2u& MapModel::getTileSize() const {
+    return m_tiles.at(m_currentZoomLevel-1).getTileSize();
 }
 
 void MapModel::centerPosition() {
@@ -91,8 +115,72 @@ void MapModel::centerPosition() {
 
     m_position.x = dim.x / 2;
     m_position.y = dim.y / 2;
+
+    m_oldPosition = m_position;
 }
 
-sf::Vector2f MapModel::getPosition() const {
+sf::Vector2i MapModel::getPosition() const {
     return m_position;
+}
+
+void MapModel::setPosition(const sf::Vector2i& position) {
+    m_position = position;
+}
+
+void MapModel::setPosition(const uint x, const uint y) {
+    m_position = sf::Vector2i(x, y);
+}
+
+void MapModel::zoomIn() {
+    if(m_currentZoomLevel < m_config.zoomLevel) {
+        setZoomLevel(m_currentZoomLevel+1);
+    }
+}
+
+void MapModel::zoomOut() {
+    if(m_currentZoomLevel > 1) {
+        setZoomLevel(m_currentZoomLevel-1);
+    }
+}
+
+void MapModel::move(const sf::Vector2i& position) {
+    m_position.x += position.x;
+    m_position.y += position.y;
+}
+
+void MapModel::move(const uint x, const uint y) {
+    m_position.x += x;
+    m_position.y += y;
+}
+
+void MapModel::grab(const sf::Vector2i& mouse) {
+    if(!m_grabbing) {
+        m_grabPoint = mouse;
+        m_grabbing = true;
+    }
+}
+
+void MapModel::ungrab() {
+    if(m_grabbing) {
+        m_grabPoint = sf::Vector2i(0, 0);
+        m_oldPosition = m_position;
+        m_grabbing = false;
+    }
+}
+
+void MapModel::grabMove(const sf::Vector2i& mouse) {
+    if(m_grabbing) {
+        clampPosition(mouse);
+    }
+}
+
+void MapModel::clampPosition() {
+    clampPosition(sf::Vector2i(0, 0));
+}
+
+void MapModel::clampPosition(const sf::Vector2i& mouse) {
+    auto limit = getMapDimension();
+
+    m_position.x = std::clamp(m_oldPosition.x + m_grabPoint.x - mouse.x, 0, (int)limit.x);
+    m_position.y = std::clamp(m_oldPosition.y + m_grabPoint.y - mouse.y, 0, (int)limit.y);
 }

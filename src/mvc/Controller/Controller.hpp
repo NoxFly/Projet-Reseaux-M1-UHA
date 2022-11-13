@@ -10,7 +10,7 @@ class Controller {
         Controller();
 		~Controller();
 
-        void update(Renderer& renderer, Model model);
+        void update(Renderer& renderer, Model& model);
 
     private:
         Input m_input;
