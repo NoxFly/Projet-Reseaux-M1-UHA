@@ -38,7 +38,7 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
     for(const auto &entry : fs::directory_iterator(tilepath)) {
         // get the index of the tile on the board
         const std::string prefixToRemove = tilepath + "/" + prefix + "_";
-        const std::string path = entry.path();
+        const std::string path = entry.path().u8string();
         const auto texId = replace(replace(path, prefixToRemove, ""), ext, "");
         const auto colrow = splitString(texId, "-");
 
@@ -52,7 +52,7 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
         }
 
         // try to load the texture (image)
-        if(!m_tiles[index].tex.loadFromFile(entry.path()))
+        if(!m_tiles[index].tex.loadFromFile(path))
             return false;
 
         m_tiles[index].tex.setSmooth(true);
