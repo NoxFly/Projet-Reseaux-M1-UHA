@@ -4,6 +4,12 @@
 #include <string_view>
 #include <vector>
 
+#ifdef WINDOWS
+#define DIRECTORY_SEPARATOR "\\"
+#else // Linux or MacOS
+#define DIRECTORY_SEPARATOR "/"
+#endif
+
 // bug with splitString for no reason.
 // using namespace std;
 
