@@ -32,12 +32,12 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
     //
     unsigned int i = 0;
 
-    std::cout << i << "/" << tileCount << std::flush;
+    std::cout << " " << i << "/" << tileCount << std::flush;
     //
 
     for(const auto &entry : fs::directory_iterator(tilepath)) {
         // get the index of the tile on the board
-        const std::string prefixToRemove = tilepath + "/" + prefix + "_";
+        const std::string prefixToRemove = tilepath + DIRECTORY_SEPARATOR + prefix + "_";
         const std::string path = entry.path().u8string();
         const auto texId = replace(replace(path, prefixToRemove, ""), ext, "");
         const auto colrow = splitString(texId, "-");
@@ -52,8 +52,12 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
         }
 
         // try to load the texture (image)
-        if(!m_tiles[index].tex.loadFromFile(path))
+        if(!m_tiles[index].tex.loadFromFile(path)) {
+#ifdef DEBUG
+            std::cout << "\n" << "   Failed for '" << path << "'" << std::endl;
+#endif
             return false;
+        }
 
         m_tiles[index].tex.setSmooth(true);
 
@@ -86,13 +90,6 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
         std::cout << ++i << "/" << tileCount << std::flush;
     }
 
-    //
-    int l = std::to_string(i).size() + std::to_string(tileCount).size() + 1;
-
-    for(int j=0; j < l; j++)
-        std::cout << "\b";
-
-    std::cout << std::flush;
     //
 
     return true;
