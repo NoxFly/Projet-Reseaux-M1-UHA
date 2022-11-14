@@ -30,16 +30,16 @@ class TileMap {
          * => avoid it, don't save it.
          * All tiles default state is hasLoaded = false, which results in a blank square from renderer side.
          */
-        bool load(const std::string& tilepath, const std::string& prefix, const std::string& ext, uint width, uint height);
+        bool load(const std::string& tilepath, const std::string& prefix, const std::string& ext, unsigned int width, unsigned int height);
 
         /**
          * Get a tile at a specific index in the 1D array (array size = width * height).
          */
-        const Tile& operator[](uint i) const;
+        const Tile& operator[](unsigned int i) const;
         /**
          * Get a tile at a specific index in the 2D array.
          */
-        const Tile& getTile(uint x, uint y) const;
+        const Tile& getTile(unsigned int x, unsigned int y) const;
         /**
          * Returns all the tiles of this level.
          */
@@ -47,7 +47,7 @@ class TileMap {
         /**
          * Returns the total number of tiles on this level (= width * height)
          */
-        uint tileCount() const;
+        unsigned int tileCount() const;
         /**
          * Returns the size of the tiles of this level (each tiles have the same size).
          */

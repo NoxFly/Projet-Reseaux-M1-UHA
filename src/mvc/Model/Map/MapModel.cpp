@@ -25,7 +25,7 @@ void MapModel::loadFromConfig(const MapConfig& config) {
     m_zoomRatio.resize(config.zoomLevel-1);
 
     // load all levels of tiles
-    for(uint i=1; i <= config.zoomLevel; i++) {  
+    for(unsigned int i=1; i <= config.zoomLevel; i++) {  
         const std::string si = std::to_string(i);
         const std::string folder = config.tileFolder + "/level_" + si;
         const std::string prefix = config.tilePrefix + si;
@@ -42,9 +42,9 @@ void MapModel::loadFromConfig(const MapConfig& config) {
     }
 
     // setup ratio
-    const uint maxTileSize = m_tiles.at(config.zoomLevel-1).getTileSize().x;
+    const unsigned int maxTileSize = m_tiles.at(config.zoomLevel-1).getTileSize().x;
 
-    for(uint i=0; i < config.zoomLevel-1; i++) {  
+    for(unsigned int i=0; i < config.zoomLevel-1; i++) {  
         auto s = m_tiles.at(i).getTileSize();
         m_zoomRatio[i] = (float)maxTileSize / s.x;
     }
@@ -52,15 +52,15 @@ void MapModel::loadFromConfig(const MapConfig& config) {
     centerPosition();
 }
 
-const TileMap& MapModel::getTilesOfLevel(const uint level) const {
+const TileMap& MapModel::getTilesOfLevel(const unsigned int level) const {
     return m_tiles.at(level-1);
 }
 
-TileMap& MapModel::getTilesOfLevel(const uint level) {
+TileMap& MapModel::getTilesOfLevel(const unsigned int level) {
     return m_tiles.at(level-1);
 }
 
-uint MapModel::getZoomLevels() {
+unsigned int MapModel::getZoomLevels() {
     return m_config.zoomLevel;
 }
 
@@ -72,15 +72,15 @@ sf::Vector2u MapModel::getMapDimension() {
     return getMapDimension(m_currentZoomLevel);
 }
 
-sf::Vector2u MapModel::getMapDimension(const uint level) {
+sf::Vector2u MapModel::getMapDimension(const unsigned int level) {
     return m_tiles.at(level-1).getDimension();
 }
 
-uint MapModel::getZoomLevel() const {
+unsigned int MapModel::getZoomLevel() const {
     return m_currentZoomLevel;
 }
 
-void MapModel::setZoomLevel(const uint level) {
+void MapModel::setZoomLevel(const unsigned int level) {
     if(level > 0 && level <= m_config.zoomLevel) {
         const auto oldPos = m_position;
         const auto oldDim = getMapDimension();
@@ -127,7 +127,7 @@ void MapModel::setPosition(const sf::Vector2i& position) {
     m_position = position;
 }
 
-void MapModel::setPosition(const uint x, const uint y) {
+void MapModel::setPosition(const unsigned int x, const unsigned int y) {
     m_position = sf::Vector2i(x, y);
 }
 
@@ -148,7 +148,7 @@ void MapModel::move(const sf::Vector2i& position) {
     m_position.y += position.y;
 }
 
-void MapModel::move(const uint x, const uint y) {
+void MapModel::move(const unsigned int x, const unsigned int y) {
     m_position.x += x;
     m_position.y += y;
 }

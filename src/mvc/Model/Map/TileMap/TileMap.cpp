@@ -19,18 +19,18 @@ TileMap::~TileMap() {
 
 
 
-bool TileMap::load(const std::string& tilepath, const std::string& prefix, const std::string& ext, uint width, uint height) {
+bool TileMap::load(const std::string& tilepath, const std::string& prefix, const std::string& ext, unsigned int width, unsigned int height) {
     m_boardSize.x = width;
     m_boardSize.y = height;
 
-    const uint tileCount = m_boardSize.x * m_boardSize.y;
+    const unsigned int tileCount = m_boardSize.x * m_boardSize.y;
 
     // put the correct total amount of tiles
     // all tiles are by default set to hasLoaded = false
     m_tiles.resize(tileCount);
 
     //
-    uint i = 0;
+    unsigned int i = 0;
 
     std::cout << i << "/" << tileCount << std::flush;
     //
@@ -38,12 +38,13 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
     for(const auto &entry : fs::directory_iterator(tilepath)) {
         // get the index of the tile on the board
         const std::string prefixToRemove = tilepath + "/" + prefix + "_";
-        const auto texId = replace(replace(entry.path(), prefixToRemove, ""), ext, "");
+        const std::string path = entry.path();
+        const auto texId = replace(replace(path, prefixToRemove, ""), ext, "");
         const auto colrow = splitString(texId, "-");
 
-        const uint col = std::stoi(colrow[1]);
-        const uint row = (int)colrow[0][0] - 65;
-        const uint index = width * row + col;
+        const unsigned int col = std::stoi(colrow[1]);
+        const unsigned int row = (int)colrow[0][0] - 65;
+        const unsigned int index = width * row + col;
 
         // don't allow out of range of defined area (width, height)
         if(row > m_boardSize.y || col > m_boardSize.x) {
@@ -97,11 +98,11 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
     return true;
 }
 
-const Tile& TileMap::operator[](uint i) const {
+const Tile& TileMap::operator[](unsigned int i) const {
     return m_tiles[i];
 }
 
-const Tile& TileMap::getTile(uint x, uint y) const {
+const Tile& TileMap::getTile(unsigned int x, unsigned int y) const {
     return m_tiles[m_boardSize.x * y + x];
 }
 
@@ -109,7 +110,7 @@ const std::vector<Tile>& TileMap::getTiles() const {
     return m_tiles;
 }
 
-uint TileMap::tileCount() const {
+unsigned int TileMap::tileCount() const {
     return m_tiles.size();
 }
 

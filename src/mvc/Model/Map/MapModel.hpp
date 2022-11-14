@@ -24,13 +24,13 @@ class MapModel {
          * Returns the TileMap object of the requested level of zoom.
          * Can throw an error if the requested level does not exists (is out of bounds).
          */
-        const TileMap& getTilesOfLevel(const uint level) const;
+        const TileMap& getTilesOfLevel(const unsigned int level) const;
 
         /**
          * Returns the TileMap object of the requested level of zoom.
          * Can throw an error if the requested level does not exists (is out of bounds).
          */
-        TileMap& getTilesOfLevel(const uint level);
+        TileMap& getTilesOfLevel(const unsigned int level);
 
         /**
          * Returns the number of zoom levels it can handles.
@@ -40,7 +40,7 @@ class MapModel {
          * @example
          * map.getMapDimension(map.getZoomLevels())
          */
-        uint getZoomLevels();
+        unsigned int getZoomLevels();
 
         /**
          * Returns the number of tiles on the map.
@@ -59,7 +59,7 @@ class MapModel {
          * @example
          * map.getMapDimension(map.getZoomLevels())
          */
-        sf::Vector2u getMapDimension(const uint level);
+        sf::Vector2u getMapDimension(const unsigned int level);
 
         /**
          * Returns the tiles of the current level.
@@ -75,13 +75,13 @@ class MapModel {
         /**
          * Returns the current zoom's level.
          */
-        uint getZoomLevel() const;
+        unsigned int getZoomLevel() const;
 
         /**
          * Change the zoom's level.
          * If the requested level does not exist, does nothing.
          */
-        void setZoomLevel(const uint level);
+        void setZoomLevel(const unsigned int level);
 
         /**
          * Returns the position of the "camera", the translation of the map.
@@ -96,7 +96,7 @@ class MapModel {
         /**
          * Defines the new position of the map in the view.
          */
-        void setPosition(const uint x, const uint y);
+        void setPosition(const unsigned int x, const unsigned int y);
         
         /**
          * Moves the map relativly with this vector.
@@ -106,7 +106,7 @@ class MapModel {
         /**
          * Moves the map relativly with this vector.
          */
-        void move(const uint x, const uint y);
+        void move(const unsigned int x, const unsigned int y);
 
         /**
          * Zoom in to the next level of zoom, z+1, > 0, <= m_config.zoomLevels.
@@ -133,7 +133,7 @@ class MapModel {
         // for a level of zoom of 3 :
         // tiles: { zoom1, zoom2, zoom3 }
         // ratio: { ratio3x1, ratio3x2 }
-        uint m_currentZoomLevel; // starts from 1, between 1 and maxZoomLevel
+        unsigned int m_currentZoomLevel; // starts from 1, between 1 and maxZoomLevel
         
         bool m_grabbing;
         sf::Vector2i m_oldPosition;

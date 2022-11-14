@@ -4,19 +4,19 @@
 #include <string>
 
 struct RendererConfig {
-    uint windowWidth;
-    uint windowHeight;
+    unsigned int windowWidth;
+    unsigned int windowHeight;
     std::string windowTitle;
     std::string icon;
-    uint frameRate;
+    unsigned int frameRate;
 };
 
 struct MapConfig {
     std::string tileFolder;
     std::string tilePrefix;
-    uint zoomLevel;
-    uint tileCountX;
-    uint tileCountY;
+    unsigned int zoomLevel;
+    unsigned int tileCountX;
+    unsigned int tileCountY;
 };
 
 struct NetworkConfig {
