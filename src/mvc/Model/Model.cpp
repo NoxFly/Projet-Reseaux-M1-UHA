@@ -10,8 +10,7 @@ Model::~Model() {
 }
 
 void Model::loadFromConfig(const AppConfig& config) {
-    // TODO : apply the config for the right models
-    (void)config;
+    m_network.loadFromConfig(config.network);
 }
 
 GuiModel Model::getGui() const noexcept {

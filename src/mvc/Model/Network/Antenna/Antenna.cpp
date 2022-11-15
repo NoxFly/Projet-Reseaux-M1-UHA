@@ -7,8 +7,8 @@ GeoPosition Antenna::getPosition() const {
     return m_position;
 }
 
-Antenna::Antenna(sf::Vector2<double> position,const float range,const int freq,const int alt):
-    m_position{position},
+Antenna::Antenna(sf::Vector2f position,const float range,const int freq,const int alt):
+    m_position(position),
     m_range{range},
     m_frequency{freq},
     m_altitude{alt},

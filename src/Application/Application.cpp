@@ -19,8 +19,7 @@ Application::Application(int argc, char** argv):
     m_config = reader.loadFromFile(argv[1]);
 
     m_model.loadFromConfig(m_config);
-    test.loadFromConfig(m_config);//for debugging the new functionality only
-    std::cout << test.getNetworkAt(1).getPosition().lambert().x << std::endl;//for debugging the new functionality only
+    std::cout << m_model.getNetwork().getNetworkAt(1).getPosition().lambert().x << std::endl;//for debugging the new functionality only
 }
 
 Application::~Application() {

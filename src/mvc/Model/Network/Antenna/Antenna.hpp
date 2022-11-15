@@ -11,7 +11,7 @@ class Antenna {
         GeoPosition getPosition() const;
 
         Antenna(
-            sf::Vector2<double> position,
+            sf::Vector2f position,
             const float range,
             const int freq,
             const int alt

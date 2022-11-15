@@ -14,55 +14,30 @@ NetworkModel::~NetworkModel() {
 
 }
 
-void NetworkModel::loadFromConfig(const AppConfig& config) {
-	//extract path from config
-	std::ifstream file(config.network.entryFile);
-	//default delimter
-	std::string delimeter = " ";
+void NetworkModel::loadFromConfig(const NetworkConfig& config) {
+	// extract path from config
+	std::ifstream file(config.entryFile);
+	// default delimter
 
-	if (file.is_open()) {//only read if file is not empty
+	if(file.is_open()) { // only read if file is not empty
 
-		std::string line;//hold current line
+		std::string line; // hold current line
 
-		while (std::getline(file, line)) {
-			
-			//init vector
-			std::vector<double> antennaValues;
+		while(std::getline(file, line)) {
+            // a line is modelised here as "0.0 0.0 0.0" (3 floats)
+            // and in order "X Y RANGE" and where X,Y are in lambert
+            float x, y, r;
 
-			//@see https://java2blog.com/split-string-space-cpp/#:~:text=You%20can%20use%20string's%20find,be%20used%20for%20any%20delimeter.
-			int start = 0;
-			int end = line.find(delimeter);
+            sscanf(line.c_str(), "%f %f %f", &x, &y, &r);
 
-			while (end != -1) {
-				//push sample value
-				antennaValues.push_back(
-										std::stod(
-											line.substr(start, end - start)
-											)
-										);
+            // at least one the 3 floats does not respect the float form
+            if(x < .1 || y < .1 || r < .1) {
+                continue;
+            }
 
-				start = end + delimeter.size();
-				end = line.find(delimeter, start);
-			}
+            Antenna newantenna(sf::Vector2f(x, y), r, 4, 4);
 
-			//push sample value
-			antennaValues.push_back(
-									std::stod(
-										line.substr(start, end - start)
-										)
-									);
-
-			if(antennaValues.size() == 3) {
-				//declare antenna
-				sf::Vector2<double> pos(antennaValues.at(0), antennaValues.at(1));
-				//frequency and altitude are hardcoded in this example
-				Antenna newantenna(pos, antennaValues.at(2), 4, 4);
-
-				m_network.push_back(newantenna);
-			}
-
-			printf("\n");
-
+            m_network.push_back(newantenna);
 		}
 
 		file.close();

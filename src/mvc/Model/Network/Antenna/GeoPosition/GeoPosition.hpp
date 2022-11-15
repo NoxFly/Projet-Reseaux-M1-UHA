@@ -5,18 +5,20 @@
 
 class GeoPosition {
     public :
-        GeoPosition(sf::Vector2<double> lambert);
+        GeoPosition(sf::Vector2f lambert);
         ~GeoPosition();
-        //replace returned type to Lambert struct
-        sf::Vector2<double> lambert() const;
-        sf::Vector2<double> coords() const;
-        void setLambert(const sf::Vector2<double>& lambert);
-        void setCoords(const sf::Vector2<double>& coords);
+
+        sf::Vector2f lambert() const;
+        sf::Vector2f coords() const;
+
+        void setLambert(const sf::Vector2f& lambert);
+        void setCoords(const sf::Vector2f& coords);
+
     private :
         void L2C();
         void C2L();
-        sf::Vector2<double> m_lambert;
-        sf::Vector2<double> m_coords;
+        sf::Vector2f m_lambert;
+        sf::Vector2f m_coords;
 };
 
 
