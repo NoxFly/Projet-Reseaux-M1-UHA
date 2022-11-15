@@ -8,10 +8,13 @@ GeoPosition Antenna::getPosition() const {
 }
 
 Antenna::Antenna(sf::Vector2<double> position,const float range,const int freq,const int alt):
-m_position{position},m_range{range}, m_frequency{freq},m_altitude{alt}
+    m_position{position},
+    m_range{range},
+    m_frequency{freq},
+    m_altitude{alt},
+    m_uuid(uuid::generate_uuid_v4())
 {
-    //set new uuid for intenna
-    m_uuid = uuid::generate_uuid_v4();
+
 }
 
 Antenna::~Antenna() {
