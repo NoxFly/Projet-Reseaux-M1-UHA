@@ -8,7 +8,7 @@
                 "${workspaceFolder}/libs/include"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/g++",
             "intelliSenseMode": "linux-clang-x64",
             "cppStandard": "c++17"
         },

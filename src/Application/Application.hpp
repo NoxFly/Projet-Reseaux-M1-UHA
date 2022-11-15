@@ -27,7 +27,8 @@ class Application {
 
 		/**
 		 * Starts the application if it hasn't.
-		 * Calls the launch method.
+		 * Generates a new window with loaded configuration.
+		 * Then calls the animate method.
 		 */
 		void start();
 
@@ -49,14 +50,6 @@ class Application {
 		void render();
 
 		/**
-		 * Used in a new sf::Thread, allowing the rest
-		 * of the application to proceed some stuff, like loading map, etc...
-		 * Generates a new window with loaded configuration.
-		 * Then calls the animate method.
-		 */
-		void launch();
-
-		/**
 		 * Main loop.
 		 * Calls update, render.
 		 * The body of this method should'nt really change.
@@ -72,13 +65,10 @@ class Application {
 		 */
 		void generateNewWindow();
 
-		bool m_running;
 		AppConfig m_config;
 		Model m_model;
 		Renderer m_renderer;
 		Controller m_controller;
-
-		sf::RenderWindow* m_window;
 };
 
 #endif // APPLICATION_HPP

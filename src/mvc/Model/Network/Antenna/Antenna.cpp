@@ -1,7 +1,10 @@
 #include "Antenna.hpp"
-#include "utils.hpp"
+
 #include <string>
 #include <SFML/System/Vector2.hpp>
+
+#include "utils.hpp"
+
 
 GeoPosition Antenna::getPosition() const {
     return m_position;
