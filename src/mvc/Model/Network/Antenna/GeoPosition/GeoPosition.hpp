@@ -12,9 +12,9 @@ class GeoPosition {
         sf::Vector2<double> coords() const;
         void setLambert(const sf::Vector2<double>& lambert);
         void setCoords(const sf::Vector2<double>& coords);
+    private :
         void L2C();
         void C2L();
-    private :
         sf::Vector2<double> m_lambert;
         sf::Vector2<double> m_coords;
 };
