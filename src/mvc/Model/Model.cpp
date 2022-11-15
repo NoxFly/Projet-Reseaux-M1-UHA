@@ -13,6 +13,7 @@ Model::~Model() {
 
 void Model::loadFromConfig(const AppConfig& config) {
     m_map.loadFromConfig(config.map);
+    m_network.loadFromConfig(config.network);
 }
 
 GuiModel& Model::getGui() {

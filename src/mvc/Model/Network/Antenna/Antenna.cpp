@@ -1,7 +1,21 @@
 #include "Antenna.hpp"
 
-Antenna::Antenna(const int x, const int y, const int distance):
-    m_x{x}, m_y{y}, m_distance{distance}
+#include <string>
+#include <SFML/System/Vector2.hpp>
+
+#include "utils.hpp"
+
+
+GeoPosition Antenna::getPosition() const {
+    return m_position;
+}
+
+Antenna::Antenna(sf::Vector2f position,const float range,const int freq,const int alt):
+    m_position(position),
+    m_range{range},
+    m_frequency{freq},
+    m_altitude{alt},
+    m_uuid(uuid::generate_uuid_v4())
 {
 
 }
@@ -10,30 +24,34 @@ Antenna::~Antenna() {
 
 }
 
-int Antenna::getX() const {
-    return m_x;
+float Antenna::getRange() const {
+    return m_range;
 }
 
-int Antenna::getY() const {
-    return m_y;
+int Antenna::getFreq() const {
+    return m_frequency;
 }
 
-int Antenna::getRange() const {
-    return m_distance;
+int Antenna::getAltitude() const {
+    return m_altitude;
 }
 
-void Antenna::setX(const int x) {
-    m_x = x;
+std::string Antenna::getName() const {
+    return m_name;
 }
 
-void Antenna::setY(const int y) {
-    m_y = y;
+const char * Antenna::getUUID() {
+    return m_uuid;
 }
 
-void Antenna::setRange(const int distance) {
-    m_distance = distance;
+void Antenna::setFreq(const int freq) {
+    m_frequency = freq;
 }
 
-double Antenna::Intensity() { // Calculer l'intensité d'une antenne (regarde cours mais pas sûr du vocabulaire employé)
-    return 0.f;
+void Antenna::setAltitude(const int alt) {
+    m_altitude = alt;
+}
+
+void Antenna::setRange(const float range) {
+    m_range = range;
 }

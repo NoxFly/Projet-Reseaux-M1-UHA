@@ -1,6 +1,7 @@
 #include "Application.hpp"
-
+#include <iostream>
 #include "ConfigReader.hpp"
+#include "NetworkModel.hpp"
 
 Application::Application(int argc, char** argv):
     m_config{},
@@ -11,10 +12,12 @@ Application::Application(int argc, char** argv):
     }
 
     ConfigReader reader;
+    NetworkModel test;//for debugging the new functionality only
 
     m_config = reader.loadFromFile(argv[1]);
 
     m_model.loadFromConfig(m_config);
+    std::cout << m_model.getNetwork().getNetworkAt(1).getPosition().lambert().x << std::endl;//for debugging the new functionality only
 }
 
 Application::~Application() {
