@@ -1,7 +1,7 @@
 #include "GeoPosition.hpp"
 #include "math.h"
 
-GeoPosition::GeoPosition(sf::Vector2<float> lambert) : m_lambert{lambert}, m_coords{} {
+GeoPosition::GeoPosition(sf::Vector2<double> lambert) : m_lambert{lambert}, m_coords{} {
     L2C();
 }
         
@@ -9,20 +9,20 @@ GeoPosition::~GeoPosition() {
 
 }
         
-sf::Vector2<float> GeoPosition::lambert() const {
+sf::Vector2<double> GeoPosition::lambert() const {
     return m_lambert;
 }
 
-sf::Vector2<float> GeoPosition::coords() const {
+sf::Vector2<double> GeoPosition::coords() const {
     return m_coords;
 }
 
-void GeoPosition::setLambert(const sf::Vector2<float>& lambert) {
+void GeoPosition::setLambert(const sf::Vector2<double>& lambert) {
     m_lambert = lambert;
     L2C();
 }
 
-void GeoPosition::setCoords(const sf::Vector2<float>& coords) {
+void GeoPosition::setCoords(const sf::Vector2<double>& coords) {
     m_coords = coords;
     C2L();
 }

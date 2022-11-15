@@ -1,4 +1,5 @@
 #include "Antenna.hpp"
+#include "utils.hpp"
 #include <string>
 #include <SFML/System/Vector2.hpp>
 
@@ -6,10 +7,11 @@ GeoPosition Antenna::getPosition() const {
     return m_position;
 }
 
-Antenna::Antenna(sf::Vector2<float> position,const float range,const int freq,const int alt):
+Antenna::Antenna(sf::Vector2<double> position,const float range,const int freq,const int alt):
 m_position{position},m_range{range}, m_frequency{freq},m_altitude{alt}
 {
-    
+    //set new uuid for intenna
+    m_uuid = uuid::generate_uuid_v4();
 }
 
 Antenna::~Antenna() {
@@ -32,7 +34,7 @@ std::string Antenna::getName() const {
     return m_name;
 }
 
-auto Antenna::getUUID() const {
+const char * Antenna::getUUID() {
     return m_uuid;
 }
 

@@ -11,7 +11,7 @@ class Antenna {
         GeoPosition getPosition() const;
 
         Antenna(
-            sf::Vector2<float> position,
+            sf::Vector2<double> position,
             const float range,
             const int freq,
             const int alt
@@ -22,7 +22,7 @@ class Antenna {
         int getFreq() const;
         int getAltitude() const;
         std::string getName() const;
-        auto getUUID() const;
+        const char * getUUID();
 
         void setFreq(const int);
         void setAltitude(const int);
@@ -34,7 +34,7 @@ class Antenna {
         int m_frequency;
         int m_altitude;
         std::string m_name;
-        char m_uuid[36];
+        const char * m_uuid;
 };
 
 #endif // ANTENNA_HPP
