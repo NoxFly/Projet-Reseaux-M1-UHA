@@ -47,7 +47,7 @@ string replace(const string& str, const string& find, const string& replace) {
     return result;
 }
 
-vector<string> splitString(string sequence, string separator) {
+vector<string> splitString(string sequence, const string separator) {
     size_t pos = 0;
     vector<string> splitted = {};
 

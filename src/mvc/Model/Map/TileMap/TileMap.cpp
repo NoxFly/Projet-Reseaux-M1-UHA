@@ -19,7 +19,7 @@ TileMap::~TileMap() {
 
 
 
-bool TileMap::load(const std::string& tilepath, const std::string& prefix, const std::string& ext, unsigned int width, unsigned int height) {
+bool TileMap::load(const std::string& tilepath, const std::string& prefix, const std::string& ext, const unsigned int width, const unsigned int height) {
     m_boardSize.x = width;
     m_boardSize.y = height;
 
@@ -30,9 +30,11 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
     m_tiles.resize(tileCount);
 
     //
+#ifdef DEBUG
     unsigned int i = 0;
 
     std::cout << " " << i << "/" << tileCount << std::flush;
+#endif
     //
 
     for(const auto &entry : fs::directory_iterator(tilepath)) {
@@ -54,7 +56,7 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
         // try to load the texture (image)
         if(!m_tiles[index].tex.loadFromFile(path)) {
 #ifdef DEBUG
-            std::cout << "\n" << "   Failed for '" << path << "'" << std::endl;
+            std::cerr << "\n" << "   Failed for '" << path << "'" << std::endl;
 #endif
             return false;
         }
@@ -80,7 +82,7 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
         // update state
         m_tiles[index].hasLoaded = true;
 
-
+#ifdef DEBUG
         // update console's loading index
         int l = std::to_string(i).size() + std::to_string(tileCount).size() + 1;
 
@@ -88,6 +90,7 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
             std::cout << "\b";
 
         std::cout << ++i << "/" << tileCount << std::flush;
+#endif
     }
 
     //
@@ -95,11 +98,11 @@ bool TileMap::load(const std::string& tilepath, const std::string& prefix, const
     return true;
 }
 
-const Tile& TileMap::operator[](unsigned int i) const {
+const Tile& TileMap::operator[](const unsigned int i) const {
     return m_tiles[i];
 }
 
-const Tile& TileMap::getTile(unsigned int x, unsigned int y) const {
+const Tile& TileMap::getTile(const unsigned int x, const unsigned int y) const {
     return m_tiles[m_boardSize.x * y + x];
 }
 

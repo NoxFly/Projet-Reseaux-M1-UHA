@@ -13,7 +13,9 @@ class NetworkModel {
 
 		void loadFromConfig(const NetworkConfig& config);
 
-		Antenna getNetworkAt(unsigned int i);
+		Antenna& getNetworkAt(const unsigned int i);
+		const Antenna& getNetworkAt(const unsigned int i) const;
+
         const std::vector<Antenna>& getNetwork() const;
 
         void setNetwork(const std::vector<Antenna>& network);

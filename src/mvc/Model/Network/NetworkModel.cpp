@@ -1,5 +1,7 @@
 #include "NetworkModel.hpp"
+
 #include "Antenna.hpp"
+
 #include <iostream>
 #include <string.h>
 #include <fstream>
@@ -15,13 +17,10 @@ NetworkModel::~NetworkModel() {
 }
 
 void NetworkModel::loadFromConfig(const NetworkConfig& config) {
-	// extract path from config
 	std::ifstream file(config.entryFile);
-	// default delimter
+    std::string line;
 
-	if(file.is_open()) { // only read if file is not empty
-
-		std::string line; // hold current line
+	if(file.is_open()) { // only read if file exists and is not empty
 
 		while(std::getline(file, line)) {
             // a line is modelised here as "0.0 0.0 0.0" (3 floats)
@@ -30,26 +29,36 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 
             sscanf(line.c_str(), "%f %f %f", &x, &y, &r);
 
-            // at least one the 3 floats does not respect the float form
+            // at least one of the 3 floats does not respect the float form
             if(x < .1 || y < .1 || r < .1) {
                 continue;
             }
 
-            Antenna newantenna(sf::Vector2f(x, y), r, 4, 4);
+            Antenna ant(sf::Vector2f(x, y), r, 4, 4);
 
-            m_network.push_back(newantenna);
+            m_network.push_back(ant);
 		}
 
 		file.close();
+
+#ifdef DEBUG
+        std::cout << std::endl;
+#endif
 	}
-	
+	else {
+        throw std::runtime_error("[ERROR] NetworkModel::loadFromConfig : Failed to open the sample file.");
+    }
 }
 
 const std::vector<Antenna>& NetworkModel::getNetwork() const {
 	return m_network;
 }
 
-Antenna NetworkModel::getNetworkAt(unsigned int i) {
+Antenna& NetworkModel::getNetworkAt(const unsigned int i) {
+    return m_network[i];
+}
+
+const Antenna& NetworkModel::getNetworkAt(const unsigned int i) const {
     return m_network[i];
 }
 

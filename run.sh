@@ -28,7 +28,7 @@ cVersion=17 # 89, 99, 11, 17
 # DO NOT CHANGE THESE CONFIG VARIABLES
 # > PASS THROUGH THE COMMAND
 
-version=0.0.9
+version=0.1.0
 
 srcFileExt="cpp"
 hdrFileExt="hpp"
@@ -510,7 +510,6 @@ compile()
 {
     [[ rule == 'build' ]] &&  macro="-D${mode^^}" || macro=""
 
-
     make "$1" ${mode^^}=1 PGNAME=$pgname\
         SRCEXT=$srcFileExt HDREXT=$hdrFileExt\
         SRCDIR=$srcDir INCDIR=$includeDir\
@@ -607,6 +606,8 @@ launch()
     if [ ! -z "$os" ]; then
         macro="-D$os"
     fi
+
+    macro="$macro -D${mode^^}"
 
     # get header files folder
     [ $projectMode -eq 1 ] && includeDir=$srcDir || includeDir=$incDir

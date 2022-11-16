@@ -22,7 +22,7 @@ Renderer::Renderer():
 
     if(!font.loadFromFile(fontPath)) {
 #ifdef DEBUG
-        std::err << "Failed to load font " << fontPath << std::endl;
+        std::cerr << "Failed to load font " << fontPath << std::endl;
 #endif
     }
     else {
@@ -35,15 +35,17 @@ Renderer::Renderer():
     // @warning
     // THIS DOES NOT WORK :
     // images are buggy, and the grab/grabbing cursors does not exist on the system by default.
-    sf::Image grabTex;
-    grabTex.loadFromFile("res/images/grab_b.png");
-
-    sf::Image grabbingTex;
-    grabbingTex.loadFromFile("res/images/grabbing_b.png");
-
     m_cursorDefault.loadFromSystem(sf::Cursor::Arrow);
-    m_cursorGrab.loadFromPixels(grabTex.getPixelsPtr(), grabTex.getSize(), sf::Vector2u(grabTex.getSize().x/2, grabTex.getSize().y/2));
-    m_cursorGrabbing.loadFromPixels(grabbingTex.getPixelsPtr(), grabbingTex.getSize(), sf::Vector2u(grabbingTex.getSize().x/2, grabbingTex.getSize().y/2));
+
+    sf::Image grabTex, grabbingTex;
+
+    if(grabTex.loadFromFile("res/images/grab_b.png")) {
+        m_cursorGrab.loadFromPixels(grabTex.getPixelsPtr(), grabTex.getSize(), sf::Vector2u(grabTex.getSize().x/2, grabTex.getSize().y/2));    
+    }
+
+    if(grabbingTex.loadFromFile("res/images/grabbing_b.png")) {
+        m_cursorGrabbing.loadFromPixels(grabbingTex.getPixelsPtr(), grabbingTex.getSize(), sf::Vector2u(grabbingTex.getSize().x/2, grabbingTex.getSize().y/2));
+    }
 }
 
 Renderer::~Renderer() {
@@ -83,6 +85,15 @@ void Renderer::createWindow(const RendererConfig& config) {
     m_view.reset(sf::FloatRect(0, 0, config.windowWidth, config.windowHeight));
 
     m_window->setMouseCursor(m_cursorDefault);
+
+#ifdef DEBUG
+    std::cout << "\nNew window :\n"
+        << "  Title : " << config.windowTitle
+        << "\n  Resolution : " << config.windowWidth << "x" << config.windowHeight << "p"
+        << "\n  Framerate : " << config.frameRate
+        << "\n  Position : " << wX << ", " << wY
+        << "\n" << std::endl;
+#endif
 }
 
 
@@ -106,7 +117,7 @@ void Renderer::close() {
 }
 
 
-void Renderer::setFullscreen(bool full) {
+void Renderer::setFullscreen(const bool full) {
     m_isFullscreen = !full;
     toggleFullscreen();
 }
@@ -177,7 +188,7 @@ void Renderer::render(Model& model) {
     m_window->display();
 }
 
-void Renderer::fillText(const std::string& str, const sf::Vector2f& position, int fontSize, const sf::Color& color) {
+void Renderer::fillText(const std::string& str, const sf::Vector2f& position, const int fontSize, const sf::Color& color) {
     sf::Text txt;
     txt.setFont(m_fonts.at("Roboto"));
     txt.setCharacterSize(fontSize);
@@ -188,6 +199,6 @@ void Renderer::fillText(const std::string& str, const sf::Vector2f& position, in
     m_window->draw(txt);
 }
 
-void Renderer::fillText(const std::string& str, int x, int y, int fontSize, const sf::Color& color) {
+void Renderer::fillText(const std::string& str, const int x, const int y, const int fontSize, const sf::Color& color) {
     fillText(str, sf::Vector2f(x, y), fontSize, color);
 }

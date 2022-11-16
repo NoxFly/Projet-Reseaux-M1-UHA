@@ -1,6 +1,9 @@
 #include "MapModel.hpp"
 
+#include "GeoPosition.hpp"
+
 #include <iostream>
+
 
 MapModel::MapModel():
     m_config{},
@@ -30,16 +33,25 @@ void MapModel::loadFromConfig(const MapConfig& config) {
         const std::string folder = config.tileFolder + "/level_" + si;
         const std::string prefix = config.tilePrefix + si;
 
+#ifdef DEBUG
         std::string result = "Failed.";
 
         std::cout << "Loading tiles for map level " << si << "..." << std::flush;
-        
+
         if(m_tiles[i-1].load(folder, prefix, ".png", config.tileCountX, config.tileCountY)) {
             result = "Done.";
         }
 
         std::cout << " " << result << std::endl;
+
+#else
+        m_tiles[i-1].load(folder, prefix, ".png", config.tileCountX, config.tileCountY);
+#endif
     }
+
+#ifdef DEBUG
+    std::cout << std::endl;
+#endif
 
     // setup ratio
     const unsigned int maxTileSize = m_tiles.at(config.zoomLevel-1).getTileSize().x;
@@ -48,6 +60,8 @@ void MapModel::loadFromConfig(const MapConfig& config) {
         auto s = m_tiles.at(i).getTileSize();
         m_zoomRatio[i] = (float)maxTileSize / s.x;
     }
+
+    GeoPosition::defineMapLBT(config.topLeft, config.bottomRight, sf::Vector2u(maxTileSize, maxTileSize));
 
     centerPosition();
 }

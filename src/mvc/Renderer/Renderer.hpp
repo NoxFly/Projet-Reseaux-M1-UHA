@@ -22,18 +22,16 @@ class Renderer {
 
         sf::RenderWindow* getWindow() const;
         sf::RenderWindow* getWindow();
+
         bool isClosed() const;
         void close();
 
-        void setFullscreen(bool full);
+        void setFullscreen(const bool full);
         void toggleFullscreen();
 
     protected:
-        void fillText(const std::string& str, int x, int y, int fontSize=20, const sf::Color& color=sf::Color::Black);
-        void fillText(const std::string& str, const sf::Vector2f& position, int fontSize=20, const sf::Color& color=sf::Color::Black);
-
-
-        // void __fix_image_pixels__(sf::Image);
+        void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black);
+        void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black);
 
 		sf::RenderWindow* m_window;
         sf::VideoMode m_screen;

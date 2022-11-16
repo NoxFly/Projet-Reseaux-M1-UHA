@@ -1,27 +1,35 @@
 #include "Antenna.hpp"
 
+#ifdef DEBUG
+#include <iostream>
+#endif
+
 #include <string>
 #include <SFML/System/Vector2.hpp>
 
 #include "utils.hpp"
 
-
-GeoPosition Antenna::getPosition() const {
-    return m_position;
-}
-
-Antenna::Antenna(sf::Vector2f position,const float range,const int freq,const int alt):
+Antenna::Antenna(const sf::Vector2f& position, const float range, const int freq, const int alt):
     m_position(position),
     m_range{range},
     m_frequency{freq},
     m_altitude{alt},
     m_uuid(uuid::generate_uuid_v4())
 {
-
+#ifdef DEBUG
+    std::cout << "New antenna "
+        << "(" << m_position.coords().x << ", " << m_position.coords().y << ")"
+        << "[" << m_position.lambert().x << ", " << m_position.lambert().y <<"]"
+        << std::endl;
+#endif
 }
 
 Antenna::~Antenna() {
 
+}
+
+const GeoPosition& Antenna::getPosition() const {
+    return m_position;
 }
 
 float Antenna::getRange() const {
@@ -36,7 +44,7 @@ int Antenna::getAltitude() const {
     return m_altitude;
 }
 
-std::string Antenna::getName() const {
+const std::string& Antenna::getName() const {
     return m_name;
 }
 

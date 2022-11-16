@@ -90,27 +90,27 @@ void Input::treatEvent(const sf::Event& event, Renderer& renderer) {
     }
 }
 
-bool Input::isKeyDown(sf::Keyboard::Key key) const {
+bool Input::isKeyDown(const sf::Keyboard::Key key) const {
     return m_keys[key];
 }
 
-bool Input::isKeyUp(sf::Keyboard::Key key) const {
+bool Input::isKeyUp(const sf::Keyboard::Key key) const {
     return !m_keys[key];
 }
 
-bool Input::isKeyPressed(sf::Keyboard::Key key) const {
+bool Input::isKeyPressed(const sf::Keyboard::Key key) const {
     return m_pressed_keys[key];
 }
 
-bool Input::isMouseButtonDown(sf::Mouse::Button btn) const {
+bool Input::isMouseButtonDown(const sf::Mouse::Button btn) const {
     return m_mouseButtons[btn];
 }
 
-bool Input::isMouseButtonUp(sf::Mouse::Button btn) const {
+bool Input::isMouseButtonUp(const sf::Mouse::Button btn) const {
     return !m_mouseButtons[btn];
 }
 
-bool Input::isMouseButtonPressed(sf::Mouse::Button btn) const {
+bool Input::isMouseButtonPressed(const sf::Mouse::Button btn) const {
     return m_pressed_mouseButtons[btn];
 }
 
@@ -122,11 +122,11 @@ bool Input::mouseWheeled() const {
     return m_hasMouseWheeled;
 }
 
-sf::Vector2i Input::getMousePosition() const {
+const sf::Vector2i& Input::getMousePosition() const {
     return m_mousePosition;
 }
 
-sf::Vector2i Input::getMouseOffset() const {
+const sf::Vector2i& Input::getMouseOffset() const {
     return m_mouseOffset;
 }
 

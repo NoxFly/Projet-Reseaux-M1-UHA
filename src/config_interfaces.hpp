@@ -2,6 +2,7 @@
 #define CONFIGINTERFACES_HPP
 
 #include <string>
+#include <SFML/System/Vector2.hpp>
 
 struct RendererConfig {
     unsigned int windowWidth;
@@ -17,6 +18,8 @@ struct MapConfig {
     unsigned int zoomLevel;
     unsigned int tileCountX;
     unsigned int tileCountY;
+    sf::Vector2f topLeft;
+    sf::Vector2f bottomRight;
 };
 
 struct NetworkConfig {

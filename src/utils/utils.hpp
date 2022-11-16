@@ -59,7 +59,7 @@ std::string replace(const std::string& str, const std::string& find, const std::
  * @param separator The delimiter
  * @return The vector of splitted substrings
  */
-std::vector<std::string> splitString(std::string sequence, std::string separator);
+std::vector<std::string> splitString(std::string sequence, const std::string separator);
 
 // namespace used to
 // isolate all stl random variables

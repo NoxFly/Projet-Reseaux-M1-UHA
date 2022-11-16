@@ -7,17 +7,17 @@ Application::Application(int argc, char** argv):
     m_config{},
     m_model(), m_renderer(), m_controller()
 {
-    if(argc < 2) {
-        throw std::runtime_error("Missing configuration file path !\nAborting.");
+    if(argc < 3) {
+        throw std::runtime_error("[ERROR] Application : " + std::to_string(argc-1) + " argument given, 2 expected (configuration file path + antenna sample file path)\nAborting.");
     }
 
     ConfigReader reader;
-    NetworkModel test;//for debugging the new functionality only
 
     m_config = reader.loadFromFile(argv[1]);
 
+    m_config.network.entryFile = argv[2];
+
     m_model.loadFromConfig(m_config);
-    std::cout << m_model.getNetwork().getNetworkAt(1).getPosition().lambert().x << std::endl;//for debugging the new functionality only
 }
 
 Application::~Application() {

@@ -9,7 +9,7 @@ class ConfigReader {
 		ConfigReader();
 		~ConfigReader();
 
-		AppConfig loadFromFile(char* filepath);
+		AppConfig loadFromFile(const char* filepath);
 
 	private:
 		IniSet m_config;

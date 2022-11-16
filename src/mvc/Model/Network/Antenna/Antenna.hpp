@@ -7,21 +7,19 @@
 
 class Antenna {
     public :
-        
-        GeoPosition getPosition() const;
-
         Antenna(
-            sf::Vector2f position,
+            const sf::Vector2f& position,
             const float range,
             const int freq,
             const int alt
         );
         ~Antenna();
 
+        const GeoPosition& getPosition() const;
         float getRange() const;
         int getFreq() const;
         int getAltitude() const;
-        std::string getName() const;
+        const std::string& getName() const;
         const char * getUUID();
 
         void setFreq(const int);

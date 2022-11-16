@@ -18,16 +18,16 @@ class Input {
          * @param   sf::Keyboard::Key   target key
          * @return  bool                key state
          */
-        bool isKeyDown(sf::Keyboard::Key key) const; // key is down
-        bool isKeyUp(sf::Keyboard::Key key) const; // key is released
-        bool isKeyPressed(sf::Keyboard::Key key) const; // key is pressed
-        bool isMouseButtonDown(sf::Mouse::Button key) const; // mouse button down
-        bool isMouseButtonUp(sf::Mouse::Button key) const; // mouse button released
-        bool isMouseButtonPressed(sf::Mouse::Button btn) const; // mouse button pressed
+        bool isKeyDown(const sf::Keyboard::Key key) const; // key is down
+        bool isKeyUp(const sf::Keyboard::Key key) const; // key is released
+        bool isKeyPressed(const sf::Keyboard::Key key) const; // key is pressed
+        bool isMouseButtonDown(const sf::Mouse::Button key) const; // mouse button down
+        bool isMouseButtonUp(const sf::Mouse::Button key) const; // mouse button released
+        bool isMouseButtonPressed(const sf::Mouse::Button btn) const; // mouse button pressed
         bool mouseMoved() const;
         bool mouseWheeled() const;
-        sf::Vector2i getMousePosition() const;
-        sf::Vector2i getMouseOffset() const;
+        const sf::Vector2i& getMousePosition() const;
+        const sf::Vector2i& getMouseOffset() const;
         float getMouseWheelDirection() const;
 
     private:

@@ -12,6 +12,8 @@ Model::~Model() {
 }
 
 void Model::loadFromConfig(const AppConfig& config) {
+    // @remark : it's important to load the map first
+    // so the antennas in the network have access to the right map's lambert coords & size
     m_map.loadFromConfig(config.map);
     m_network.loadFromConfig(config.network);
 }
