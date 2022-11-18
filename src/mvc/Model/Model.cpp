@@ -14,14 +14,14 @@ void Model::loadFromConfig(AppConfig config) {
     (void)config;
 }
 
-GuiModel Model::getGui() const noexcept {
+GuiModel& Model::getGui() noexcept {
     return m_gui;
 }
 
-MapModel Model::getMap() const noexcept {
+MapModel& Model::getMap() noexcept {
     return m_map;
 }
 
-NetworkModel Model::getNetwork() const noexcept {
+NetworkModel& Model::getNetwork() noexcept {
     return m_network;
 }

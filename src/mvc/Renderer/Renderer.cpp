@@ -1,6 +1,7 @@
 #include "Renderer.hpp"
 
 
+
 Renderer::Renderer() {
     
 }
@@ -9,7 +10,11 @@ Renderer::~Renderer() {
     
 }
 
-void Renderer::render(sf::RenderWindow* window, Model model) {
+void Renderer::render(sf::RenderWindow* window, Model& model) {
     (void)window;
-    (void)model;
+    
+    auto& gui = model.getGui().getTgui();
+
+    gui.draw();
+
 }

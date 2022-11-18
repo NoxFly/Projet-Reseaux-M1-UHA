@@ -1,7 +1,7 @@
 # MODIFIABLE
 CFLAGS 		:= -Werror -Wall -Wextra
 LDFLAGS		:=
-LIBS 		:= sfml-graphics sfml-window sfml-system
+LIBS 		:= sfml-graphics sfml-window sfml-system tgui
 
 # NOT MODIFIABLE
 # all what's below must not be modified

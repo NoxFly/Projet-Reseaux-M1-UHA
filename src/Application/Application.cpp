@@ -77,6 +77,9 @@ void Application::render() {
 
 void Application::launch() {
     generateNewWindow();
+
+    m_model.getGui().bindWindow(m_window);
+
     animate();
 }
 

@@ -15,9 +15,9 @@ class Model {
 
         void loadFromConfig(AppConfig config);
 
-        GuiModel getGui() const noexcept;
-        MapModel getMap() const noexcept;
-        NetworkModel getNetwork() const noexcept;
+        GuiModel& getGui() noexcept;
+        MapModel& getMap() noexcept;
+        NetworkModel& getNetwork() noexcept;
 
     protected:
         GuiModel m_gui;

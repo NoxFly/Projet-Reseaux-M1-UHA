@@ -10,7 +10,7 @@ class Controller {
         Controller();
 		~Controller();
 
-        void update(sf::RenderWindow* window, Model model, bool* running);
+        void update(sf::RenderWindow* window, Model& model, bool* running);
 };
 
 #endif // CONTROLLER_HPP
