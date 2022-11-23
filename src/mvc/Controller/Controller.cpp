@@ -17,11 +17,24 @@ void Controller::update(Renderer& renderer, Model& model) {
     m_input.update(renderer);
 
 
-    // update models
+
+    //
+    // |======| update models |======|
+    //
+
+    /////////////////
+    // --- window ---
+
+    // toggle window fullscreen
     if(m_input.isKeyPressed(sf::Keyboard::F)) {
         renderer.toggleFullscreen();
     }
 
+
+    //////////////
+    // --- map ---
+
+    // grab map
     if(m_input.isMouseButtonDown(sf::Mouse::Button::Left)) {
         model.getMap().grab(m_input.getMousePosition());
 
@@ -33,9 +46,28 @@ void Controller::update(Renderer& renderer, Model& model) {
         model.getMap().ungrab();
     }
 
+    // zoom map
     if(m_input.mouseWheeled()) {
         (m_input.getMouseWheelDirection() > 0)
             ? model.getMap().zoomIn()
             : model.getMap().zoomOut();
+    }
+
+    //////////////////
+    // --- network ---
+
+    // toggle antennas view
+    if(m_input.isKeyPressed(sf::Keyboard::A)) {
+        model.getNetwork().showAntennas(!model.getNetwork().shouldShowAntennas());
+    }
+
+    // toggle ranges view
+    if(m_input.isKeyPressed(sf::Keyboard::R)) {
+        model.getNetwork().showRanges(!model.getNetwork().shouldShowRanges());
+    }
+
+    // toggle colors view
+    if(m_input.isKeyPressed(sf::Keyboard::C)) {
+        model.getNetwork().showColors(!model.getNetwork().shouldShowColors());
     }
 }

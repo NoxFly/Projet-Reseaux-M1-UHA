@@ -11,7 +11,7 @@
             "program": "${workspaceRoot}/bin/debug/NetworkGraph",
             "cwd": "${workspaceRoot}/bin",
             "preLaunchTask": "${defaultBuildTask}",
-            "args": ["res/config.ini"]
+            "args": ["res/config.ini", "res/sample1.txt"]
         }
     ]
 }

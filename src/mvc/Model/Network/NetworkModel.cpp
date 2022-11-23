@@ -8,7 +8,12 @@
 #include <SFML/System/Vector2.hpp>
 
 
-NetworkModel::NetworkModel() {
+NetworkModel::NetworkModel():
+    m_network{},
+    m_showAntennas(true),
+    m_showRanges(false),
+    m_showColors(false)
+{
 
 }
 
@@ -31,7 +36,7 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 
             // at least one of the 3 floats does not respect the float form
             if(x < .1 || y < .1 || r < .1) {
-                continue;
+                // continue;
             }
 
             Antenna ant(sf::Vector2f(x, y), r, 4, 4);
@@ -50,7 +55,7 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
     }
 }
 
-const std::vector<Antenna>& NetworkModel::getNetwork() const {
+const std::vector<Antenna>& NetworkModel::getAntennas() const {
 	return m_network;
 }
 
@@ -64,4 +69,29 @@ const Antenna& NetworkModel::getNetworkAt(const unsigned int i) const {
 
 void NetworkModel::setNetwork(const std::vector<Antenna>& network) {
     m_network = network;
+}
+
+
+void NetworkModel::showAntennas(const bool state) {
+    m_showAntennas = state;
+}
+
+void NetworkModel::showRanges(const bool state) {
+    m_showRanges = state;
+}
+
+void NetworkModel::showColors(const bool state) {
+    m_showColors = state;
+}
+
+bool NetworkModel::shouldShowAntennas() const {
+    return m_showAntennas;
+}
+
+bool NetworkModel::shouldShowRanges() const {
+    return m_showRanges;
+}
+
+bool NetworkModel::shouldShowColors() const {
+    return m_showColors;
 }

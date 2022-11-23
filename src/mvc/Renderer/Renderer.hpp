@@ -40,6 +40,11 @@ class Renderer {
         sf::View m_view;
     
         sf::Cursor m_cursorDefault, m_cursorGrab, m_cursorGrabbing;
+        
+        // dev
+        sf::Texture m_guiTexture;
+        sf::Sprite m_antennaSprite;
+        //
 
         bool m_isFullscreen;
         sf::Vector2u m_defaultWindowSize;

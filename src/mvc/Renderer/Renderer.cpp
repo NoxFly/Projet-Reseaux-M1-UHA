@@ -46,6 +46,14 @@ Renderer::Renderer():
     if(grabbingTex.loadFromFile("res/images/grabbing_b.png")) {
         m_cursorGrabbing.loadFromPixels(grabbingTex.getPixelsPtr(), grabbingTex.getSize(), sf::Vector2u(grabbingTex.getSize().x/2, grabbingTex.getSize().y/2));
     }
+
+
+
+    // load gui texture
+    m_guiTexture.loadFromFile("res/images/sprite_gui.png");
+    m_antennaSprite.setTexture(m_guiTexture);
+    m_antennaSprite.setTextureRect(sf::IntRect(29, 445, 129, 157));
+    m_antennaSprite.setScale(.3, .3);
 }
 
 Renderer::~Renderer() {
@@ -176,6 +184,62 @@ void Renderer::render(Model& model) {
         fillText(position, t.tile.getPosition(), .2 * tileSize.y, sf::Color::Red);
 #endif
     }
+
+
+
+    // network
+    const auto& net = model.getNetwork();
+
+    bool showA = net.shouldShowAntennas();
+    bool showR = net.shouldShowRanges();
+    bool showC = net.shouldShowColors();
+
+    sf::Color baseColor(150, 150, 150);
+    sf::Color baseColorT(150, 150, 150, 100);
+
+    if(showA || showR || showC) {
+        const auto& ants = net.getAntennas();
+        const float ratio = map.getCurrentRatio();
+        const auto bounds = m_antennaSprite.getGlobalBounds();
+
+        m_antennaSprite.setColor(baseColor);
+
+        for(const auto& ant : ants) {
+            const auto& position = ant.getPosition().coords();
+
+            sf::Vector2f pos(position.x * ratio, position.y * ratio);
+
+            if(showA) {
+                if(showC) {
+                    m_antennaSprite.setColor(ant.getColor());
+                }
+
+                sf::Vector2f posA(pos.x - bounds.width/2, pos.y - bounds.height);
+
+                m_antennaSprite.setPosition(posA);
+
+                m_window->draw(m_antennaSprite);
+            }
+
+            if(showR) {
+                sf::CircleShape range(ant.getRange());
+                
+                range.setFillColor(showC
+                    ? ant.getColor()
+                    : baseColorT
+                );
+
+                range.setOutlineThickness(2);
+                range.setOutlineColor(baseColor);
+
+                m_window->draw(range);
+            }
+        }
+    }
+
+
+
+
 
 
     // reset the view for 2D HUD that needs to be drawn in front of the map

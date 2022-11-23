@@ -25,7 +25,7 @@ MapModel::~MapModel() {
 void MapModel::loadFromConfig(const MapConfig& config) {
     m_config = config;
     m_tiles.resize(config.zoomLevel);
-    m_zoomRatio.resize(config.zoomLevel-1);
+    m_zoomRatio.resize(config.zoomLevel);
 
     // load all levels of tiles
     for(unsigned int i=1; i <= config.zoomLevel; i++) {  
@@ -58,10 +58,12 @@ void MapModel::loadFromConfig(const MapConfig& config) {
 
     for(unsigned int i=0; i < config.zoomLevel-1; i++) {  
         auto s = m_tiles.at(i).getTileSize();
-        m_zoomRatio[i] = (float)maxTileSize / s.x;
+        m_zoomRatio[i] = (float)s.x / maxTileSize;
     }
 
-    GeoPosition::defineMapLBT(config.topLeft, config.bottomRight, sf::Vector2u(maxTileSize, maxTileSize));
+    m_zoomRatio[config.zoomLevel-1] = 1;
+
+    GeoPosition::defineMapLBT(config.topLeft, config.bottomRight, m_tiles.at(config.zoomLevel-1).getDimension());
 
     centerPosition();
 }
@@ -88,6 +90,10 @@ sf::Vector2u MapModel::getMapDimension() {
 
 sf::Vector2u MapModel::getMapDimension(const unsigned int level) {
     return m_tiles.at(level-1).getDimension();
+}
+
+float MapModel::getCurrentRatio() const {
+    return m_zoomRatio.at(m_currentZoomLevel-1);
 }
 
 unsigned int MapModel::getZoomLevel() const {

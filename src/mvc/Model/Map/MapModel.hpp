@@ -70,6 +70,9 @@ class MapModel {
          * Returns the dimension of the tiles of the current level.
          */
         const sf::Vector2u& getTileSize() const;
+
+        
+        float getCurrentRatio() const;
         
 
         /**
