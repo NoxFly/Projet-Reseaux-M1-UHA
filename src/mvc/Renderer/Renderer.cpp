@@ -195,7 +195,7 @@ void Renderer::render(Model& model) {
     bool showC = net.shouldShowColors();
 
     sf::Color baseColor(150, 150, 150);
-    sf::Color baseColorT(150, 150, 150, 100);
+    sf::Color baseColorT(150, 150, 150, 50);
 
     if(showA || showR || showC) {
         const auto& ants = net.getAntennas();
@@ -222,15 +222,17 @@ void Renderer::render(Model& model) {
             }
 
             if(showR) {
-                sf::CircleShape range(ant.getRange());
+                int radius = ant.getRange() * ratio;
+
+                sf::CircleShape range(radius, 90);
+
+                range.setOrigin(radius, radius);
+                range.setPosition(pos);
                 
-                range.setFillColor(showC
-                    ? ant.getColor()
-                    : baseColorT
-                );
+                range.setFillColor(baseColorT);
 
                 range.setOutlineThickness(2);
-                range.setOutlineColor(baseColor);
+                range.setOutlineColor(showC? ant.getColor() : baseColor);
 
                 m_window->draw(range);
             }
