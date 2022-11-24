@@ -18,7 +18,7 @@ Input::~Input() {
 
 }
 
-void Input::update(Renderer& renderer) {
+void Input::update(Renderer& renderer, Model& model) {
     sf::Event event;
 
     // reset key pressed
@@ -32,14 +32,18 @@ void Input::update(Renderer& renderer) {
     m_hasMouseMoved = false;
     m_hasMouseWheeled = false;
 
+    auto& gui = model.getGui().getTgui();
+
     // update
-    while(renderer.getWindow()->pollEvent(event)) {
+    while(renderer.getWindow() && renderer.getWindow()->pollEvent(event)) {
         if(event.type == sf::Event::Closed) {
             renderer.close();
             return;
         }
 
         treatEvent(event, renderer);
+
+        gui.handleEvent(event);
     }
 }
 

@@ -11,7 +11,7 @@ class Input {
 		Input();
 		~Input();
         
-        void update(Renderer& renderer);
+        void update(Renderer& renderer, Model& model);
 
         // getters
         /** return a bool either a specific key/button is downed, pressed, or released

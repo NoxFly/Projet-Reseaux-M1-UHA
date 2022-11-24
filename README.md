@@ -6,6 +6,7 @@ Outil | Version
 ------|--------
 C++   | 17
 SFML  | 2.5
+TGUI  | 0.9
 OS    | Linux or Windows with MingW
 
 # Dependencies
@@ -19,6 +20,14 @@ Install dependencies :
 ```sh
 sudo apt-get install make libsfml-dev
 ```
+
+
+To install TGUI :
+
+```
+./install/tgui.sh
+```
+
 
 The `libs/` folder is only for Windows's users.
 

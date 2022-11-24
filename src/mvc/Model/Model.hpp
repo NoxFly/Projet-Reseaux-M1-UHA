@@ -1,12 +1,13 @@
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
+// class Model;
+
 #include "MapModel.hpp"
 #include "GuiModel.hpp"
 #include "NetworkModel.hpp"
 
 #include "config_interfaces.hpp"
-
 
 class Model {
 	public:

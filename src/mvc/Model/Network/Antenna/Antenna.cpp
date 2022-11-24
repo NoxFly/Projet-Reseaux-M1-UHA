@@ -19,10 +19,28 @@ Antenna::Antenna(const sf::Vector2f& position, const float range, const int freq
     m_uuid(uuid::generate_uuid_v4())
 {
 #ifdef DEBUG
+    int x = m_position.coords().x;
+    int xl = std::to_string(x).size();
+    int y = m_position.coords().y;
+    int yl = std::to_string(y).size();
+
+    int l = 6;
+
     std::cout << "New antenna "
-        << "(" << m_position.coords().x << ", " << m_position.coords().y << ")"
-        << "[" << std::fixed << m_position.lambert().x << ", " << m_position.lambert().y <<"]"
+        << "(" << x << ", ";
+
+    for(int i=0; i < (l-xl); i++)
+        std::cout << " ";
+        
+    std::cout << y << ")";
+
+    for(int i=0; i < (l-yl); i++)
+        std::cout << " ";
+
+    std::cout
+        << "[" << std::fixed << m_position.lambert().x << ", " << m_position.lambert().y  << std::defaultfloat <<"]"
         << std::endl;
+
 #endif
 }
 

@@ -42,6 +42,9 @@ void Application::stop() {
 void Application::generateNewWindow() {
     m_renderer.createWindow(m_config.renderer);
     m_renderer.getWindow()->setActive();
+
+    m_model.getGui().bindRenderer(&m_renderer);
+    m_model.getGui().setup(m_model);
 }
 
 void Application::update() {

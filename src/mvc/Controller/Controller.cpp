@@ -14,7 +14,7 @@ Controller::~Controller() {
 
 void Controller::update(Renderer& renderer, Model& model) {
     // update view input (poll event)
-    m_input.update(renderer);
+    m_input.update(renderer, model);
 
 
 

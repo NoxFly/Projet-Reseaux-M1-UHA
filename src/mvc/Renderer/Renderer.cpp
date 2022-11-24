@@ -248,7 +248,12 @@ void Renderer::render(Model& model) {
     m_window->setView(defaultView);
 
     // do stuff for HUD here...
+    auto& gui = model.getGui();
 
+    if(gui.shouldDraw()) {
+        auto& tgui = gui.getTgui();
+        tgui.draw();
+    }
 
 
     m_window->display();

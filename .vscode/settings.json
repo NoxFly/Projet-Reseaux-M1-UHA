@@ -66,6 +66,7 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "cinttypes": "cpp",
+<<<<<<< HEAD
         "typeinfo": "cpp",
         "codecvt": "cpp",
         "iomanip": "cpp",
@@ -78,4 +79,9 @@
         "variant": "cpp",
         "cfenv": "cpp"
     }
+=======
+        "typeinfo": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+>>>>>>> origin/Gui
 }
