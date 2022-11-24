@@ -7,10 +7,10 @@ GuiModel::GuiModel():
     m_gui()
 {
 
-    tgui::Theme::setDefault(tgui::Theme::create("/home/amir/Desktop/tgui/TGUI-0.9.5/themes/BabyBlue.txt"));
+    tgui::Theme::setDefault(tgui::Theme::create("res/themes/BabyBlue.txt"));
 
     // Create the background image
-    auto picture = tgui::Picture::create("/home/amir/Desktop/Master1/ProjetReseauMobile/Projet-Reseaux-M1-UHA/src/mvc/Model/Gui/MenuBackground.jpg");
+    auto picture = tgui::Picture::create("res/images/menu/MenuBackground.jpg");
     picture->setSize(1280, 720);
 
 
@@ -18,7 +18,7 @@ GuiModel::GuiModel():
     auto title = tgui::Label::create();
     title->setText("Mulhouse Networking");
     title->setPosition(225, 160);
-    title->getRenderer()->setFont("/home/amir/Desktop/Master1/ProjetReseauMobile/Projet-Reseaux-M1-UHA/src/mvc/Model/Gui/font.ttf");
+    title->getRenderer()->setFont("res/fonts/font.ttf");
     title->getRenderer()->setTextColor(sf::Color(255,255,255));
     title->getRenderer()->setTextOutlineThickness(3);
     title->getRenderer()->setTextOutlineColor(sf::Color(80,80,80));
@@ -31,7 +31,7 @@ GuiModel::GuiModel():
     auto buttonStart = tgui::Button::create();
     buttonStart->setPosition(490, 400);
     buttonStart->setText("Start");
-    buttonStart->setInheritedFont("/home/amir/Desktop/Master1/ProjetReseauMobile/Projet-Reseaux-M1-UHA/src/mvc/Model/Gui/font.ttf");
+    buttonStart->setInheritedFont("res/fonts/font.ttf");
     buttonStart->setTextSize(30);
     buttonStart->setSize(300, 50);
     buttonStart->onPress([&]{ std::cout << " button Start pressed" << std::endl; });
@@ -41,7 +41,7 @@ GuiModel::GuiModel():
     auto buttonSettings = tgui::Button::create();
     buttonSettings->setPosition(490, 470);
     buttonSettings->setText("Settings");
-    buttonSettings->setInheritedFont("/home/amir/Desktop/Master1/ProjetReseauMobile/Projet-Reseaux-M1-UHA/src/mvc/Model/Gui/font.ttf");
+    buttonSettings->setInheritedFont("res/fonts/font.ttf");
     buttonSettings->setTextSize(30);
     buttonSettings->setSize(300, 50);
     buttonSettings->onPress([&]{ std::cout << " button Settings pressed" << std::endl; });
@@ -52,16 +52,17 @@ GuiModel::GuiModel():
     auto buttonQuit = tgui::Button::create();
     buttonQuit->setPosition(490, 540);
     buttonQuit->setText("Quit");
-    buttonQuit->setInheritedFont("/home/amir/Desktop/Master1/ProjetReseauMobile/Projet-Reseaux-M1-UHA/src/mvc/Model/Gui/font.ttf");
+    buttonQuit->setInheritedFont("res/fonts/font.ttf");
     buttonQuit->setTextSize(30);
     ///buttonQuit->setCallbackId(3);
     //buttonQuit->bindCallback(tgui::Button::LeftMouseClicked);
     buttonQuit->setSize(300, 50);
-    buttonQuit->onPress([&]{ std::cout << " button Quit pressed" << std::endl; });
+    buttonQuit->onPress([&]{
+        std::cout << " button Quit pressed" << std::endl; 
+        
+        });
     buttonQuit->showWithEffect(tgui::ShowAnimationType::SlideFromTop, 500);
 
-
-    m_gui.setOverrideMouseCursor(tgui::Cursor::Type::Hand);
     m_gui.add(picture);
     m_gui.add(title);
     m_gui.add(buttonStart);
