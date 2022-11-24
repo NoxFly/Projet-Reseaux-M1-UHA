@@ -150,96 +150,101 @@ void Renderer::toggleFullscreen() {
 void Renderer::render(Model& model) {
     m_window->clear(m_background);
 
-    // map
-    const MapModel& map = model.getMap();
-    const std::vector<Tile>& tiles = map.getTiles();
-
-    sf::Vector2i position = map.getPosition();
-
     const auto& defaultView = m_window->getDefaultView();
 
-    m_view.setCenter((sf::Vector2f)position);
-    m_window->setView(m_view);
+    auto& gui = model.getGui();
 
-    for(const Tile& t : tiles) {
-        if(t.hasLoaded) {
-            m_window->draw(t.tile);
+    // DEV ONLY
+    // after main menu > start
+    if(!gui.shouldDraw()) {
+        // map
+        const MapModel& map = model.getMap();
+        const std::vector<Tile>& tiles = map.getTiles();
+
+        sf::Vector2i position = map.getPosition();
+
+        m_view.setCenter((sf::Vector2f)position);
+        m_window->setView(m_view);
+
+        for(const Tile& t : tiles) {
+            if(t.hasLoaded) {
+                m_window->draw(t.tile);
+            }
+
+        // red debug grid
+#ifdef TILE_DEBUG
+            const auto& tileSize = map.getTileSize();
+
+            sf::RectangleShape r;
+            r.setSize((sf::Vector2f)tileSize);
+            r.setPosition(t.tile.getPosition());
+            r.setOutlineColor(sf::Color::Red);
+            r.setOutlineThickness(1);
+            r.setFillColor(sf::Color::Transparent);
+
+            m_window->draw(r);
+
+            std::string position = std::to_string(t.position.x) + ", " + std::to_string(t.position.y);
+
+            fillText(position, t.tile.getPosition(), .2 * tileSize.y, sf::Color::Red);
+#endif
         }
 
-    // red debug grid
-#ifdef TILE_DEBUG
-        const auto& tileSize = map.getTileSize();
-
-        sf::RectangleShape r;
-        r.setSize((sf::Vector2f)tileSize);
-        r.setPosition(t.tile.getPosition());
-        r.setOutlineColor(sf::Color::Red);
-        r.setOutlineThickness(1);
-        r.setFillColor(sf::Color::Transparent);
-
-        m_window->draw(r);
-
-        std::string position = std::to_string(t.position.x) + ", " + std::to_string(t.position.y);
-
-        fillText(position, t.tile.getPosition(), .2 * tileSize.y, sf::Color::Red);
-#endif
-    }
 
 
+        // network
+        const auto& net = model.getNetwork();
 
-    // network
-    const auto& net = model.getNetwork();
+        bool showA = net.shouldShowAntennas();
+        bool showR = net.shouldShowRanges();
+        bool showC = net.shouldShowColors();
 
-    bool showA = net.shouldShowAntennas();
-    bool showR = net.shouldShowRanges();
-    bool showC = net.shouldShowColors();
+        sf::Color baseColor(150, 150, 150);
+        sf::Color baseColorT(150, 150, 150, 50);
 
-    sf::Color baseColor(150, 150, 150);
-    sf::Color baseColorT(150, 150, 150, 50);
+        if(showA || showR || showC) {
+            const auto& ants = net.getAntennas();
+            const float ratio = map.getCurrentRatio();
+            const auto bounds = m_antennaSprite.getGlobalBounds();
 
-    if(showA || showR || showC) {
-        const auto& ants = net.getAntennas();
-        const float ratio = map.getCurrentRatio();
-        const auto bounds = m_antennaSprite.getGlobalBounds();
+            m_antennaSprite.setColor(baseColor);
 
-        m_antennaSprite.setColor(baseColor);
+            for(const auto& ant : ants) {
+                const auto& position = ant.getPosition().coords();
 
-        for(const auto& ant : ants) {
-            const auto& position = ant.getPosition().coords();
+                sf::Vector2f pos(position.x * ratio, position.y * ratio);
 
-            sf::Vector2f pos(position.x * ratio, position.y * ratio);
+                if(showA) {
+                    if(showC) {
+                        m_antennaSprite.setColor(ant.getColor());
+                    }
 
-            if(showA) {
-                if(showC) {
-                    m_antennaSprite.setColor(ant.getColor());
+                    sf::Vector2f posA(pos.x - bounds.width/2, pos.y - bounds.height);
+
+                    m_antennaSprite.setPosition(posA);
+
+                    m_window->draw(m_antennaSprite);
                 }
 
-                sf::Vector2f posA(pos.x - bounds.width/2, pos.y - bounds.height);
+                if(showR) {
+                    int radius = ant.getRange() * ratio;
 
-                m_antennaSprite.setPosition(posA);
+                    sf::CircleShape range(radius, 90);
 
-                m_window->draw(m_antennaSprite);
-            }
+                    range.setOrigin(radius, radius);
+                    range.setPosition(pos);
+                    
+                    range.setFillColor(baseColorT);
 
-            if(showR) {
-                int radius = ant.getRange() * ratio;
+                    range.setOutlineThickness(2);
+                    range.setOutlineColor(showC? ant.getColor() : baseColor);
 
-                sf::CircleShape range(radius, 90);
-
-                range.setOrigin(radius, radius);
-                range.setPosition(pos);
-                
-                range.setFillColor(baseColorT);
-
-                range.setOutlineThickness(2);
-                range.setOutlineColor(showC? ant.getColor() : baseColor);
-
-                m_window->draw(range);
+                    m_window->draw(range);
+                }
             }
         }
+
     }
-
-
 
 
 
@@ -248,8 +253,8 @@ void Renderer::render(Model& model) {
     m_window->setView(defaultView);
 
     // do stuff for HUD here...
-    auto& gui = model.getGui();
-
+    // DEV ONLY
+    // main menu
     if(gui.shouldDraw()) {
         auto& tgui = gui.getTgui();
         tgui.draw();
