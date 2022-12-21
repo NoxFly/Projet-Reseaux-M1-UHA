@@ -7,7 +7,7 @@
 #include <string>
 #include <SFML/System/Vector2.hpp>
 
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 Antenna::Antenna(const sf::Vector2f& position, const float range, const int freq, const int alt):
     m_position(position),

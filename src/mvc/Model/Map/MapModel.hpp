@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "config_interfaces.hpp"
-#include "TileMap.hpp"
+#include "TileMap/TileMap.hpp"
 
 class MapModel {
 	public:

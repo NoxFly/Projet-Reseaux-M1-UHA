@@ -2,7 +2,7 @@
 #define CONFIGREADER_HPP
 
 #include "config_interfaces.hpp"
-#include "IniSet.hpp"
+#include "utils/IniSet/IniSet.hpp"
 
 class ConfigReader {
 	public:

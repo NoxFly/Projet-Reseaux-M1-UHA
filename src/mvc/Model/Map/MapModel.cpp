@@ -1,6 +1,6 @@
 #include "MapModel.hpp"
 
-#include "GeoPosition.hpp"
+#include "mvc/Model/Network/Antenna/GeoPosition/GeoPosition.hpp"
 
 #include <iostream>
 

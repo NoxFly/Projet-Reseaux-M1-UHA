@@ -1,9 +1,9 @@
 #ifndef CONTROLLER_HPP
 #define CONTROLLER_HPP
 
-#include "Model.hpp"
-#include "Renderer.hpp"
-#include "Input.hpp"
+#include "mvc/Model/Model.hpp"
+#include "mvc/Renderer/Renderer.hpp"
+#include "Input/Input.hpp"
 
 class Controller {
 	public:

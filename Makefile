@@ -137,7 +137,7 @@ endif # incdir
 # windows libs include
 ifeq ($(OS), WINDOWS)
 	INC += -I./libs/include
-	LDFLAGS := -L./libs/lib $(LDFLAGS)
+	LDFLAGS := -L./libs/lib/MingW $(LDFLAGS)
 endif
 
 

@@ -1,7 +1,9 @@
 #include "Application.hpp"
+
 #include <iostream>
-#include "ConfigReader.hpp"
-#include "NetworkModel.hpp"
+
+#include "ConfigReader/ConfigReader.hpp"
+#include "mvc/Model/Network/NetworkModel.hpp"
 
 Application::Application(int argc, char** argv):
     m_config{},

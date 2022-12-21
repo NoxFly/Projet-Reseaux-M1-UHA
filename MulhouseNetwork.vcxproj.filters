@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\config_interfaces.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\utils.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\IniSet\IniSet.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Renderer\Renderer.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Model.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Network\NetworkModel.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Network\Antenna\Antenna.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Map\MapModel.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Map\TileMap\TileMap.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Gui\GuiModel.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Controller\Controller.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Controller\Input\Input.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ConfigReader\ConfigReader.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Application\Application.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\utils.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\IniSet\IniSet.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Renderer\Renderer.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Model.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Network\NetworkModel.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Network\Antenna\Antenna.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Map\MapModel.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Map\TileMap\TileMap.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Gui\GuiModel.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Controller\Controller.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Controller\Input\Input.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConfigReader\ConfigReader.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Application\Application.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="Makefile" />
+    <None Include="README.md" />
+    <None Include="run.sh" />
+    <None Include="bin\openal32.dll" />
+    <None Include="bin\sfml-audio-2.dll" />
+    <None Include="bin\sfml-audio-d-2.dll" />
+    <None Include="bin\sfml-graphics-2.dll" />
+    <None Include="bin\sfml-graphics-d-2.dll" />
+    <None Include="bin\sfml-network-2.dll" />
+    <None Include="bin\sfml-network-d-2.dll" />
+    <None Include="bin\sfml-system-2.dll" />
+    <None Include="bin\sfml-system-d-2.dll" />
+    <None Include="bin\sfml-window-2.dll" />
+    <None Include="bin\sfml-window-d-2.dll" />
+    <None Include="bin\tgui.dll" />
+    <None Include="bin\res\config.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\res\favicon.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-0.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-1.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-2.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-3.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-4.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-5.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\grab.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\grab_b.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\grabbing.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\grabbing_b.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\sprite_gui.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\menu\MenuBackground.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\4g.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\antenne.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\edit.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\export_file.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\fullscreen.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\location_marker.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\logo_antenne.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\settings.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\smartphone.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\view.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="bin\res\images\gui\wifi.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bin\res\sample_coords.txt" />
+    <Text Include="bin\res\sample1.txt" />
+    <Text Include="bin\res\fonts\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="bin\res\fonts\font.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Black.ttf" />
+    <Font Include="bin\res\fonts\Roboto-BlackItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Bold.ttf" />
+    <Font Include="bin\res\fonts\Roboto-BoldItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Italic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Light.ttf" />
+    <Font Include="bin\res\fonts\Roboto-LightItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Medium.ttf" />
+    <Font Include="bin\res\fonts\Roboto-MediumItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Regular.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Thin.ttf" />
+    <Font Include="bin\res\fonts\Roboto-ThinItalic.ttf" />
+  </ItemGroup>
+</Project>

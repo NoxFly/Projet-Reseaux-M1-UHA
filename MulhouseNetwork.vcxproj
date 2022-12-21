@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{e57b9e8d-889e-4b5e-8373-38ef53318565}</ProjectGuid>
+    <RootNamespace>MulhouseNetwork</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>VISUAL_STUDIO;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs/include/;$(SolutionDir)src/;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)libs/lib/VS;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>VISUAL_STUDIO;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs/include/;$(SolutionDir)src/;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)libs/lib/VS;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>VISUAL_STUDIO;_CRT_SECURE_NO_WARNINGS;DEBUG;WINDOWS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs/include/;$(SolutionDir)src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)libs/lib/VS;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>VISUAL_STUDIO;_CRT_SECURE_NO_WARNINGS;RELEASE;WINDOWS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)libs/include/;$(SolutionDir)src/;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)libs/lib/VS;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Application\Application.hpp" />
+    <ClInclude Include="src\ConfigReader\ConfigReader.hpp" />
+    <ClInclude Include="src\config_interfaces.hpp" />
+    <ClInclude Include="src\mvc\Controller\Controller.hpp" />
+    <ClInclude Include="src\mvc\Controller\Input\Input.hpp" />
+    <ClInclude Include="src\mvc\Model\Gui\GuiModel.hpp" />
+    <ClInclude Include="src\mvc\Model\Map\MapModel.hpp" />
+    <ClInclude Include="src\mvc\Model\Map\TileMap\TileMap.hpp" />
+    <ClInclude Include="src\mvc\Model\Model.hpp" />
+    <ClInclude Include="src\mvc\Model\Network\Antenna\Antenna.hpp" />
+    <ClInclude Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.hpp" />
+    <ClInclude Include="src\mvc\Model\Network\NetworkModel.hpp" />
+    <ClInclude Include="src\mvc\Renderer\Renderer.hpp" />
+    <ClInclude Include="src\utils\IniSet\IniSet.hpp" />
+    <ClInclude Include="src\utils\utils.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application\Application.cpp" />
+    <ClCompile Include="src\ConfigReader\ConfigReader.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mvc\Controller\Controller.cpp" />
+    <ClCompile Include="src\mvc\Controller\Input\Input.cpp" />
+    <ClCompile Include="src\mvc\Model\Gui\GuiModel.cpp" />
+    <ClCompile Include="src\mvc\Model\Map\MapModel.cpp" />
+    <ClCompile Include="src\mvc\Model\Map\TileMap\TileMap.cpp" />
+    <ClCompile Include="src\mvc\Model\Model.cpp" />
+    <ClCompile Include="src\mvc\Model\Network\Antenna\Antenna.cpp" />
+    <ClCompile Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.cpp" />
+    <ClCompile Include="src\mvc\Model\Network\NetworkModel.cpp" />
+    <ClCompile Include="src\mvc\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\utils\IniSet\IniSet.cpp" />
+    <ClCompile Include="src\utils\utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="bin\openal32.dll" />
+    <None Include="bin\res\config.ini" />
+    <None Include="bin\sfml-audio-2.dll" />
+    <None Include="bin\sfml-audio-d-2.dll" />
+    <None Include="bin\sfml-graphics-2.dll" />
+    <None Include="bin\sfml-graphics-d-2.dll" />
+    <None Include="bin\sfml-network-2.dll" />
+    <None Include="bin\sfml-network-d-2.dll" />
+    <None Include="bin\sfml-system-2.dll" />
+    <None Include="bin\sfml-system-d-2.dll" />
+    <None Include="bin\sfml-window-2.dll" />
+    <None Include="bin\sfml-window-d-2.dll" />
+    <None Include="bin\tgui.dll" />
+    <None Include="Makefile" />
+    <None Include="README.md" />
+    <None Include="run.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\res\favicon.png" />
+    <Image Include="bin\res\images\grab.png" />
+    <Image Include="bin\res\images\grabbing.png" />
+    <Image Include="bin\res\images\grabbing_b.png" />
+    <Image Include="bin\res\images\grab_b.png" />
+    <Image Include="bin\res\images\gui\4g.png" />
+    <Image Include="bin\res\images\gui\antenne.png" />
+    <Image Include="bin\res\images\gui\edit.png" />
+    <Image Include="bin\res\images\gui\export_file.png" />
+    <Image Include="bin\res\images\gui\fullscreen.png" />
+    <Image Include="bin\res\images\gui\location_marker.png" />
+    <Image Include="bin\res\images\gui\logo_antenne.png" />
+    <Image Include="bin\res\images\gui\settings.png" />
+    <Image Include="bin\res\images\gui\smartphone.png" />
+    <Image Include="bin\res\images\gui\view.png" />
+    <Image Include="bin\res\images\gui\wifi.png" />
+    <Image Include="bin\res\images\menu\MenuBackground.jpg" />
+    <Image Include="bin\res\images\sprite_gui.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-0.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-1.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-2.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-3.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-4.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_A-5.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-0.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-1.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-2.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-3.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-4.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_B-5.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-0.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-1.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-2.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-3.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-4.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_C-5.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-0.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-1.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-2.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-3.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-4.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_D-5.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-0.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-1.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-2.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-3.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-4.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_E-5.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-0.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-1.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-2.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-3.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-4.png" />
+    <Image Include="bin\res\map\tiles\level_1\MapTex1_F-5.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-0.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-1.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-2.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-3.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-4.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_A-5.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-0.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-1.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-2.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-3.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-4.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_B-5.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-0.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-1.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-2.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-3.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-4.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_C-5.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-0.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-1.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-2.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-3.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-4.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_D-5.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-0.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-1.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-2.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-3.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-4.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_E-5.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-0.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-1.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-2.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-3.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-4.png" />
+    <Image Include="bin\res\map\tiles\level_2\MapTex2_F-5.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-0.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-1.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-2.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-3.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-4.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_A-5.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-0.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-1.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-2.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-3.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-4.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_B-5.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-0.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-1.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-2.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-3.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-4.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_C-5.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-0.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-1.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-2.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-3.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-4.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_D-5.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-0.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-1.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-2.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-3.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-4.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_E-5.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-0.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-1.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-2.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-3.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-4.png" />
+    <Image Include="bin\res\map\tiles\level_3\MapTex3_F-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bin\res\fonts\LICENSE.txt" />
+    <Text Include="bin\res\sample1.txt" />
+    <Text Include="bin\res\sample_coords.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="bin\res\fonts\font.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Black.ttf" />
+    <Font Include="bin\res\fonts\Roboto-BlackItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Bold.ttf" />
+    <Font Include="bin\res\fonts\Roboto-BoldItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Italic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Light.ttf" />
+    <Font Include="bin\res\fonts\Roboto-LightItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Medium.ttf" />
+    <Font Include="bin\res\fonts\Roboto-MediumItalic.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Regular.ttf" />
+    <Font Include="bin\res\fonts\Roboto-Thin.ttf" />
+    <Font Include="bin\res\fonts\Roboto-ThinItalic.ttf" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

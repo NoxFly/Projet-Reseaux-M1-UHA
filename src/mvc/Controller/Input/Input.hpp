@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Renderer.hpp"
+#include "mvc/Renderer/Renderer.hpp"
 
 
 class Input {

@@ -9,7 +9,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "config_interfaces.hpp"
-#include "Model.hpp"
+#include "mvc/Model/Model.hpp"
 
 
 class Renderer {

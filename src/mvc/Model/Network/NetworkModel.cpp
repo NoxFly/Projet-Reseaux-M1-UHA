@@ -1,10 +1,9 @@
 #include "NetworkModel.hpp"
 
-#include "Antenna.hpp"
-
 #include <iostream>
 #include <string.h>
 #include <fstream>
+
 #include <SFML/System/Vector2.hpp>
 
 

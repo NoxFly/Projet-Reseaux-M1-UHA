@@ -3,9 +3,9 @@
 
 // class Model;
 
-#include "MapModel.hpp"
-#include "GuiModel.hpp"
-#include "NetworkModel.hpp"
+#include "Map/MapModel.hpp"
+#include "Gui/GuiModel.hpp"
+#include "Network/NetworkModel.hpp"
 
 #include "config_interfaces.hpp"
 

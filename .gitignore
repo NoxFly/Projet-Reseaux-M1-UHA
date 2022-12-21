@@ -1,4 +1,12 @@
+# Linux & MingW
 **/*.o
 build/
 bin/debug/
 bin/release/
+
+# Visual Studio
+x64/
+x86/
+.vs/
+Debug/
+Release/

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Antenna.hpp"
+#include "Antenna/Antenna.hpp"
 #include "config_interfaces.hpp"
 
 class NetworkModel {

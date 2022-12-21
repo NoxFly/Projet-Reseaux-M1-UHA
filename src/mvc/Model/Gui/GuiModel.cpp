@@ -2,8 +2,8 @@
 
 #include <TGUI/TGUI.hpp>
 
-#include "Renderer.hpp"
-#include "Model.hpp"
+#include "mvc/Renderer/Renderer.hpp"
+#include "mvc/Model/Model.hpp"
 
 GuiModel::GuiModel():
     m_gui(),

@@ -5,9 +5,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "config_interfaces.hpp"
-#include "Model.hpp"
-#include "Renderer.hpp"
-#include "Controller.hpp"
+#include "mvc/Model/Model.hpp"
+#include "mvc/Renderer/Renderer.hpp"
+#include "mvc/Controller/Controller.hpp"
 
 
 /**

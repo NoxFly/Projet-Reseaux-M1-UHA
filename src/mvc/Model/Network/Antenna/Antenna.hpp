@@ -5,7 +5,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Color.hpp>
 
-#include "GeoPosition.hpp"
+#include "GeoPosition/GeoPosition.hpp"
 
 
 class Antenna {
