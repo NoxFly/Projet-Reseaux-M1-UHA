@@ -40,7 +40,7 @@ The `libs/` folder is only for Windows's users.
 
 ### Visual Studio
 
--         | -
+/         | /
 ----------|---------
 Version   | 2019
 Mode      | Release
