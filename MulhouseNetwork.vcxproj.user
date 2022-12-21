@@ -9,7 +9,6 @@
     <LocalDebuggerEnvironment>$(SolutionDir)bin
 
 $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
-    <LocalDebuggerCommandArguments>res/config.ini res/sample1.txt</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerWorkingDirectory>$(ProjectDir)bin</LocalDebuggerWorkingDirectory>
