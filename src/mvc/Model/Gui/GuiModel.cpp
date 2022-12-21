@@ -1,5 +1,5 @@
 #include "GuiModel.hpp"
-
+#include <iostream>
 #include <TGUI/TGUI.hpp>
 
 #include "mvc/Renderer/Renderer.hpp"
@@ -11,7 +11,7 @@ GuiModel::GuiModel():
     m_renderer(nullptr),
     m_draw(true)
 {
-    
+     
     tgui::Theme::setDefault(tgui::Theme::create("res/themes/BabyBlue.txt"));
 
     // Create the background image
@@ -27,7 +27,7 @@ GuiModel::GuiModel():
     title->getRenderer()->setTextColor(sf::Color(255,255,255));
     title->getRenderer()->setTextOutlineThickness(3);
     title->getRenderer()->setTextOutlineColor(sf::Color(80,80,80));
-    //title->getRenderer()->setBackgroundColor(sf::Color(187,226,233));
+    title->getRenderer()->setBackgroundColor(sf::Color(187,226,233));
     title->setTextSize(92);
     title->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
 
@@ -79,7 +79,7 @@ void GuiModel::setup(Model& model) {
     buttonSettings->setInheritedFont("res/fonts/font.ttf");
     buttonSettings->setTextSize(30);
     buttonSettings->setSize(300, 50);
-    buttonSettings->onPress([&]{ std::cout << " button Settings pressed" << std::endl; });
+    //buttonSettings->onPress([&]{ std::cout << " button Settings pressed" << std::endl; });
     buttonSettings->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
 
 
