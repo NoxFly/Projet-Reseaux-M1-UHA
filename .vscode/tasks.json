@@ -6,11 +6,13 @@
             "command": "./run.sh",
             "args": [
                 "--no-run",
-                "-v",
-                "-d"
+                "-v"
             ],
             "promptOnClose": true,
-            "group": "build"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "type": "cppbuild",
@@ -31,7 +33,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "detail": "Tâche générée par le débogueur."
         }
