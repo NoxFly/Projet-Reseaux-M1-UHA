@@ -13,9 +13,9 @@ void NetworkModel::loadFromConfig(const AppConfig& config) {
 	(void)config;
 }
 
-Antenna NetworkModel::getNetworkAt(unsigned int i) {
-	return m_network.at(i);
-}
+//Antenna NetworkModel::getNetworkAt(unsigned int i) {
+//	return m_network.at(i);
+//}
 
 const std::vector<Antenna>& NetworkModel::getNetwork() const {
 	return m_network;

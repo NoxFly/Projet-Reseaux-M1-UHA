@@ -1,4 +1,4 @@
-#include "Antenne.hpp"
+#include "Antenna.hpp"
 
 Antenna::Antenna(const int x, const int y, const int distance):
     m_x{x}, m_y{y}, m_distance{distance}
@@ -34,6 +34,6 @@ void Antenna::setRange(const int distance) {
     m_distance = distance;
 }
 
-double Antenna::Intensity() { // Calculer l'intensité d'une antenne (regarde cours mais pas sûr du vocabulaire employé)
-
-}
+//double Antenna::Intensity() { // Calculer l'intensité d'une antenne (regarde cours mais pas sûr du vocabulaire employé)
+//
+//}

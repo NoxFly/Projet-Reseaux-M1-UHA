@@ -14,7 +14,7 @@ class Antenna {
         void setY(const int y);
         void setRange(const int distance);
 
-        double Intensity(); // Censé calculer la puissance de l'antenne (cf cours) pas sûr que ce soit l'intensité mais quelque chose de ce genre
+        //double Intensity(); // Censé calculer la puissance de l'antenne (cf cours) pas sûr que ce soit l'intensité mais quelque chose de ce genre
 
     private :
         int m_x, m_y, m_distance;
