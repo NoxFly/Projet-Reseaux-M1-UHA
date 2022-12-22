@@ -43,12 +43,12 @@ The `libs/` folder is only for Windows's users.
 /         | /
 ----------|---------
 Version   | 2019
-Mode      | Release
+Mode      | Debug or Release
 Platform  | x64
 
 * The Win32 platform is not supported, because we loaded TGUI from sources with platform target x64 only.
 
-* The Debug mode is for now unabled to use, but we will fix it in the future.
+* To have execution trace in the console, you must run as Debug.
 
 * Libraries are provided directly in the repository, and the solution has already be setup. It means that you can directly launch the solution.
 

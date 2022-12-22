@@ -9,6 +9,7 @@
     <LocalDebuggerEnvironment>$(SolutionDir)bin
 
 $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+    <LocalDebuggerCommandArguments>res/config.ini res/sample1.txt</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerWorkingDirectory>$(ProjectDir)bin</LocalDebuggerWorkingDirectory>
@@ -23,11 +24,13 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerEnvironment>$(SolutionDir)bin
 </LocalDebuggerEnvironment>
+    <LocalDebuggerCommandArguments>res/config.ini res/sample1.txt</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerWorkingDirectory>$(ProjectDir)bin</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerEnvironment>$(SolutionDir)bin
 </LocalDebuggerEnvironment>
+    <LocalDebuggerCommandArguments>res/config.ini res/sample1.txt</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>
