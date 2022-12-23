@@ -1,41 +1,65 @@
-#include "Graphe.hpp"
+#include "mvc/Model/Network/Graphe/Graphe.hpp"
+#include "mvc/Model/Network/NetworkModel.hpp"
 
-Graphe::Graphe(std::vector<Arrete> &Arretes, int n) {
-    liste_adj.resize(n);
-    for(Arrete arrete : Arretes) {
-        int source = arrete.source;
-        int destination = arrete.destination;
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <cstdlib>
+#include <typeinfo>
 
-        liste_adj[source].push_back(destination);
-        liste_adj[destination].push_back(source);
+Graphe::Graphe(int n) {
+   m_size = n;
+   m_adj.resize(m_size);//init adjacents array
+   for(int i = 0; i < n; i++){
+        sf::Color newColor;
+        newColor.r = (rand() % (255 - 1 + 1)) + 1;
+        newColor.b = (rand() % (255 - 1 + 1)) + 1;
+        newColor.g = (rand() % (255 - 1 + 1)) + 1;
+        m_colors.push_back(newColor);
+   }
+
+}
+
+void Graphe::colorationGraphe(NetworkModel &antennas) {
+
+    //antennas colors are set to black by default
+    antennas.getNetworkAt(0).setColor(m_colors[0]);//give first vertex the first gen color
+
+    bool areAvailable[m_size];
+
+	for (int cr = 0; cr < m_size; cr++){
+        areAvailable[cr] = true;
+    }
+
+    for(unsigned y =  1 ; y < m_adj.size(); y++){
+
+        for(unsigned x = 0; x < m_adj.at(y).size(); x++){
+    
+            if(antennas.getNetworkAt(m_adj.at(y).at(x)).getColor().r != 0
+            && antennas.getNetworkAt(m_adj.at(y).at(x)).getColor().b != 0
+            && antennas.getNetworkAt(m_adj.at(y).at(x)).getColor().g != 0){
+                areAvailable[m_adj.at(y).at(x)] = false;
+            }
+        }
+
+        // Find the first available color
+        int cr;
+        for (cr = 1; cr < m_size; cr++){
+            if (areAvailable[cr] == true){
+                break; 
+            }
+        }
+        //cr is index of smallest available color
+        antennas.getNetworkAt(y).setColor(m_colors[cr]);
+
+        // reset dependencies availability for next vertex
+        for (cr = 0; cr < m_size; cr++){
+            areAvailable[cr] = true;
+        }
     }
 }
 
-void Graphe::colorationGraphe(int n) {
-    std::string couleur[] = {
-            "", "BLEU", "VERT", "ROUGE", "JAUNE", "ORANGE", "ROSE", "NOIR", "BRUN", "BLANC", "VIOLET"
-    };
-    std::unordered_map<int, int> resultat;
-    for (int i = 0; i < n; i++) {
-        std::set<int> assign;
-        for (int j : liste_adj[i]) {
-            if(resultat[j]) {
-                assign.insert(resultat[j]);
-            }
-        }
-
-        int couleur = 1;
-        for (auto &col : assign) {
-            if (couleur != col) {
-                break;
-            }
-            couleur++;
-        }
-
-        resultat[i] = couleur;
-    }
-
-    for (int i = 0; i < n; i++) {
-        std::cout << "La couleur assigné au noeud " << i << " est " << couleur[resultat[i]] << std::endl;
-    }
+void Graphe::addEdge(int v, int w)
+{
+	m_adj[v].push_back(w);
+	m_adj[w].push_back(v); // Note: the graph is undirected
 }
