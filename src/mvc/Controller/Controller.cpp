@@ -3,7 +3,8 @@
 #include <iostream>
 
 Controller::Controller():
-    m_input()
+    m_input(),
+    m_mouseWasDragging(false)
 {
 
 }
@@ -17,7 +18,9 @@ void Controller::update(Renderer& renderer, Model& model) {
     // update view input (poll event)
     m_input.update(renderer, model);
 
-
+    if(renderer.isClosed()) {
+        return;
+    }
 
     //
     // |======| update models |======|
@@ -35,16 +38,54 @@ void Controller::update(Renderer& renderer, Model& model) {
     //////////////
     // --- map ---
 
+    // click [on antenna or something else]
+    if(m_input.isMouseButtonPressed(sf::Mouse::Button::Left)) {
+        const unsigned int menuWidth = 400;
+
+        if(!m_mouseWasDragging) {
+            if(model.getGui().noMenuOpened()) {
+                std::vector<Antenna>& antennas = model.getNetwork().getAntennas();
+                
+                const int antAreaWidth = 50;
+                const int antAreaHeight = 190;
+
+                auto mouse = renderer.getPixelToWorldCoords(m_input.getMousePosition(), model.getMap());
+
+                for(auto& antenna : antennas) {
+                    const auto& pos = antenna.getPosition().coords();
+
+                    if(
+                        pos.x - antAreaWidth <= mouse.x && mouse.x <= pos.x + antAreaWidth &&
+                        pos.y - antAreaHeight <= mouse.y && mouse.y <= pos.y
+                    ) {
+                        model.getGui().showAntennaDetailsMenu(&antenna);
+                        model.getMap().setPosition(
+                            (antenna.getPosition().coords().x * model.getMap().getCurrentRatio() + menuWidth / 2),
+                            antenna.getPosition().coords().y * model.getMap().getCurrentRatio()
+                        );
+                    }
+                }
+            }
+            else {
+                // we considere here only the right menu is opened (antenna's details)
+                if(m_input.getMousePosition().x < (int)(renderer.getWindow()->getSize().x - menuWidth)) {
+                    model.getGui().hideAntennaDetailsMenu();
+                }
+            }
+        }
+
+        m_mouseWasDragging = false;
+        model.getMap().ungrab();
+    }
+
     // grab map
     if(m_input.isMouseButtonDown(sf::Mouse::Button::Left)) {
         model.getMap().grab(m_input.getMousePosition());
 
         if(m_input.mouseMoved()) {
-            model.getMap().grabMove(m_input.getMousePosition());
+            m_mouseWasDragging = true;
+            model.getMap().grabMove(m_input.getMousePosition());            
         }
-    }
-    else {
-        model.getMap().ungrab();
     }
 
     // zoom map

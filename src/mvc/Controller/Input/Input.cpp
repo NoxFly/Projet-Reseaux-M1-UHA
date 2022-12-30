@@ -32,7 +32,7 @@ void Input::update(Renderer& renderer, Model& model) {
     m_hasMouseMoved = false;
     m_hasMouseWheeled = false;
 
-    auto& gui = model.getGui().getTgui();
+    auto& gui = model.getGui();
 
     // update
     while(renderer.getWindow() && renderer.getWindow()->pollEvent(event)) {

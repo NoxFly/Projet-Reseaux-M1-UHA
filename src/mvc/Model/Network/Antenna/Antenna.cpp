@@ -9,13 +9,18 @@
 
 #include "utils/utils.hpp"
 
-Antenna::Antenna(const sf::Vector2f& position, const float range, const int freq, const int alt):
+Antenna::Antenna():
+    Antenna("unamed", sf::Vector2f(0, 0), 0, 0, 0)
+{}
+
+Antenna::Antenna(const std::string& name, const sf::Vector2f& position, const float range, const int freq, const int alt):
     m_position(position),
-    m_range{range},
-    m_frequency{freq},
-    m_altitude{alt},
+    m_power(0),
+    m_range(range),
+    m_frequency(freq),
+    m_altitude(alt),
     m_color(sf::Color::Black),
-    m_name("name-not-defined"),
+    m_name(name),
     m_uuid(uuid::generate_uuid_v4())
 {
 #ifdef DEBUG
@@ -38,7 +43,10 @@ Antenna::Antenna(const sf::Vector2f& position, const float range, const int freq
         std::cout << " ";
 
     std::cout
-        << "[" << std::fixed << m_position.lambert().x << ", " << m_position.lambert().y  << std::defaultfloat <<"]"
+        << "[" << std::fixed << m_position.lambert().x << ", " << m_position.lambert().y  << std::defaultfloat <<"]";
+
+    std::cout
+        << " #" << m_uuid << " '" << m_name << "'"
         << std::endl;
 
 #endif
@@ -52,7 +60,12 @@ const GeoPosition& Antenna::getPosition() const {
     return m_position;
 }
 
+float Antenna::getEmitPower() const {
+    return m_power;
+}
+
 float Antenna::getRange() const {
+    // TODO : calculate depending of power (PATHLOSS ?)
     return m_range;
 }
 
@@ -68,7 +81,7 @@ const std::string& Antenna::getName() const {
     return m_name;
 }
 
-const char * Antenna::getUUID() {
+const std::string Antenna::getUUID() const {
     return m_uuid;
 }
 

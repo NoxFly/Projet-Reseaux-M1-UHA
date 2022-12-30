@@ -3,7 +3,6 @@
 #include <random>
 #include <sstream>
 
-
 using namespace std;
 
 
@@ -73,7 +72,7 @@ namespace uuid {
     static uniform_int_distribution<> dis(0, 15);
     static uniform_int_distribution<> dis2(8, 11);
 
-    const char* generate_uuid_v4() {
+    std::string generate_uuid_v4() {
         stringstream ss;
         int i;
 
@@ -107,7 +106,7 @@ namespace uuid {
         for (i = 0; i < 12; i++) {
             ss << dis(gen);
         };
-        
-        return ss.str().c_str();
+
+        return ss.str();
     }
 }

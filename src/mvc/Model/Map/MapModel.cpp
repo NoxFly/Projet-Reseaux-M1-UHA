@@ -139,7 +139,7 @@ void MapModel::centerPosition() {
     m_oldPosition = m_position;
 }
 
-sf::Vector2i MapModel::getPosition() const {
+const sf::Vector2i& MapModel::getPosition() const {
     return m_position;
 }
 

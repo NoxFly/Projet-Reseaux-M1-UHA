@@ -71,7 +71,9 @@ class MapModel {
          */
         const sf::Vector2u& getTileSize() const;
 
-        
+        /**
+         * 
+         */
         float getCurrentRatio() const;
         
 
@@ -89,7 +91,7 @@ class MapModel {
         /**
          * Returns the position of the "camera", the translation of the map.
          */
-        sf::Vector2i getPosition() const;
+        const sf::Vector2i& getPosition() const;
 
         /**
          * Defines the new position of the map in the view.

@@ -4,6 +4,10 @@
 #include <TGUI/TGUI.hpp>
 #include <SFML/Graphics.hpp>
 
+#include <map>
+
+#include "mvc/Model/Network/Antenna/Antenna.hpp"
+
 
 class Renderer;
 class Model;
@@ -13,23 +17,32 @@ class GuiModel {
 		GuiModel();
 		~GuiModel();
 
-		tgui::GuiSFML& getTgui();
+		void draw();
+        void handleEvent(const sf::Event& event);
 
         void bindRenderer(Renderer* renderer);
 
-        void setup(Model& model);
+        bool isDrawingFullscreenMenu() const;
 
-        bool shouldDraw() const;
+        bool noMenuOpened() const;
+
+        void showHomeMenu();
+        void hideHomeMenu();
+
+        void showAntennaDetailsMenu(Antenna* antenna);
+        void hideAntennaDetailsMenu();
 
 	private:
 
 		tgui::GuiSFML m_gui;
-        sf::RenderWindow* m_window;
         Renderer* m_renderer;
 
-        // debug
-        bool m_draw;
+        // dev
+        Antenna* m_antenna;
 
+        // debug
+        bool m_drawFsMenu;
+        bool m_hasAnyMenuOpened;
 };
 
 #endif // GUI_HPP

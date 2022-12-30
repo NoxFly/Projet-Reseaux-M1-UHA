@@ -17,8 +17,9 @@ class NetworkModel {
 		const Antenna& getNetworkAt(const unsigned int i) const;
 
         const std::vector<Antenna>& getAntennas() const;
+        std::vector<Antenna>& getAntennas();
 
-        void setNetwork(const std::vector<Antenna>& network);
+        void clear();
 
         // view modifiers
         void showAntennas(const bool state);

@@ -29,18 +29,26 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 		while(std::getline(file, line)) {
             // a line is modelised here as "0.0 0.0 0.0" (3 floats)
             // and in order "X Y RANGE" and where X,Y are in lambert
+            std::string name;
+            char cname[] = "unamed XXX-XXX-XXX-XXX";
             float x, y, r;
 
-            sscanf(line.c_str(), "%f %f %f", &x, &y, &r);
+            sscanf(line.c_str(), "%s %f %f %f", cname, &x, &y, &r);
 
             // at least one of the 3 floats does not respect the float form
             if(x < .1 || y < .1 || r < .1) {
                 // continue;
             }
 
-            Antenna ant(sf::Vector2f(x, y), r, 4, 4);
+            name = std::string(cname);
 
-            m_network.push_back(ant);
+            if(name.size() == 0) {
+                name = "unamed";
+            }
+
+            Antenna antenna(name, sf::Vector2f(x, y), r, 0, 0);
+
+            m_network.push_back(antenna);
 		}
 
 		file.close();
@@ -58,6 +66,10 @@ const std::vector<Antenna>& NetworkModel::getAntennas() const {
 	return m_network;
 }
 
+std::vector<Antenna>& NetworkModel::getAntennas() {
+	return m_network;
+}
+
 Antenna& NetworkModel::getNetworkAt(const unsigned int i) {
     return m_network[i];
 }
@@ -66,8 +78,8 @@ const Antenna& NetworkModel::getNetworkAt(const unsigned int i) const {
     return m_network[i];
 }
 
-void NetworkModel::setNetwork(const std::vector<Antenna>& network) {
-    m_network = network;
+void NetworkModel::clear() {
+    m_network.clear();
 }
 
 

@@ -9,8 +9,10 @@
 
 
 class Antenna {
-    public :
+    public:
+        Antenna();
         Antenna(
+            const std::string& name,
             const sf::Vector2f& position,
             const float range,
             const int freq,
@@ -19,11 +21,12 @@ class Antenna {
         ~Antenna();
 
         const GeoPosition& getPosition() const;
+        float getEmitPower() const;
         float getRange() const;
         int getFreq() const;
         int getAltitude() const;
         const std::string& getName() const;
-        const char * getUUID();
+        const std::string getUUID() const;
 
         void setFreq(const int);
         void setAltitude(const int);
@@ -33,14 +36,15 @@ class Antenna {
         void setColor(const sf::Color& color);
         const sf::Color& getColor() const;
 
-    private :
+    private:
         GeoPosition m_position;
+        float m_power;
         float m_range;
         int m_frequency;
         int m_altitude;
         sf::Color m_color;
         std::string m_name;
-        const char * m_uuid;
+        const std::string m_uuid;
 };
 
 #endif // ANTENNA_HPP

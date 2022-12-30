@@ -29,9 +29,13 @@ class Renderer {
         void setFullscreen(const bool full);
         void toggleFullscreen();
 
+        sf::Vector2i getPixelToWorldCoords(const sf::Vector2i& p, MapModel& map);
+
+        void drawAntennaMenu(Antenna* antenna);
+
     protected:
-        void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black);
-        void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black);
+        void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
+        void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
 
 		sf::RenderWindow* m_window;
         sf::VideoMode m_screen;
@@ -43,7 +47,7 @@ class Renderer {
         
         // dev
         sf::Texture m_guiTexture;
-        sf::Sprite m_antennaSprite;
+        sf::Sprite m_antennaSprite, m_locationSprite;
         //
 
         bool m_isFullscreen;
