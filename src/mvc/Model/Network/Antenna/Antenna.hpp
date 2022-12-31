@@ -6,9 +6,10 @@
 #include <SFML/Graphics/Color.hpp>
 
 #include "GeoPosition/GeoPosition.hpp"
+#include "mvc/Model/Network/Graphe/Colorable/Colorable.hpp"
 
 
-class Antenna {
+class Antenna: public Colorable {
     public :
         Antenna(
             const sf::Vector2f& position,
@@ -29,16 +30,11 @@ class Antenna {
         void setAltitude(const int);
         void setRange(const float);
 
-        // view modifiers
-        void setColor(const sf::Color& color);
-        const sf::Color& getColor() const;
-
     private :
         GeoPosition m_position;
         float m_range;
         int m_frequency;
         int m_altitude;
-        sf::Color m_color;
         std::string m_name;
         const char * m_uuid;
 };

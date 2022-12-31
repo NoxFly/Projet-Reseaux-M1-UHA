@@ -71,4 +71,20 @@ namespace uuid {
     const char* generate_uuid_v4();
 }
 
+/**
+ * Returns either 2 circles collides.
+ * 0 : no collisions
+ * 1 : intersection
+ * 2 : touch
+ * 3 : c2 inside c1
+ * 4 : c1 inside c2
+ * @param x1 - The position x-axis of the first circle
+ * @param y1 - The position y-axis of the first circle
+ * @param r1 - The radius of the first circle
+ * @param x2 - The position x of the second circle
+ * @param y2 - The position y of the second circle
+ * @param r2 - The radius of the second circle
+ */
+unsigned int circleToCircleCollision(const float x1, const float y1, const float r1, const float x2, const float y2, const float r2);
+
 #endif // UTILS_HPP

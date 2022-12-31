@@ -2,6 +2,7 @@
 #define NETWORK_HPP
 
 #include <vector>
+#include <memory>
 
 #include "Antenna/Antenna.hpp"
 #include "config_interfaces.hpp"
@@ -13,12 +14,11 @@ class NetworkModel {
 
 		void loadFromConfig(const NetworkConfig& config);
 
-		Antenna& getNetworkAt(const unsigned int i);
-		const Antenna& getNetworkAt(const unsigned int i) const;
+		Antenna* getAntennaByIndex(const unsigned int i);
 
-        const std::vector<Antenna>& getAntennas() const;
+        Antenna* operator[](const unsigned int i);
 
-        void setNetwork(const std::vector<Antenna>& network);
+        const std::vector<std::unique_ptr<Antenna>>& getAntennas() const;
 
         // view modifiers
         void showAntennas(const bool state);
@@ -30,7 +30,9 @@ class NetworkModel {
         bool shouldShowColors() const;
 
 	private:
-        std::vector<Antenna> m_network;
+        void updateColorization();
+
+        std::vector<std::unique_ptr<Antenna>> m_antennas;
 
         bool m_showAntennas;
         bool m_showRanges;

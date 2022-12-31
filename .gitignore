@@ -10,3 +10,5 @@ x86/
 .vs/
 Debug/
 Release/
+
+tmp/

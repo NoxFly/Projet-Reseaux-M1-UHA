@@ -10,11 +10,11 @@
 #include "utils/utils.hpp"
 
 Antenna::Antenna(const sf::Vector2f& position, const float range, const int freq, const int alt):
+    Colorable(),
     m_position(position),
     m_range{range},
     m_frequency{freq},
     m_altitude{alt},
-    m_color(sf::Color::Black),
     m_name("name-not-defined"),
     m_uuid(uuid::generate_uuid_v4())
 {
@@ -82,12 +82,4 @@ void Antenna::setAltitude(const int alt) {
 
 void Antenna::setRange(const float range) {
     m_range = range;
-}
-
-void Antenna::setColor(const sf::Color& color) {
-    m_color = color;
-}
-
-const sf::Color& Antenna::getColor() const {
-    return m_color;
 }

@@ -111,3 +111,23 @@ namespace uuid {
         return ss.str().c_str();
     }
 }
+
+unsigned int circleToCircleCollision(const float x1, const float y1, const float r1, const float x2, const float y2, const float r2) {
+    const float d = std::sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+ 
+    if(d <= r1 - r2) {
+        return 3;
+    }
+    else if(d <= r2 - r1) {
+        return 4;
+    }
+    else if(d < r1 + r2) {
+        return 1;
+    }
+    else if(d == r1 + r2) {
+        return 2;
+    }
+    else {
+        return 0;
+    }
+}

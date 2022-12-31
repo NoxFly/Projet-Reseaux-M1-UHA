@@ -6,9 +6,12 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include "mvc/Model/Network/Graphe/Graphe.hpp"
+#include "utils/utils.hpp"
+
 
 NetworkModel::NetworkModel():
-    m_network{},
+    m_antennas{},
     m_showAntennas(true),
     m_showRanges(false),
     m_showColors(false)
@@ -24,7 +27,10 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 	std::ifstream file(config.entryFile);
     std::string line;
 
+
 	if(file.is_open()) { // only read if file exists and is not empty
+
+        m_antennas.clear();
 
 		while(std::getline(file, line)) {
             // a line is modelised here as "0.0 0.0 0.0" (3 floats)
@@ -38,9 +44,9 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
                 // continue;
             }
 
-            Antenna ant(sf::Vector2f(x, y), r, 4, 4);
+            auto ant = std::make_unique<Antenna>(sf::Vector2f(x, y), r, 4, 4);
 
-            m_network.push_back(ant);
+            m_antennas.push_back(std::move(ant));
 		}
 
 		file.close();
@@ -48,28 +54,68 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 #ifdef DEBUG
         std::cout << std::endl;
 #endif
+
 	}
 	else {
         throw std::runtime_error("[ERROR] NetworkModel::loadFromConfig : Failed to open the sample file.");
     }
+
+
+
+
+    // ------ GRAPH / COLORIZATION ------
+    updateColorization();
 }
 
-const std::vector<Antenna>& NetworkModel::getAntennas() const {
-	return m_network;
+void NetworkModel::updateColorization() {
+    //do logic to figure out which antennas are in each others zone
+    // for every two interfering antennas, take their indexes
+    // and pass them to addEdge method of Graphe class
+    unsigned int antennasCr = m_antennas.size();
+
+	Graphe graphe(antennasCr);
+
+    // 1st. Add vertices
+    for(unsigned int i=0; i < antennasCr; i++) {
+        graphe.addVertex(i, (*this)[i]);
+    }
+
+    // 2nd. Add edges
+    for(unsigned int i=0; i < antennasCr; i++) {
+        for(unsigned int j=i+1; j < antennasCr; j++) {
+            // Antennas
+            auto a = (*this)[i];
+            auto b = (*this)[j];
+
+            const unsigned int rangesCollide = circleToCircleCollision(
+                a->getPosition().lambert().x,
+                a->getPosition().lambert().y,
+                a->getRange(),
+                b->getPosition().lambert().x,
+                b->getPosition().lambert().y,
+                b->getRange()
+            );
+
+            if(rangesCollide != 0) {
+                graphe.addEdge(i, j);
+            }
+        }
+    }
+
+	graphe.colorize();
 }
 
-Antenna& NetworkModel::getNetworkAt(const unsigned int i) {
-    return m_network[i];
+const std::vector<std::unique_ptr<Antenna>>& NetworkModel::getAntennas() const {
+	return m_antennas;
 }
 
-const Antenna& NetworkModel::getNetworkAt(const unsigned int i) const {
-    return m_network[i];
+Antenna* NetworkModel::getAntennaByIndex(const unsigned int i) {
+    return m_antennas[i].get();
 }
 
-void NetworkModel::setNetwork(const std::vector<Antenna>& network) {
-    m_network = network;
+Antenna* NetworkModel::operator[](const unsigned int i) {
+    return m_antennas[i].get();
 }
-
 
 void NetworkModel::showAntennas(const bool state) {
     m_showAntennas = state;

@@ -210,13 +210,13 @@ void Renderer::render(Model& model) {
             m_antennaSprite.setColor(baseColor);
 
             for(const auto& ant : ants) {
-                const auto& position = ant.getPosition().coords();
+                const auto& position = ant->getPosition().coords();
 
                 sf::Vector2f pos(position.x * ratio, position.y * ratio);
 
                 if(showA) {
                     if(showC) {
-                        m_antennaSprite.setColor(ant.getColor());
+                        m_antennaSprite.setColor(ant->getColor());
                     }
 
                     sf::Vector2f posA(pos.x - bounds.width/2, pos.y - bounds.height);
@@ -227,7 +227,7 @@ void Renderer::render(Model& model) {
                 }
 
                 if(showR) {
-                    int radius = ant.getRange() * ratio;
+                    int radius = ant->getRange() * ratio;
 
                     sf::CircleShape range(radius, 90);
 
@@ -237,7 +237,7 @@ void Renderer::render(Model& model) {
                     range.setFillColor(baseColorT);
 
                     range.setOutlineThickness(2);
-                    range.setOutlineColor(showC? ant.getColor() : baseColor);
+                    range.setOutlineColor(showC? ant->getColor() : baseColor);
 
                     m_window->draw(range);
                 }

@@ -76,7 +76,12 @@
         "ranges": "cpp",
         "span": "cpp",
         "variant": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "any": "cpp",
+        "bitset": "cpp",
+        "unordered_set": "cpp",
+        "regex": "cpp",
+        "typeindex": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
