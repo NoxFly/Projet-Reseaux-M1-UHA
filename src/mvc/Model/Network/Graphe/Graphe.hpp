@@ -31,6 +31,8 @@ class Graphe {
          * Under the hood, the vertex is already created, but the pointer is by default equals to null.
          * If v is already present, just update the ptr associated with.
          * If v is highter than the size of the graph (defined by n in the constructor) nothing's done.
+         * @param v - The index of the data in its initial vector, the distinct value of it on this graphe.
+         * @param ptr - The pointer to the data
          */
         void addVertex(const unsigned int v, Colorable* ptr);
 
@@ -38,9 +40,7 @@ class Graphe {
          * Function to add an edge to graph from 2 vertices.
          * V and W are vertices of the graph, and are the index of the antennas in the NetworkModel.
          * @param v - The index of the first antenna
-         * @param a - The first antenna which has for index v
          * @param w - The index of the second antenna
-         * @param b - The second antenna which has for index w
          */
 	    void addEdge(const unsigned int v, const unsigned int w);
 
