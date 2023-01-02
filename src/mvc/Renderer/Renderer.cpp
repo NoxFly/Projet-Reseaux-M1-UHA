@@ -447,5 +447,7 @@ void Renderer::drawAntennaMenu(const MapModel& map, Antenna* antenna) {
     m_window->draw(antColor);
 
 
+    m_window->setView(m_view);
     drawAntenna(antenna, true, true, true, false, map.getCurrentRatio());
+    m_window->setView(m_window->getDefaultView());
 }
