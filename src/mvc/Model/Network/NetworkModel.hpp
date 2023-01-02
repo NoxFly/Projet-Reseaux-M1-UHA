@@ -19,6 +19,9 @@ class NetworkModel {
         Antenna* operator[](const unsigned int i);
 
         const std::vector<std::unique_ptr<Antenna>>& getAntennas() const;
+        std::vector<std::unique_ptr<Antenna>>& getAntennas();
+
+        void clear();
 
         // view modifiers
         void showAntennas(const bool state);

@@ -76,7 +76,7 @@ namespace uuid {
     /**
      * Generates and returns a 36-char uuid.
      */
-    const char* generate_uuid_v4();
+    std::string generate_uuid_v4();
 }
 
 /**

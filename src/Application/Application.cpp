@@ -46,7 +46,8 @@ void Application::generateNewWindow() {
     m_renderer.getWindow()->setActive();
 
     m_model.getGui().bindRenderer(&m_renderer);
-    m_model.getGui().setup(m_model);
+
+    m_model.getGui().showHomeMenu();
 }
 
 void Application::update() {

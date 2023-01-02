@@ -35,16 +35,20 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 		while(std::getline(file, line)) {
             // a line is modelised here as "0.0 0.0 0.0" (3 floats)
             // and in order "X Y RANGE" and where X,Y are in lambert
+            std::string name;
+            char cname[] = "unamed XXX-XXX-XXX-XXX";
             float x, y, r;
 
-            sscanf(line.c_str(), "%f %f %f", &x, &y, &r);
+            sscanf(line.c_str(), "%s %f %f %f", cname, &x, &y, &r);
 
             // at least one of the 3 floats does not respect the float form
             if(x < .1 || y < .1 || r < .1) {
                 // continue;
             }
 
-            auto ant = std::make_unique<Antenna>(sf::Vector2f(x, y), r, 4, 4);
+            name = std::string(cname);
+
+            auto ant = std::make_unique<Antenna>(name, sf::Vector2f(x, y), r, 0, 0);
 
             m_antennas.push_back(std::move(ant));
 		}
@@ -211,12 +215,20 @@ const std::vector<std::unique_ptr<Antenna>>& NetworkModel::getAntennas() const {
 	return m_antennas;
 }
 
+std::vector<std::unique_ptr<Antenna>>& NetworkModel::getAntennas() {
+	return m_antennas;
+}
+
 Antenna* NetworkModel::getAntennaByIndex(const unsigned int i) {
     return m_antennas[i].get();
 }
 
 Antenna* NetworkModel::operator[](const unsigned int i) {
     return m_antennas[i].get();
+}
+
+void NetworkModel::clear() {
+    m_antennas.clear();
 }
 
 void NetworkModel::showAntennas(const bool state) {

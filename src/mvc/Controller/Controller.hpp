@@ -14,6 +14,7 @@ class Controller {
 
     private:
         Input m_input;
+        bool m_mouseWasDragging;
 };
 
 #endif // CONTROLLER_HPP

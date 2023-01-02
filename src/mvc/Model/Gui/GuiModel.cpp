@@ -7,67 +7,71 @@
 
 GuiModel::GuiModel():
     m_gui(),
-    m_window(nullptr),
     m_renderer(nullptr),
-    m_draw(true)
+    m_antenna(nullptr),
+    m_drawFsMenu(false),
+    m_showHome(false),
+    m_hasAnyMenuOpened(false)
 {
-     
     tgui::Theme::setDefault(tgui::Theme::create("res/themes/BabyBlue.txt"));
-
-    // Create the background image
-    auto picture = tgui::Picture::create("res/images/menu/MenuBackground.jpg");
-    picture->setSize(1280, 720);
-
-
-    //Add title(label)
-    auto title = tgui::Label::create();
-    title->setText("Mulhouse Networking");
-    title->setPosition(225, 160);
-    title->getRenderer()->setFont("res/fonts/font.ttf");
-    title->getRenderer()->setTextColor(sf::Color(255,255,255));
-    title->getRenderer()->setTextOutlineThickness(3);
-    title->getRenderer()->setTextOutlineColor(sf::Color(80,80,80));
-    title->getRenderer()->setBackgroundColor(sf::Color(187,226,233));
-    title->setTextSize(92);
-    title->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
-
-
-    
-
-    m_gui.add(picture);
-    m_gui.add(title);
-
 }
 
 GuiModel::~GuiModel() {
 
 }
 
-tgui::GuiSFML& GuiModel::getTgui() {
-    return m_gui;
+void GuiModel::handleEvent(const sf::Event& event) {
+    m_gui.handleEvent(event);
 }
 
 void GuiModel::bindRenderer(Renderer* renderer) {
-
     m_renderer = renderer;
-
     m_gui.setTarget(*(m_renderer->getWindow()));
-
 }
 
-void GuiModel::setup(Model& model) {
-    (void)model;
+bool GuiModel::isDrawingFullscreenMenu() const {
+    return m_drawFsMenu;
+}
+
+void GuiModel::draw() {
+    m_gui.draw();
+}
+
+bool GuiModel::noMenuOpened() const {
+    return !m_hasAnyMenuOpened;
+}
+
+/* ===================================== */
+/* ============== MENUS ================ */
+/* ===================================== */
+
+void GuiModel::showHomeMenu() {
+    // Create the background image
+    auto homePic = tgui::Picture::create("res/images/menu/MenuBackground.jpg");
+    homePic->setSize(1280, 720);
+
+    //Add title(label)
+    auto homeTitle = tgui::Label::create();
+    homeTitle->setText("Mulhouse Networking");
+    homeTitle->setPosition(225, 160);
+    homeTitle->getRenderer()->setFont("res/fonts/font.ttf");
+    homeTitle->getRenderer()->setTextColor(sf::Color(255,255,255));
+    homeTitle->getRenderer()->setTextOutlineThickness(3);
+    homeTitle->getRenderer()->setTextOutlineColor(sf::Color(80,80,80));
+    homeTitle->getRenderer()->setBackgroundColor(sf::Color(187,226,233));
+    homeTitle->setTextSize(92);
+    homeTitle->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
 
     //Add buttons
     auto buttonStart = tgui::Button::create();
-    buttonStart->setPosition(490, 400);
+    buttonStart->setPosition(490, 430);
     buttonStart->setText("Start");
     buttonStart->setInheritedFont("res/fonts/font.ttf");
     buttonStart->setTextSize(30);
     buttonStart->setSize(300, 50);
 
     buttonStart->onPress([&]{
-        m_draw = false;
+        hideHomeMenu();
     });
 
     buttonStart->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
@@ -85,7 +89,7 @@ void GuiModel::setup(Model& model) {
 
 
     auto buttonQuit = tgui::Button::create();
-    buttonQuit->setPosition(490, 540);
+    buttonQuit->setPosition(490, 500);
     buttonQuit->setText("Quit");
     buttonQuit->setInheritedFont("res/fonts/font.ttf");
     buttonQuit->setTextSize(30);
@@ -100,11 +104,43 @@ void GuiModel::setup(Model& model) {
 
     buttonQuit->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
 
+    m_gui.add(homePic);
+    m_gui.add(homeTitle);
     m_gui.add(buttonStart);
-    m_gui.add(buttonSettings);
+    // m_gui.add(buttonSettings);
     m_gui.add(buttonQuit);
+
+    m_drawFsMenu = true;
+    m_showHome = true;
+    m_hasAnyMenuOpened = true;
 }
 
-bool GuiModel::shouldDraw() const {
-    return m_draw;
+void GuiModel::hideHomeMenu() {
+    m_gui.removeAllWidgets();
+    m_drawFsMenu = false;
+    m_showHome = false;
+    m_hasAnyMenuOpened = false;
+}
+
+void GuiModel::showAntennaDetailsMenu(Antenna* antenna) {
+    m_antenna = antenna;
+    m_hasAnyMenuOpened = true;
+}
+
+void GuiModel::hideAntennaDetailsMenu() {
+    m_antenna = nullptr;
+    m_gui.removeAllWidgets();
+    m_hasAnyMenuOpened = false;
+}
+
+bool GuiModel::isShowingDetails() const {
+    return m_antenna != nullptr;
+}
+
+bool GuiModel::isShowingHomeMenu() const {
+    return m_showHome;
+}
+
+Antenna* GuiModel::getAntennaDetails() const {
+    return m_antenna;
 }

@@ -139,16 +139,18 @@ void MapModel::centerPosition() {
     m_oldPosition = m_position;
 }
 
-sf::Vector2i MapModel::getPosition() const {
+const sf::Vector2i& MapModel::getPosition() const {
     return m_position;
 }
 
 void MapModel::setPosition(const sf::Vector2i& position) {
     m_position = position;
+    m_oldPosition = m_position;
 }
 
 void MapModel::setPosition(const unsigned int x, const unsigned int y) {
     m_position = sf::Vector2i(x, y);
+    m_oldPosition = m_position;
 }
 
 void MapModel::zoomIn() {
