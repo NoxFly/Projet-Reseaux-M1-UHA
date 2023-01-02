@@ -77,8 +77,6 @@ void NetworkModel::updateColorization() {
     // and pass them to addEdge method of Graphe class
     unsigned int antennasCr = m_antennas.size();
 
-    std::cout << "am antennas count : " << antennasCr << std::endl;
-
 	Graphe graphe(antennasCr);
 
     // 1st. Add vertices
