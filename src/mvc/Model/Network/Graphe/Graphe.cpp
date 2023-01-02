@@ -29,7 +29,7 @@ Graphe::Graphe(const unsigned int n):
 }
 
 void Graphe::colorize() {
-    // antennas colors are set to black by default
+    // antennas colors are set to black by default (SFML does it by default)
 
     // first antenna : associate the first color in the list
     if(m_adj[0].ptr) {
@@ -45,16 +45,15 @@ void Graphe::colorize() {
     }
 
     // for each vertex to set up its color
-    for(unsigned int y = 1; y < m_size; y++) {
+    for(unsigned int y = 0; y < m_size; y++) {
         unsigned int linkCount = m_adj.at(y).edges.size();
 
         // for each edge
         for(unsigned x = 0; x < linkCount; x++) {
             const int k = m_adj.at(y).edges.at(x);
             const auto color = m_adj[k].colorIdx;
-
             if(color > -1) {
-                areAvailable[k] = false;
+                areAvailable[color] = false;
             }
 
         }
@@ -62,7 +61,7 @@ void Graphe::colorize() {
         // Find the first available color
         unsigned int cr;
 
-        for (cr = 1; cr < m_size; cr++) {
+        for (cr = 0; cr < m_size; cr++) {
             if (areAvailable[cr]) {
                 break;
             }
