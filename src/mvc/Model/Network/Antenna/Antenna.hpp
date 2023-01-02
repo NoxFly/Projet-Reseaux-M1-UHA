@@ -14,14 +14,14 @@ class Antenna: public Colorable {
         Antenna(
             const sf::Vector2f& position,
             const float range,
-            const int freq,
+            const unsigned int freq,
             const int alt
         );
         ~Antenna();
 
         const GeoPosition& getPosition() const;
         float getRange() const;
-        int getFreq() const;
+        unsigned int getFreq() const;
         int getAltitude() const;
         const std::string& getName() const;
         const char * getUUID();
@@ -33,7 +33,7 @@ class Antenna: public Colorable {
     private :
         GeoPosition m_position;
         float m_range;
-        int m_frequency;
+        unsigned int m_frequency;
         int m_altitude;
         std::string m_name;
         const char * m_uuid;

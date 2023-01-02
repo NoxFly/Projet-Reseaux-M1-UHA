@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <typeinfo>
+#include <iostream>
 
 
 Graphe::Graphe(const unsigned int n):
@@ -29,9 +30,13 @@ Graphe::Graphe(const unsigned int n):
 
 void Graphe::colorize() {
     // antennas colors are set to black by default
+
+    // first antenna : associate the first color in the list
     if(m_adj[0].ptr) {
         m_adj[0].ptr->setColor(m_colors[0]); // give first vertex the first gen color
     }
+
+    m_adj[0].colorIdx = 0;
 
     bool areAvailable[m_size];
 
@@ -64,7 +69,12 @@ void Graphe::colorize() {
         }
 
         // cr is index of smallest available color
-        m_adj[y].ptr->setColor(m_colors[cr]);
+        const auto color = m_colors[cr];
+
+        if(m_adj[y].ptr) {
+            m_adj[y].ptr->setColor(color);
+        }
+
         m_adj[y].colorIdx = cr;
 
         // reset dependencies availability for next vertex
@@ -73,6 +83,10 @@ void Graphe::colorize() {
         }
 
     }
+
+#ifdef DEBUG
+    
+#endif
 }
 
 
@@ -91,4 +105,8 @@ void Graphe::addEdge(const unsigned int v, const unsigned int w) {
     // To be upgraded :
     // no verification done : we can call 2 times addEdge(0, 1) and it will increment.
     m_linkCount++;
+}
+
+const std::vector<sf::Color>& Graphe::getColors() const {
+    return m_colors;
 }

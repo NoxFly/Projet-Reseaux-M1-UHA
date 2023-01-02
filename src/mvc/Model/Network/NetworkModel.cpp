@@ -103,6 +103,108 @@ void NetworkModel::updateColorization() {
     }
 
 	graphe.colorize();
+
+
+    // now associate a frequence for each color
+    // GSM frequences are in 900 - 1800 MHz bounds
+    std::unordered_map<sf::Uint32, unsigned int> colFreq;
+
+    const auto& colors = graphe.getColors();
+    const unsigned int colorCount = colors.size();
+
+    const unsigned int freqStart = 900;
+    const unsigned int freqEnd = 1800;
+
+    const unsigned int freqStep = (freqEnd - freqStart) / colorCount;
+
+    unsigned int freqVal = freqStart;
+
+    for(const auto& color : colors) {
+        colFreq.emplace(
+            color.toInteger(),
+            freqVal
+        );
+
+        freqVal += freqStep;
+    }
+
+    // set frequence for each antennas
+    for(const auto& ant : m_antennas) {
+        ant->setFreq(colFreq.at(ant->getColor().toInteger()));
+    }
+
+
+#ifdef DEBUG
+    /* ==== HEADER ==== */
+    std::string header = "| idx";
+    
+    const unsigned int l = colorCount - 4;
+    
+    header += repeat(' ', l);
+
+    header += "|  r  |  g  |  b  |   freq  |";
+
+    unsigned int headerSize = header.size() - 2;
+
+    header += "\n|";
+    header += repeat('-', headerSize);
+    header += "|";
+
+    headerSize = header.size() / 2;
+
+    const std::string title = "GRAPHE COLORIZATION";
+    const unsigned int titleSize = title.size();
+    const unsigned int tbl = (headerSize - titleSize - 2) / 2;
+
+    std::cout
+        << repeat('-', tbl)
+        << " " << title << " "
+        << repeat('-', tbl)
+        << "\n" << header
+        << std::endl;
+
+
+    /* ==== ANTENNAS ==== */
+    for(unsigned int i=0; i < colorCount; i++) {
+        const auto s = std::to_string(i);
+        const auto color = m_antennas.at(i)->getColor();
+        const unsigned int l = colorCount - s.size() - 1;
+
+        const std::string sColor[] = {
+            std::to_string(color.r),
+            std::to_string(color.g),
+            std::to_string(color.b)
+        };
+
+        std::cout << "|";
+
+        /* ==== INDEX ==== */
+        std::cout << repeat(' ', l) << s << " |";
+
+        /* ==== COLOR ==== */
+        for(unsigned int j=0; j < 3; j++) {
+            const unsigned int cl = 6 - sColor[j].size() - ((j == 0)? 2 : 0);
+
+            std::cout << repeat(' ', cl) << sColor[j];
+        }
+
+        /* ==== FREQUENCE ==== */
+        const std::string freq = std::to_string(m_antennas.at(i)->getFreq());
+        const unsigned int freqL = std::to_string(freqEnd).size() - freq.size();
+
+        std::cout
+            << " |   "
+            << repeat(' ', freqL)
+            << freq << "  |"
+            << std::endl;
+    }
+
+
+    std::cout
+        << repeat('-', headerSize)
+        << std::endl;
+#endif
+
 }
 
 const std::vector<std::unique_ptr<Antenna>>& NetworkModel::getAntennas() const {

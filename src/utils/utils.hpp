@@ -61,6 +61,14 @@ std::string replace(const std::string& str, const std::string& find, const std::
  */
 std::vector<std::string> splitString(std::string sequence, const std::string separator);
 
+/**
+ * Repeats a character c n times in a row.
+ * Returns the resulting string
+ * @param c The character to repeat
+ * @param n The amount of time to repeat c
+ */
+std::string repeat(char c, unsigned int n);
+
 // namespace used to
 // isolate all stl random variables
 // from outside.

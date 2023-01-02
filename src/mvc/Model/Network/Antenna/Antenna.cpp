@@ -9,7 +9,7 @@
 
 #include "utils/utils.hpp"
 
-Antenna::Antenna(const sf::Vector2f& position, const float range, const int freq, const int alt):
+Antenna::Antenna(const sf::Vector2f& position, const float range, const unsigned int freq, const int alt):
     Colorable(),
     m_position(position),
     m_range{range},
@@ -56,7 +56,7 @@ float Antenna::getRange() const {
     return m_range;
 }
 
-int Antenna::getFreq() const {
+unsigned int Antenna::getFreq() const {
     return m_frequency;
 }
 

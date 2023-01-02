@@ -63,6 +63,16 @@ vector<string> splitString(string sequence, const string separator) {
 }
 
 
+std::string repeat(char c, unsigned int n) {
+    std::string s = "";
+
+    for(unsigned int i=0; i < n; i++) {
+        s += c;
+    }
+
+    return s;
+}
+
 
 
 

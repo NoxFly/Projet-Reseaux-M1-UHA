@@ -44,6 +44,8 @@ class Graphe {
          */
 	    void addEdge(const unsigned int v, const unsigned int w);
 
+        const std::vector<sf::Color>& getColors() const;
+
     private:
         /*
         
