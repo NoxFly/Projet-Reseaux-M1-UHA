@@ -40,18 +40,18 @@ class MapModel {
          * @example
          * map.getMapDimension(map.getZoomLevels())
          */
-        unsigned int getZoomLevels();
+        unsigned int getZoomLevels() const;
 
         /**
          * Returns the number of tiles on the map.
          * It is the same amount for each level.
          */
-        sf::Vector2u getBoardDimension();
+        sf::Vector2u getBoardDimension() const;
 
         /**
          * Returns the total dimension of the current map.
          */
-        sf::Vector2u getMapDimension();
+        sf::Vector2u getMapDimension() const;
 
         /**
          * Returns the total dimension of the map of the requested level.
@@ -59,7 +59,7 @@ class MapModel {
          * @example
          * map.getMapDimension(map.getZoomLevels())
          */
-        sf::Vector2u getMapDimension(const unsigned int level);
+        sf::Vector2u getMapDimension(const unsigned int level) const;
 
         /**
          * Returns the tiles of the current level.
@@ -75,6 +75,22 @@ class MapModel {
          * 
          */
         float getCurrentRatio() const;
+
+        /**
+         * Returns a conversion from pixels to kilometers, depending of the current zoom.
+         * Simple cross product.
+         * @param px The distance / length in pixels to convert to km.
+         * @return The same distance / length in km on the current zoom level.
+         */
+        float pxToKm(unsigned int px) const;
+
+        /**
+         * Returns a conversion from kilometers to pixels, depending of the current zoom.
+         * Simple cross product.
+         * @param km The distance / length in kilometers to convert to px.
+         * @return The same distance / length in pixels on the current zoom level.
+         */
+        float kmToPx(float km) const;
         
 
         /**

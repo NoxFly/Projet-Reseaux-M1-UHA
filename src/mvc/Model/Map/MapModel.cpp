@@ -76,24 +76,36 @@ TileMap& MapModel::getTilesOfLevel(const unsigned int level) {
     return m_tiles.at(level-1);
 }
 
-unsigned int MapModel::getZoomLevels() {
+unsigned int MapModel::getZoomLevels() const {
     return m_config.zoomLevel;
 }
 
-sf::Vector2u MapModel::getBoardDimension() {
+sf::Vector2u MapModel::getBoardDimension() const {
     return sf::Vector2u(m_config.tileCountX, m_config.tileCountY);
 }
 
-sf::Vector2u MapModel::getMapDimension() {
+sf::Vector2u MapModel::getMapDimension() const {
     return getMapDimension(m_currentZoomLevel);
 }
 
-sf::Vector2u MapModel::getMapDimension(const unsigned int level) {
+sf::Vector2u MapModel::getMapDimension(const unsigned int level) const {
     return m_tiles.at(level-1).getDimension();
 }
 
 float MapModel::getCurrentRatio() const {
     return m_zoomRatio.at(m_currentZoomLevel-1);
+}
+
+float MapModel::pxToKm(unsigned int px) const {
+    // for now we don't care of complex vectors, a length is considered here with X-Axis
+    // because the map is square.
+    return px / (float)getMapDimension().x * m_config.km.x;
+}
+
+float MapModel::kmToPx(float km) const {
+    // for now we don't care of complex vectors, a length is considered here with X-Axis
+    // because the map is square.
+    return km / m_config.km.x * getMapDimension().x;
 }
 
 unsigned int MapModel::getZoomLevel() const {

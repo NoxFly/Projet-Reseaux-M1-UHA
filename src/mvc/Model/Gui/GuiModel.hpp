@@ -32,9 +32,13 @@ class GuiModel {
         void showAntennaDetailsMenu(Antenna* antenna);
         void hideAntennaDetailsMenu();
 
+        void showShortcutMenu();
+        void hideShortcutMenu();
+
         // dev
         bool isShowingDetails() const;
         bool isShowingHomeMenu() const;
+        bool isShowingShortcutMenu() const;
         Antenna* getAntennaDetails() const;
 
 	private:
@@ -47,7 +51,7 @@ class GuiModel {
 
         // debug
         bool m_drawFsMenu;
-        bool m_showHome;
+        bool m_showHome, m_showShortcuts;
         bool m_hasAnyMenuOpened;
 };
 

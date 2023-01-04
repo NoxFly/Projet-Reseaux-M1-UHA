@@ -227,75 +227,100 @@ void Renderer::render(Model& model) {
 
         if(showA || showR || showC) {
             const auto& ants = net.getAntennas();
-            const float ratio = map.getCurrentRatio();
 
             m_antennaSprite.setColor(m_baseAntennaColor);
 
             for(const auto& antenna : ants) {
-                drawAntenna(antenna.get(), showA, showC, showR, true, ratio);
+                drawAntenna(map, antenna.get(), showA, showC, showR, true);
             }
         }
 
+        // reset the view for 2D HUD that needs to be drawn in front of the map
+        m_window->setView(defaultView);
+
+
+        // scale information
+        const auto scaleSize = sf::Vector2f(160, 20);
+        const sf::Vector2f scalePos((sf::Vector2f)m_window->getSize() - scaleSize);
+
+        const sf::Vector2f strokeSize(scaleSize.x / 2.f, 2);
+
+        float km = map.pxToKm(strokeSize.x);
+        std::string sKm;
+
+        if(km == 0) {
+            sKm = "0 km";
+        }
+        else {
+            std::stringstream ssKm;
+
+            // meters
+            if(km < 1) {
+                sKm = std::to_string((int)(km * 1000)) + " m";
+            }
+            // kilometers
+            else {
+                ssKm << std::fixed << std::setprecision(2) << km;
+
+                sKm = ssKm.str();
+
+                if(sKm[2] == '0') {
+                    sKm = std::to_string((int)km);
+                }
+
+                sKm += " km";
+            }
+        }
+
+
+        sf::RectangleShape scaleBg(scaleSize),
+            scaleStrokeBot(strokeSize),
+            scaleStrokeLeft(sf::Vector2f(2, 5)),
+            scaleStrokeRight(sf::Vector2f(2, 5));
+        
+        scaleBg.setPosition(scalePos);
+        scaleBg.setFillColor(sf::Color(250, 250, 250, 220));
+
+        scaleStrokeBot.setPosition(scalePos.x + scaleSize.x / 2 - 10, scalePos.y + scaleSize.y * .6);
+        scaleStrokeBot.setFillColor(sf::Color(150, 150, 150));
+
+        scaleStrokeLeft.setPosition(scalePos.x + scaleSize.x / 2 - 10, scalePos.y + scaleSize.y * .6 - 5);
+        scaleStrokeLeft.setFillColor(sf::Color(150, 150, 150));
+
+        scaleStrokeRight.setPosition(scalePos.x + scaleSize.x - 12, scalePos.y + scaleSize.y * .6 - 5);
+        scaleStrokeRight.setFillColor(sf::Color(150, 150, 150));
+
+
+        m_window->draw(scaleBg);
+        m_window->draw(scaleStrokeBot);
+        m_window->draw(scaleStrokeLeft);
+        m_window->draw(scaleStrokeRight);
+
+        fillText(sKm, scalePos.x + 10, scalePos.y + 3, 12, sf::Color(100, 100, 100));
+
     }
-
-
-
-
-    // reset the view for 2D HUD that needs to be drawn in front of the map
-    m_window->setView(defaultView);
-
-
-
-
-
-    // scale information
-    const auto scaleSize = sf::Vector2f(150, 20);
-    const sf::Vector2f scalePos((sf::Vector2f)m_window->getSize() - scaleSize);
-
-
-    sf::RectangleShape scaleBg(scaleSize),
-        scaleStrokeBot(sf::Vector2f(scaleSize.x / 2.f, 2)),
-        scaleStrokeLeft(sf::Vector2f(2, 5)),
-        scaleStrokeRight(sf::Vector2f(2, 5));
-    
-    scaleBg.setPosition(scalePos);
-    scaleBg.setFillColor(sf::Color(250, 250, 250, 220));
-
-    scaleStrokeBot.setPosition(scalePos.x + scaleSize.x / 2 - 10, scalePos.y + scaleSize.y * .6);
-    scaleStrokeBot.setFillColor(sf::Color(150, 150, 150));
-
-    scaleStrokeLeft.setPosition(scalePos.x + scaleSize.x / 2 - 10, scalePos.y + scaleSize.y * .6 - 5);
-    scaleStrokeLeft.setFillColor(sf::Color(150, 150, 150));
-
-    scaleStrokeRight.setPosition(scalePos.x + scaleSize.x - 12, scalePos.y + scaleSize.y * .6 - 5);
-    scaleStrokeRight.setFillColor(sf::Color(150, 150, 150));
-
-
-    m_window->draw(scaleBg);
-    m_window->draw(scaleStrokeBot);
-    m_window->draw(scaleStrokeLeft);
-    m_window->draw(scaleStrokeRight);
-
-    fillText("2 km", scalePos.x + 10, scalePos.y + 3, 12, sf::Color(100, 100, 100));
-
-
 
 
 
     // do stuff for HUD here...
-    // main menu
-    // this method only draws TGUI stuff
-    gui.draw();
-
     if(gui.isShowingDetails()) {
         drawAntennaMenu(map, gui.getAntennaDetails());
     }
 
+    if(gui.isShowingShortcutMenu()) {
+        drawShortcuts();
+    }
+
+    // main menu
+    // this method only draws TGUI stuff
+    gui.draw();
+
     m_window->display();
 }
 
-void Renderer::drawAntenna(Antenna* antenna, bool showAntenna, bool showColor, bool showRange, bool dark, float ratio) {
+void Renderer::drawAntenna(const MapModel& map, Antenna* antenna, bool showAntenna, bool showColor, bool showRange, bool dark) {
     const auto& position = antenna->getPosition().coords();
+    const auto ratio = map.getCurrentRatio();
 
     sf::Vector2f pos(position.x * ratio, position.y * ratio);
 
@@ -315,7 +340,7 @@ void Renderer::drawAntenna(Antenna* antenna, bool showAntenna, bool showColor, b
     }
 
     if(showRange) {
-        int radius = antenna->getRange() * ratio;
+        int radius = map.kmToPx(antenna->getRange() / 1000.f);
 
         sf::CircleShape range(radius, 90);
 
@@ -409,8 +434,6 @@ void Renderer::drawAntennaMenu(const MapModel& map, Antenna* antenna) {
     menuBorder.setFillColor(menuStrokeColor);
 
     m_window->draw(hover);
-    m_window->draw(bgMenu);
-    m_window->draw(menuBorder);
 
 
     int menuLabelX = menuX + 20;
@@ -419,24 +442,6 @@ void Renderer::drawAntennaMenu(const MapModel& map, Antenna* antenna) {
     sf::Color menuValueColor(160, 160, 160);
     auto menuLabelStyle = sf::Text::Style::Bold;
 
-    fillText("Antenne",                 menuX + menuWidth / 2,  40, 30, menuLabelColor, menuLabelStyle, "center");
-
-    fillText("Nom : ",                  menuLabelX,             menuLabelY + 0,     15,     menuLabelColor, menuLabelStyle);
-    fillText("Coordonnees : ",          menuLabelX,             menuLabelY + 50,    15,     menuLabelColor, menuLabelStyle);
-    fillText("Frequence : ",            menuLabelX,             menuLabelY + 100,   15,     menuLabelColor, menuLabelStyle);
-    fillText("Puissance d'emission : ", menuLabelX,             menuLabelY + 150,   15,     menuLabelColor, menuLabelStyle);
-    fillText("Distance d'emission : ",  menuLabelX,             menuLabelY + 200,   15,     menuLabelColor, menuLabelStyle);
-    fillText("Hauteur : ",              menuLabelX,             menuLabelY + 250,   15,     menuLabelColor, menuLabelStyle);
-    fillText("Couleur : ",              menuLabelX,             menuLabelY + 300,   15,     menuLabelColor, menuLabelStyle);
-
-
-    fillText(antenna->getName(),        menuLabelX + 60,             menuLabelY + 0,     15,     menuValueColor);
-    fillText(sAntPos,                   menuLabelX + 130,            menuLabelY + 50,    15,     menuValueColor);
-    fillText(sAntFreq,                  menuLabelX + 110,            menuLabelY + 100,   15,     menuValueColor);
-    fillText(sAntPower,                 menuLabelX + 200,            menuLabelY + 150,   15,     menuValueColor);
-    fillText(sAntRange,                 menuLabelX + 190,            menuLabelY + 200,   15,     menuValueColor);
-    fillText(sAntAlt,                   menuLabelX + 90,             menuLabelY + 250,   15,     menuValueColor);
-
     const unsigned int antColorRad = 10.0;
     sf::CircleShape antColor(antColorRad);
     antColor.setFillColor(antenna->getColor());
@@ -444,10 +449,79 @@ void Renderer::drawAntennaMenu(const MapModel& map, Antenna* antenna) {
     antColor.setOutlineThickness(2);
     antColor.setPosition(menuLabelX + 100, menuLabelY + 300);
 
-    m_window->draw(antColor);
-
 
     m_window->setView(m_view);
-    drawAntenna(antenna, true, true, true, false, map.getCurrentRatio());
+    drawAntenna(map, antenna, true, true, true, false);
     m_window->setView(m_window->getDefaultView());
+
+    m_window->draw(bgMenu);
+    m_window->draw(menuBorder);
+
+    m_window->draw(antColor);
+
+    fillText("Antenne",                 menuX + menuWidth / 2,  40, 30, menuLabelColor, menuLabelStyle, "center");
+
+    fillText("Nom : ",                  menuLabelX,       menuLabelY + 0,   15, menuLabelColor, menuLabelStyle);
+    fillText("Coordonnees : ",          menuLabelX,       menuLabelY + 50,  15, menuLabelColor, menuLabelStyle);
+    fillText("Frequence : ",            menuLabelX,       menuLabelY + 100, 15, menuLabelColor, menuLabelStyle);
+    fillText("Puissance d'emission : ", menuLabelX,       menuLabelY + 150, 15, menuLabelColor, menuLabelStyle);
+    fillText("Distance d'emission : ",  menuLabelX,       menuLabelY + 200, 15, menuLabelColor, menuLabelStyle);
+    fillText("Hauteur : ",              menuLabelX,       menuLabelY + 250, 15, menuLabelColor, menuLabelStyle);
+    fillText("Couleur : ",              menuLabelX,       menuLabelY + 300, 15, menuLabelColor, menuLabelStyle);
+
+
+    fillText(antenna->getName(),        menuLabelX + 60,  menuLabelY + 0,   15, menuValueColor);
+    fillText(sAntPos,                   menuLabelX + 130, menuLabelY + 50,  15, menuValueColor);
+    fillText(sAntFreq,                  menuLabelX + 110, menuLabelY + 100, 15, menuValueColor);
+    fillText(sAntPower,                 menuLabelX + 200, menuLabelY + 150, 15, menuValueColor);
+    fillText(sAntRange,                 menuLabelX + 190, menuLabelY + 200, 15, menuValueColor);
+    fillText(sAntAlt,                   menuLabelX + 90,  menuLabelY + 250, 15, menuValueColor);
+}
+
+void Renderer::drawShortcuts() {
+    fillText("Shortcuts", m_window->getSize().x / 2, 50, 40, sf::Color(50, 50, 50), sf::Text::Bold, "center");
+
+    std::pair<std::string, std::string> shortcuts[] = {
+        { "Esc", "Ouvre le menu principal." },
+        { "A", "Affiche / Cache les antennes." },
+        { "C", "Affiche / Cache les couleurs des antennes." },
+        { "R", "Affiche / Cache les ranges des antennes." },
+        { "G", "Affiche / Cache la grille de projection." },
+        { "Tab", "Switch entre le mode spectateur / editeur." }
+    };
+
+    unsigned int x = 100,
+        y = 200;
+
+    unsigned int fsize = 20;
+    unsigned int margin = 20;
+
+    for(const auto& shrt : shortcuts) {
+        fillText(shrt.first, x, y, fsize, sf::Color(50, 50, 50), sf::Text::Bold);
+        fillText(shrt.second, x + 80, y + 1, fsize * .8, sf::Color(50, 50, 50));
+
+        y += fsize + margin;
+    }
+
+    sf::RectangleShape strk(sf::Vector2f(1, m_window->getSize().y * .7));
+    strk.setPosition(m_window->getSize().x / 2, m_window->getSize().y - strk.getSize().y - 50);
+    strk.setFillColor(sf::Color(220, 220, 220));
+
+    m_window->draw(strk);
+
+
+    sf::RectangleShape crossA(sf::Vector2f(20, 4));
+    crossA.setOrigin(10, 2);
+    crossA.setPosition(40, 40);
+    crossA.setRotation(45);
+    crossA.setFillColor(sf::Color(80, 80, 80));
+
+    sf::RectangleShape crossB(sf::Vector2f(20, 4));
+    crossB.setOrigin(10, 2);
+    crossB.setPosition(40, 40);
+    crossB.setRotation(-45);
+    crossB.setFillColor(sf::Color(80, 80, 80));
+
+    m_window->draw(crossA);
+    m_window->draw(crossB);
 }

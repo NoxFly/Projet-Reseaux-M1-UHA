@@ -55,7 +55,7 @@ class TileMap {
         /**
          * Returns the total dimension of this map (width * tileSize.x, height * tileSize.y).
          */
-        sf::Vector2u getDimension();
+        sf::Vector2u getDimension() const;
         /**
          * Returns the number of tiles on both x/y axis on the board of this level.
          */

@@ -20,6 +20,7 @@ struct MapConfig {
     unsigned int tileCountY;
     sf::Vector2f topLeft;
     sf::Vector2f bottomRight;
+    sf::Vector2f km;
 };
 
 struct NetworkConfig {

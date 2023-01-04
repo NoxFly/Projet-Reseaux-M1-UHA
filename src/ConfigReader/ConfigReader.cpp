@@ -32,6 +32,11 @@ AppConfig ConfigReader::loadFromFile(const char* filepath) {
     m.tileCountX    = m_config.getIntValue("MAP", "CHESS_X", 0);
     m.tileCountY    = m_config.getIntValue("MAP", "CHESS_Y", 0);
 
+    m.km            = sf::Vector2f(
+        m_config.getIntValue("MAP", "KM_DISTANCE_X", 0),
+        m_config.getIntValue("MAP", "KM_DISTANCE_Y", 0)
+    );
+
     m.topLeft       = sf::Vector2f(
         std::stof(m_config.getValue("MAP", "TOP_LEFT_X")),
         std::stof(m_config.getValue("MAP", "TOP_LEFT_Y"))

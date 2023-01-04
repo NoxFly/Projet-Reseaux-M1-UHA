@@ -11,6 +11,7 @@ GuiModel::GuiModel():
     m_antenna(nullptr),
     m_drawFsMenu(false),
     m_showHome(false),
+    m_showShortcuts(false),
     m_hasAnyMenuOpened(false)
 {
     tgui::Theme::setDefault(tgui::Theme::create("res/themes/BabyBlue.txt"));
@@ -60,11 +61,12 @@ void GuiModel::showHomeMenu() {
     homeTitle->getRenderer()->setTextOutlineColor(sf::Color(80,80,80));
     homeTitle->getRenderer()->setBackgroundColor(sf::Color(187,226,233));
     homeTitle->setTextSize(92);
-    homeTitle->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
+
+    // homeTitle->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
 
     //Add buttons
     auto buttonStart = tgui::Button::create();
-    buttonStart->setPosition(490, 430);
+    buttonStart->setPosition(490, 400);
     buttonStart->setText("Start");
     buttonStart->setInheritedFont("res/fonts/font.ttf");
     buttonStart->setTextSize(30);
@@ -74,22 +76,26 @@ void GuiModel::showHomeMenu() {
         hideHomeMenu();
     });
 
-    buttonStart->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
+    // buttonStart->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
 
 
     auto buttonSettings = tgui::Button::create();
     buttonSettings->setPosition(490, 470);
-    buttonSettings->setText("Settings");
+    buttonSettings->setText("Shortcuts");
     buttonSettings->setInheritedFont("res/fonts/font.ttf");
     buttonSettings->setTextSize(30);
     buttonSettings->setSize(300, 50);
-    //buttonSettings->onPress([&]{ std::cout << " button Settings pressed" << std::endl; });
-    buttonSettings->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
+
+    // buttonSettings->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
+
+    buttonSettings->onPress([&]{
+        showShortcutMenu();
+    });
 
 
 
     auto buttonQuit = tgui::Button::create();
-    buttonQuit->setPosition(490, 500);
+    buttonQuit->setPosition(490, 540);
     buttonQuit->setText("Quit");
     buttonQuit->setInheritedFont("res/fonts/font.ttf");
     buttonQuit->setTextSize(30);
@@ -102,12 +108,12 @@ void GuiModel::showHomeMenu() {
         m_renderer->close();
     });
 
-    buttonQuit->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
+    // buttonQuit->showWithEffect(tgui::ShowEffectType::SlideFromTop, 500);
 
     m_gui.add(homePic);
     m_gui.add(homeTitle);
     m_gui.add(buttonStart);
-    // m_gui.add(buttonSettings);
+    m_gui.add(buttonSettings);
     m_gui.add(buttonQuit);
 
     m_drawFsMenu = true;
@@ -129,7 +135,6 @@ void GuiModel::showAntennaDetailsMenu(Antenna* antenna) {
 
 void GuiModel::hideAntennaDetailsMenu() {
     m_antenna = nullptr;
-    m_gui.removeAllWidgets();
     m_hasAnyMenuOpened = false;
 }
 
@@ -143,4 +148,26 @@ bool GuiModel::isShowingHomeMenu() const {
 
 Antenna* GuiModel::getAntennaDetails() const {
     return m_antenna;
+}
+
+void GuiModel::showShortcutMenu() {
+    m_showShortcuts = true;
+    m_drawFsMenu = true;
+    m_gui.removeAllWidgets();
+}
+
+void GuiModel::hideShortcutMenu() {
+    m_showShortcuts = false;
+
+    if(m_showHome) {
+        showHomeMenu();
+        return;
+    }
+
+    m_drawFsMenu = false;
+    m_hasAnyMenuOpened = false;
+}
+
+bool GuiModel::isShowingShortcutMenu() const {
+    return m_showShortcuts;
 }

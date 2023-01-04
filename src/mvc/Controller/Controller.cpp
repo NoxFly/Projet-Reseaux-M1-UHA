@@ -18,7 +18,21 @@ void Controller::update(Renderer& renderer, Model& model) {
     // update view input (poll event)
     m_input.update(renderer, model);
 
-    if(renderer.isClosed() || model.getGui().isShowingHomeMenu()) {
+    if(renderer.isClosed()) {
+        return;
+    }
+
+    if(m_input.isMouseButtonPressed(sf::Mouse::Button::Left)) {
+        if(model.getGui().isShowingShortcutMenu()) {
+            const auto& mouse = m_input.getMousePosition();
+
+            if(mouse.x < 80 && mouse.y < 80) {
+                model.getGui().hideShortcutMenu();
+            }
+        }
+    }
+
+    if(model.getGui().isShowingHomeMenu()) {
         return;
     }
 
@@ -31,7 +45,14 @@ void Controller::update(Renderer& renderer, Model& model) {
 
     // toggle window fullscreen
     if(m_input.isKeyPressed(sf::Keyboard::F)) {
-        renderer.toggleFullscreen();
+        // buggy
+        //renderer.toggleFullscreen();
+    }
+
+
+    if(m_input.isKeyPressed(sf::Keyboard::Escape)) {
+        // model.getGui().hideAntennaDetailsMenu();
+        model.getGui().showHomeMenu();
     }
 
 

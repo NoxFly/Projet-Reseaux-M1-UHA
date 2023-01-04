@@ -118,7 +118,7 @@ const sf::Vector2u& TileMap::getBoardDimension() const {
     return m_boardSize;
 }
 
-sf::Vector2u TileMap::getDimension() {
+sf::Vector2u TileMap::getDimension() const {
     sf::Vector2u v;
 
     v.x = m_boardSize.x * m_tileSize.x;

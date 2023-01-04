@@ -37,7 +37,8 @@ class Renderer {
         void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
         void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
 
-        void drawAntenna(Antenna* antenna, bool showAntenna, bool showColor, bool showRange, bool dark, float ratio);
+        void drawAntenna(const MapModel& map, Antenna* antenna, bool showAntenna, bool showColor, bool showRange, bool dark);
+        void drawShortcuts();
 
 		sf::RenderWindow* m_window;
         sf::VideoMode m_screen;
