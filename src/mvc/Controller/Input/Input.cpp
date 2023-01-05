@@ -52,14 +52,18 @@ void Input::treatEvent(const sf::Event& event, Renderer& renderer) {
 
     switch(event.type) {
         case sf::Event::KeyPressed:
-            m_pressed_keys[event.key.code] = false;
-            m_keys[event.key.code] = true;
+            if(event.key.code > -1) {
+                m_pressed_keys[event.key.code] = false;
+                m_keys[event.key.code] = true;
+            }
             break;
 
         // keyboard's key released
         case sf::Event::KeyReleased:
-            if(m_keys[event.key.code]) m_pressed_keys[event.key.code] = true;
-            m_keys[event.key.code] = false;
+            if(event.key.code > -1) {
+                if(m_keys[event.key.code]) m_pressed_keys[event.key.code] = true;
+                m_keys[event.key.code] = false;
+            }
             break;
 
         // mouse's button pressed

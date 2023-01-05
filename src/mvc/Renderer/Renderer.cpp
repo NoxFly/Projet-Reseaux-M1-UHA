@@ -18,7 +18,7 @@ Renderer::Renderer():
     m_cursorGrabbing(),
     m_isFullscreen(false),
     m_defaultWindowSize(0, 0),
-    m_showAntennasOfFreq(0)
+    m_showAntennasOfFreq(-1)
 {
     // init font(s)
     sf::Font font;
@@ -235,7 +235,7 @@ void Renderer::render(Model& model) {
                     drawAntenna(map, antenna.get(), showA, showC, showR, true);
                 }
             }
-            else {
+            else if(m_showAntennasOfFreq < (int)model.getNetwork().getFrequencies().size()) {
                 const auto filterFreq = model.getNetwork().getFrequencies()[m_showAntennasOfFreq];
 
                 for(const auto& antenna : ants) {
@@ -353,24 +353,39 @@ void Renderer::drawAntenna(const MapModel& map, Antenna* antenna, bool showAnten
     if(showRange) {
         int radius = map.kmToPx(antenna->getRange() / 1000.f);
 
+        sf::Color rCol = m_baseAntennaColor;
+        sf::Color rBg = dark? m_baseAntennaColorDarkTransparent : m_baseAntennaColorLightTransparent;
+
+        if(showColor) {
+            rCol = antenna->getColor();
+
+            if(!showAntenna) {
+                rBg = rCol;
+                rBg.a = 50;
+            }
+        }
+
         sf::CircleShape range(radius, 90);
 
         range.setOrigin(radius, radius);
         range.setPosition(pos);
         
-        range.setFillColor(dark? m_baseAntennaColorDarkTransparent : m_baseAntennaColorLightTransparent);
+        range.setFillColor(rBg);
 
-        range.setOutlineThickness(2);
-        range.setOutlineColor(showColor? antenna->getColor() : m_baseAntennaColor);
+        if(showAntenna) {
+
+            range.setOutlineThickness(1);
+            range.setOutlineColor(rCol);
+        }
 
         m_window->draw(range);
     }
 
     // debug position
-    fillText(
-        std::to_string(antenna->getPosition().meters().x) + ", " + std::to_string(antenna->getPosition().meters().y),
-        pos, 15, sf::Color::Black, 0, "center"
-    );
+    // fillText(
+    //     std::to_string(antenna->getPosition().meters().x) + ", " + std::to_string(antenna->getPosition().meters().y),
+    //     pos, 15, sf::Color::Black, 0, "center"
+    // );
 }
 
 void Renderer::fillText(const std::string& str, const sf::Vector2f& position, const int fontSize, const sf::Color& color, const sf::Uint32 style, const std::string& alignment) {

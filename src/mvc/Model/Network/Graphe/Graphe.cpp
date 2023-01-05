@@ -14,27 +14,16 @@ Graphe::Graphe(const unsigned int n):
     // the 3 primary colors
     // dirty ifs but to be sure it won't make issues in the future with getColors()
     if(m_size > 0) {
-        m_colors.push_back(sf::Color(255, 0, 0));
+        m_colors.push_back(sf::Color(224, 65, 72));
 
         if(m_size > 1) {
-            m_colors.push_back(sf::Color(0, 255, 0));
+            m_colors.push_back(sf::Color(99, 230, 112));
 
             if(m_size > 2) {
-                m_colors.push_back(sf::Color(0, 0, 255));
+                m_colors.push_back(sf::Color(76, 89, 235));
             }
         }
     }
-
-    // // some others if needed
-    // for(unsigned int i = 3; i < n; i++) {
-    //     sf::Color newColor;
-
-    //     newColor.r = (rand() % (255 - 1 + 1)) + 1;
-    //     newColor.b = (rand() % (255 - 1 + 1)) + 1;
-    //     newColor.g = (rand() % (255 - 1 + 1)) + 1;
-
-    //     m_colors.push_back(newColor);
-    // }
 }
 
 void Graphe::colorize() {
