@@ -39,6 +39,9 @@ class Renderer {
          */
         void setFreqFilter(const int freq);
 
+        void showOutline(const bool show);
+        void toggleOutline();
+
     protected:
         void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
         void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");

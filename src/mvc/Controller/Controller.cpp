@@ -88,8 +88,10 @@ void Controller::update(Renderer& renderer, Model& model) {
 
                 auto mouse = renderer.getPixelToWorldCoords(m_input.getMousePosition(), model.getMap());
 
-                const auto filterFreq = (renderer.getFreqFilter() != -1)
-                    ? model.getNetwork().getFrequencies()[renderer.getFreqFilter()]
+                const auto freqF = renderer.getFreqFilter();
+
+                const auto filterFreq = (freqF != -1)
+                    ? model.getNetwork().getFrequencies()[freqF]
                     : 0;
 
                 for(auto& antenna : antennas) {
