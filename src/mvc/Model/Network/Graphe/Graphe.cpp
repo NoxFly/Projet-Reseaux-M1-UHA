@@ -41,7 +41,7 @@ void Graphe::colorize() {
 
     m_adj[0].colorIdx = 0;
 
-    bool areAvailable[m_size];
+    bool* areAvailable = new bool[m_size];
 
 	for (unsigned int cr = 0; cr < m_size; cr++) {
         areAvailable[cr] = true;
@@ -94,9 +94,7 @@ void Graphe::colorize() {
 
     }
 
-#ifdef DEBUG
-    
-#endif
+    delete[] areAvailable;
 }
 
 

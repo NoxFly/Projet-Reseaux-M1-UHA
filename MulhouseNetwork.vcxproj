@@ -166,6 +166,8 @@
     <ClInclude Include="src\mvc\Model\Model.hpp" />
     <ClInclude Include="src\mvc\Model\Network\Antenna\Antenna.hpp" />
     <ClInclude Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.hpp" />
+    <ClInclude Include="src\mvc\Model\Network\Graphe\Colorable\Colorable.hpp" />
+    <ClInclude Include="src\mvc\Model\Network\Graphe\Graphe.hpp" />
     <ClInclude Include="src\mvc\Model\Network\NetworkModel.hpp" />
     <ClInclude Include="src\mvc\Renderer\Renderer.hpp" />
     <ClInclude Include="src\utils\IniSet\IniSet.hpp" />
@@ -183,6 +185,8 @@
     <ClCompile Include="src\mvc\Model\Model.cpp" />
     <ClCompile Include="src\mvc\Model\Network\Antenna\Antenna.cpp" />
     <ClCompile Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.cpp" />
+    <ClCompile Include="src\mvc\Model\Network\Graphe\Colorable\Colorable.cpp" />
+    <ClCompile Include="src\mvc\Model\Network\Graphe\Graphe.cpp" />
     <ClCompile Include="src\mvc\Model\Network\NetworkModel.cpp" />
     <ClCompile Include="src\mvc\Renderer\Renderer.cpp" />
     <ClCompile Include="src\utils\IniSet\IniSet.cpp" />

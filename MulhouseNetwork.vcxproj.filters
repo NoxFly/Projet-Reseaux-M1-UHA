@@ -60,6 +60,12 @@
     <ClInclude Include="src\Application\Application.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="src\mvc\Model\Network\Graphe\Colorable\Colorable.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Network\Graphe\Graphe.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -105,6 +111,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\Application\Application.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Network\Graphe\Colorable\Colorable.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Network\Graphe\Graphe.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
