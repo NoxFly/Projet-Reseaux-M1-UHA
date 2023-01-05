@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <fstream>
+#include <sstream>
 
 #include <SFML/System/Vector2.hpp>
 
@@ -12,6 +13,7 @@
 
 NetworkModel::NetworkModel():
     m_antennas{},
+    m_frequencies{},
     m_showAntennas(true),
     m_showRanges(false),
     m_showColors(false)
@@ -25,33 +27,15 @@ NetworkModel::~NetworkModel() {
 
 void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 	std::ifstream file(config.entryFile);
-    std::string line;
 
+    bool isCSV = endsWith(config.entryFile, ".csv");
 
 	if(file.is_open()) { // only read if file exists and is not empty
 
         m_antennas.clear();
 
-		while(std::getline(file, line)) {
-            // a line is modelised here as "0.0 0.0 0.0" (3 floats)
-            // and in order "X Y RANGE" and where X,Y are in lambert
-            std::string name;
-            char cname[] = "unamed XXX-XXX-XXX-XXX";
-            float x, y, r;
-
-            sscanf(line.c_str(), "%s %f %f %f", cname, &x, &y, &r);
-
-            // at least one of the 3 floats does not respect the float form
-            if(x < .1 || y < .1 || r < .1) {
-                // continue;
-            }
-
-            name = std::string(cname);
-
-            auto ant = std::make_unique<Antenna>(name, sf::Vector2f(x, y), r, 0, 0);
-
-            m_antennas.push_back(std::move(ant));
-		}
+        if(isCSV)   loadFromCsv(file);
+        else        loadFromTxt(file);
 
 		file.close();
 
@@ -65,13 +49,78 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
     }
 
 
-
-
     // ------ GRAPH / COLORIZATION ------
     updateColorization();
 }
 
+
+void NetworkModel::loadFromTxt(std::ifstream& file) {
+    std::string line;
+
+    // read line by line
+    while(std::getline(file, line)) {
+        // a line is modelised here as "name X Y R" (1 string 3 int)
+        // where X,Y are in lambert
+        std::string name;
+        // default name, gives a max length
+        char cname[] = "unamed XXX-XXX-XXX-XXX";
+        int x = 0, y = 0, r = 0;
+
+        sscanf(line.c_str(), "%s %d %d %d", cname, &x, &y, &r);
+
+        name = std::string(cname);
+
+        createAntenna(name, x, y, r);
+    }
+}
+
+void NetworkModel::loadFromCsv(std::ifstream& file) {
+    std::string line;
+
+    // remove the first line because it's header
+    std::getline(file, line);
+
+    if(!file) {
+        return;
+    }
+
+
+    // read cell by cell
+    while(std::getline(file, line)) {
+        std::istringstream iss { line };
+        
+        std::string name;
+        int values[3];
+
+        int i = -2;
+        std::string s;
+
+        while(std::getline(iss, s, ';')) {
+            if(++i == -1) {
+                name = s;
+            }
+            else {
+                values[i] = std::stoi(s);
+            }
+        }
+
+        createAntenna(name, values[0], values[1], values[2]);
+    }
+}
+
+void NetworkModel::createAntenna(const std::string& name, int x, int y, unsigned int r) {
+    auto ant = std::make_unique<Antenna>(name, sf::Vector2i(x, y), r, 0, 0);
+
+    m_antennas.push_back(std::move(ant));
+}
+
+
 void NetworkModel::updateColorization() {
+    // no need to operate if there's no antenna
+    if(m_antennas.size() == 0) {
+        return;
+    }
+
     //do logic to figure out which antennas are in each others zone
     // for every two interfering antennas, take their indexes
     // and pass them to addEdge method of Graphe class
@@ -92,11 +141,11 @@ void NetworkModel::updateColorization() {
             auto b = (*this)[j];
 
             const unsigned int rangesCollide = circleToCircleCollision(
-                a->getPosition().lambert().x,
-                a->getPosition().lambert().y,
+                a->getPosition().meters().x,
+                a->getPosition().meters().y,
                 a->getRange(),
-                b->getPosition().lambert().x,
-                b->getPosition().lambert().y,
+                b->getPosition().meters().x,
+                b->getPosition().meters().y,
                 b->getRange()
             );
 
@@ -129,6 +178,8 @@ void NetworkModel::updateColorization() {
             freqVal
         );
 
+        m_frequencies.push_back(freqVal);
+
         freqVal += freqStep;
     }
 
@@ -142,7 +193,8 @@ void NetworkModel::updateColorization() {
     /* ==== HEADER ==== */
     std::string header = "| idx";
     
-    const unsigned int l = colorCount - 4;
+    const auto ls = std::max((int)std::to_string(colorCount).size(), 3);
+    const unsigned int l = ls - 2;
     
     header += repeat(' ', l);
 
@@ -169,10 +221,11 @@ void NetworkModel::updateColorization() {
 
 
     /* ==== ANTENNAS ==== */
+
     for(unsigned int i=0; i < colorCount; i++) {
         const auto s = std::to_string(i);
         const auto color = m_antennas.at(i)->getColor();
-        const unsigned int l = colorCount - s.size() - 1;
+        const unsigned int l = ls - s.size() + 1;
 
         const std::string sColor[] = {
             std::to_string(color.r),
@@ -253,4 +306,8 @@ bool NetworkModel::shouldShowRanges() const {
 
 bool NetworkModel::shouldShowColors() const {
     return m_showColors;
+}
+
+const std::vector<unsigned int>& NetworkModel::getFrequencies() const {
+    return m_frequencies;
 }

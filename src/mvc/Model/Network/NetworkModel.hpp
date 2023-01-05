@@ -32,10 +32,18 @@ class NetworkModel {
         bool shouldShowRanges() const;
         bool shouldShowColors() const;
 
+        void createAntenna(const std::string& name, int x, int y, unsigned int r);
+
+        const std::vector<unsigned int>& getFrequencies() const;
+
 	private:
         void updateColorization();
 
+        void loadFromTxt(std::ifstream& file);
+        void loadFromCsv(std::ifstream& file);
+
         std::vector<std::unique_ptr<Antenna>> m_antennas;
+        std::vector<unsigned int> m_frequencies;
 
         bool m_showAntennas;
         bool m_showRanges;

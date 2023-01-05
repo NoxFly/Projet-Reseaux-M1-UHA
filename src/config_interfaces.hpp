@@ -18,8 +18,8 @@ struct MapConfig {
     unsigned int zoomLevel;
     unsigned int tileCountX;
     unsigned int tileCountY;
-    sf::Vector2f topLeft;
-    sf::Vector2f bottomRight;
+    sf::Vector2i topLeft;
+    sf::Vector2i bottomRight;
     sf::Vector2f km;
 };
 

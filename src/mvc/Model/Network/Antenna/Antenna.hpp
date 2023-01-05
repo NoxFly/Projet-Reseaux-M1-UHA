@@ -14,8 +14,8 @@ class Antenna: public Colorable {
         Antenna();
         Antenna(
             const std::string& name,
-            const sf::Vector2f& position,
-            const float range,
+            const sf::Vector2i& position,
+            const unsigned int range,
             const unsigned int freq,
             const int alt
         );
@@ -23,7 +23,7 @@ class Antenna: public Colorable {
 
         const GeoPosition& getPosition() const;
         float getEmitPower() const;
-        float getRange() const;
+        unsigned int getRange() const;
         unsigned int getFreq() const;
         int getAltitude() const;
         const std::string& getName() const;
@@ -31,12 +31,12 @@ class Antenna: public Colorable {
 
         void setFreq(const int);
         void setAltitude(const int);
-        void setRange(const float);
+        void setRange(const unsigned int);
 
     private:
         GeoPosition m_position;
         float m_power;
-        float m_range;
+        unsigned int m_range;
         unsigned int m_frequency;
         int m_altitude;
         std::string m_name;

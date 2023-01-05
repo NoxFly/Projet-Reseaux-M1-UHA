@@ -37,12 +37,12 @@ AppConfig ConfigReader::loadFromFile(const char* filepath) {
         m_config.getIntValue("MAP", "KM_DISTANCE_Y", 0)
     );
 
-    m.topLeft       = sf::Vector2f(
+    m.topLeft       = sf::Vector2i(
         std::stof(m_config.getValue("MAP", "TOP_LEFT_X")),
         std::stof(m_config.getValue("MAP", "TOP_LEFT_Y"))
     );
 
-    m.bottomRight   = sf::Vector2f(
+    m.bottomRight   = sf::Vector2i(
         std::stof(m_config.getValue("MAP", "BOTTOM_RIGHT_X")),
         std::stof(m_config.getValue("MAP", "BOTTOM_RIGHT_Y"))
     );

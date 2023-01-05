@@ -17,7 +17,8 @@ Renderer::Renderer():
     m_cursorGrab(),
     m_cursorGrabbing(),
     m_isFullscreen(false),
-    m_defaultWindowSize(0, 0)
+    m_defaultWindowSize(0, 0),
+    m_showAntennasOfFreq(0)
 {
     // init font(s)
     sf::Font font;
@@ -217,7 +218,6 @@ void Renderer::render(Model& model) {
         }
 
 
-
         // network
         const auto& net = model.getNetwork();
 
@@ -230,8 +230,19 @@ void Renderer::render(Model& model) {
 
             m_antennaSprite.setColor(m_baseAntennaColor);
 
-            for(const auto& antenna : ants) {
-                drawAntenna(map, antenna.get(), showA, showC, showR, true);
+            if(m_showAntennasOfFreq == -1) {
+                for(const auto& antenna : ants) {
+                    drawAntenna(map, antenna.get(), showA, showC, showR, true);
+                }
+            }
+            else {
+                const auto filterFreq = model.getNetwork().getFrequencies()[m_showAntennasOfFreq];
+
+                for(const auto& antenna : ants) {
+                    if(antenna->getFreq() == filterFreq) {
+                        drawAntenna(map, antenna.get(), showA, showC, showR, true);
+                    }
+                }
             }
         }
 
@@ -319,7 +330,7 @@ void Renderer::render(Model& model) {
 }
 
 void Renderer::drawAntenna(const MapModel& map, Antenna* antenna, bool showAntenna, bool showColor, bool showRange, bool dark) {
-    const auto& position = antenna->getPosition().coords();
+    const auto& position = antenna->getPosition().pixels();
     const auto ratio = map.getCurrentRatio();
 
     sf::Vector2f pos(position.x * ratio, position.y * ratio);
@@ -354,6 +365,12 @@ void Renderer::drawAntenna(const MapModel& map, Antenna* antenna, bool showAnten
 
         m_window->draw(range);
     }
+
+    // debug position
+    fillText(
+        std::to_string(antenna->getPosition().meters().x) + ", " + std::to_string(antenna->getPosition().meters().y),
+        pos, 15, sf::Color::Black, 0, "center"
+    );
 }
 
 void Renderer::fillText(const std::string& str, const sf::Vector2f& position, const int fontSize, const sf::Color& color, const sf::Uint32 style, const std::string& alignment) {
@@ -487,6 +504,8 @@ void Renderer::drawShortcuts() {
         { "C", "Affiche / Cache les couleurs des antennes." },
         { "R", "Affiche / Cache les ranges des antennes." },
         { "G", "Affiche / Cache la grille de projection." },
+        { "1", "Filtre precedent pour les couleurs des antennes." },
+        { "2", "Filtre suivant pour les couleurs des antennes." },
         { "Tab", "Switch entre le mode spectateur / editeur." }
     };
 
@@ -524,4 +543,12 @@ void Renderer::drawShortcuts() {
 
     m_window->draw(crossA);
     m_window->draw(crossB);
+}
+
+int Renderer::getFreqFilter() const {
+    return m_showAntennasOfFreq;
+}
+
+void Renderer::setFreqFilter(const int freq) {
+    m_showAntennasOfFreq = freq;
 }

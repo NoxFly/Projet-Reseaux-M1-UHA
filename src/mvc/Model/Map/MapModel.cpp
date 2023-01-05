@@ -63,7 +63,12 @@ void MapModel::loadFromConfig(const MapConfig& config) {
 
     m_zoomRatio[config.zoomLevel-1] = 1;
 
-    GeoPosition::defineMapLBT(config.topLeft, config.bottomRight, m_tiles.at(config.zoomLevel-1).getDimension());
+    GeoPosition::defineMapLBT(
+        config.topLeft,
+        config.bottomRight,
+        m_tiles.at(config.zoomLevel-1).getDimension(),
+        sf::Vector2u(m_config.km.x * 1000, m_config.km.y * 1000)
+    );
 
     centerPosition();
 }

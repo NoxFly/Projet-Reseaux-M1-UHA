@@ -47,6 +47,8 @@ class Graphe {
         const std::vector<sf::Color>& getColors() const;
 
     private:
+        void addColor();
+
         /*
         
         2D squared array where the y is the index of the antenna and x is the index of the antennas linked to this one.

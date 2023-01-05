@@ -55,6 +55,22 @@ void Controller::update(Renderer& renderer, Model& model) {
         model.getGui().showHomeMenu();
     }
 
+    // freq filter
+    //      previous
+    if(m_input.isKeyPressed(sf::Keyboard::Num1)) {
+        const int l = model.getNetwork().getFrequencies().size();
+        int freq = renderer.getFreqFilter();
+        int newFreq = (freq == -1)? l - 1 : freq - 1;
+        renderer.setFreqFilter(newFreq);
+    }
+    //      next
+    if(m_input.isKeyPressed(sf::Keyboard::Num2)) {
+        const int l = model.getNetwork().getFrequencies().size();
+        int freq = renderer.getFreqFilter();
+        int newFreq = (freq < l - 1)? freq + 1 : -1;
+        renderer.setFreqFilter(newFreq);
+    }
+
 
     //////////////
     // --- map ---
@@ -72,8 +88,16 @@ void Controller::update(Renderer& renderer, Model& model) {
 
                 auto mouse = renderer.getPixelToWorldCoords(m_input.getMousePosition(), model.getMap());
 
+                const auto filterFreq = (renderer.getFreqFilter() != -1)
+                    ? model.getNetwork().getFrequencies()[renderer.getFreqFilter()]
+                    : 0;
+
                 for(auto& antenna : antennas) {
-                    const auto& pos = antenna->getPosition().coords();
+                    if(filterFreq && antenna->getFreq() != filterFreq) {
+                        continue;
+                    }
+
+                    const auto& pos = antenna->getPosition().pixels();
 
                     if(
                         pos.x - antAreaWidth <= mouse.x && mouse.x <= pos.x + antAreaWidth &&
@@ -81,8 +105,8 @@ void Controller::update(Renderer& renderer, Model& model) {
                     ) {
                         model.getGui().showAntennaDetailsMenu(antenna.get());
                         model.getMap().setPosition(
-                            (antenna->getPosition().coords().x * model.getMap().getCurrentRatio() + menuWidth / 2),
-                            antenna->getPosition().coords().y * model.getMap().getCurrentRatio()
+                            (antenna->getPosition().pixels().x * model.getMap().getCurrentRatio() + menuWidth / 2),
+                            antenna->getPosition().pixels().y * model.getMap().getCurrentRatio()
                         );
                     }
                 }

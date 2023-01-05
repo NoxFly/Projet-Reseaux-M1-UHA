@@ -33,6 +33,12 @@ class Renderer {
 
         void drawAntennaMenu(const MapModel& map, Antenna* antenna);
 
+        int getFreqFilter() const;
+        /**
+         * If -1, disable the filter
+         */
+        void setFreqFilter(const int freq);
+
     protected:
         void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
         void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
@@ -55,6 +61,8 @@ class Renderer {
 
         bool m_isFullscreen;
         sf::Vector2u m_defaultWindowSize;
+
+        int m_showAntennasOfFreq; // -1 = disabled
 };
 
 #endif // RENDERER_HPP

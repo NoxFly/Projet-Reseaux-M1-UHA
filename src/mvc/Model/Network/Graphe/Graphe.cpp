@@ -12,23 +12,37 @@ Graphe::Graphe(const unsigned int n):
     m_adj.resize(m_size); // init adjacents array
 
     // the 3 primary colors
-    m_colors.push_back(sf::Color(255, 0, 0));
-    m_colors.push_back(sf::Color(0, 255, 0));
-    m_colors.push_back(sf::Color(0, 0, 255));
+    // dirty ifs but to be sure it won't make issues in the future with getColors()
+    if(m_size > 0) {
+        m_colors.push_back(sf::Color(255, 0, 0));
 
-    // some others if needed
-    for(unsigned int i = 3; i < n; i++) {
-        sf::Color newColor;
+        if(m_size > 1) {
+            m_colors.push_back(sf::Color(0, 255, 0));
 
-        newColor.r = (rand() % (255 - 1 + 1)) + 1;
-        newColor.b = (rand() % (255 - 1 + 1)) + 1;
-        newColor.g = (rand() % (255 - 1 + 1)) + 1;
-
-        m_colors.push_back(newColor);
+            if(m_size > 2) {
+                m_colors.push_back(sf::Color(0, 0, 255));
+            }
+        }
     }
+
+    // // some others if needed
+    // for(unsigned int i = 3; i < n; i++) {
+    //     sf::Color newColor;
+
+    //     newColor.r = (rand() % (255 - 1 + 1)) + 1;
+    //     newColor.b = (rand() % (255 - 1 + 1)) + 1;
+    //     newColor.g = (rand() % (255 - 1 + 1)) + 1;
+
+    //     m_colors.push_back(newColor);
+    // }
 }
 
 void Graphe::colorize() {
+    // no antenna : no colorization
+    if(m_size == 0) {
+        return;
+    }
+
     // antennas colors are set to black by default (SFML does it by default)
 
     // first antenna : associate the first color in the list
@@ -43,6 +57,8 @@ void Graphe::colorize() {
 	for (unsigned int cr = 0; cr < m_size; cr++) {
         areAvailable[cr] = true;
     }
+
+    unsigned int colorSize = m_colors.size();
 
     // for each vertex to set up its color
     for(unsigned int y = 0; y < m_size; y++) {
@@ -65,6 +81,12 @@ void Graphe::colorize() {
             if (areAvailable[cr]) {
                 break;
             }
+        }
+
+        // only happens when cr = colorSize + 1 because the colorSize'th previous ones weren't available
+        if(colorSize <= cr) {
+            colorSize++;
+            addColor();
         }
 
         // cr is index of smallest available color
@@ -108,4 +130,14 @@ void Graphe::addEdge(const unsigned int v, const unsigned int w) {
 
 const std::vector<sf::Color>& Graphe::getColors() const {
     return m_colors;
+}
+
+void Graphe::addColor() {
+    sf::Color newColor;
+
+    newColor.r = (rand() % (255 - 1 + 1)) + 1;
+    newColor.b = (rand() % (255 - 1 + 1)) + 1;
+    newColor.g = (rand() % (255 - 1 + 1)) + 1;
+
+    m_colors.push_back(newColor);
 }

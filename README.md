@@ -7,7 +7,7 @@ Outil | Version
 C++   | 17
 SFML  | 2.5
 TGUI  | 0.9
-OS    | Linux or Windows with MingW
+OS    | Linux or Windows with MingW / Visual Studio
 
 ## Execute release
 
@@ -95,11 +95,16 @@ The run script compiles and runs if it succeed. It places the PWD in the `bin/` 
 
 The command to compile/run the application:
 ```sh
-./run.sh -v res/config.ini res/sample1.txt
+./run.sh -v res/config.ini data/data30.csv
 ```
 
+The project accepts both .txt and .csv files.<br>
+For csv file it ignores the first line, considering it as the header of the table. Each values are separated by semicolon `;`.<br>
+For txt files, it reads from the first line and each values are separated by spaces.<br>
+One line = one antenna. `antennaName;lambertX;lambertY;radiusInMeters`.
+
 On Visual Studio Code :
-- Press F5, or launch the debugguer.<br>It will run custom task, executing the run script.
+- Press F5, or launch the debugguer.<br>It will run custom task, executing the run script with a default file.
 
 # Authors
 
