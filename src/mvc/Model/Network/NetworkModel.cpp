@@ -7,7 +7,9 @@
 
 #include <SFML/System/Vector2.hpp>
 
-#include "mvc/Model/Network/Graphe/Graphe.hpp"
+#include "mvc/Model/Network/Graphe/GrapheGreedy/GrapheGreedy.hpp"
+#include "mvc/Model/Network/Graphe/GrapheBacktrack/GrapheBacktrack.hpp"
+
 #include "utils/PerfMeasure/PerfMeasure.hpp"
 #include "utils/utils.hpp"
 #include "common.hpp"
@@ -152,7 +154,7 @@ void NetworkModel::updateColorization() {
     // and pass them to addEdge method of Graphe class
     unsigned int antennasCr = m_antennas.size();
 
-	Graphe graphe(antennasCr);
+	GrapheGreedy graphe(antennasCr);
 
     // 1st. Add vertices
     for(unsigned int i=0; i < antennasCr; i++) {
