@@ -8,7 +8,9 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "mvc/Model/Network/Graphe/Graphe.hpp"
+#include "utils/PerfMeasure/PerfMeasure.hpp"
 #include "utils/utils.hpp"
+#include "common.hpp"
 
 
 NetworkModel::NetworkModel():
@@ -18,7 +20,6 @@ NetworkModel::NetworkModel():
     m_showRanges(false),
     m_showColors(false)
 {
-
 }
 
 NetworkModel::~NetworkModel() {
@@ -26,6 +27,12 @@ NetworkModel::~NetworkModel() {
 }
 
 void NetworkModel::loadFromConfig(const NetworkConfig& config) {
+#ifdef MEASURE_PERF
+    PerfMeasure perf;
+
+    perf.start();
+#endif
+
 	std::ifstream file(config.entryFile);
 
     bool isCSV = endsWith(config.entryFile, ".csv");
@@ -48,9 +55,22 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
         throw std::runtime_error("[ERROR] NetworkModel::loadFromConfig : Failed to open the sample file.");
     }
 
+#ifdef MEASURE_PERF
+    perf.flag();
+#endif
 
     // ------ GRAPH / COLORIZATION ------
     updateColorization();
+
+#ifdef MEASURE_PERF
+    perf.end();
+
+    std::cout << "\n┌───── Network loading performances log ──────┐"
+        << "\n│ loadFile : " << perf.getTime(0)
+        << "\n│ graphe   : " << perf.getTime(1)
+        << "\n└─────────────────────────────────────────────┘"
+        << std::endl;
+#endif
 }
 
 
@@ -116,6 +136,12 @@ void NetworkModel::createAntenna(const std::string& name, int x, int y, unsigned
 
 
 void NetworkModel::updateColorization() {
+#ifdef MEASURE_PERF
+    PerfMeasure perf;
+
+    perf.start();
+#endif
+
     // no need to operate if there's no antenna
     if(m_antennas.size() == 0) {
         return;
@@ -155,8 +181,15 @@ void NetworkModel::updateColorization() {
         }
     }
 
+#ifdef MEASURE_PERF
+    perf.flag();
+#endif
+
 	graphe.colorize();
 
+#ifdef MEASURE_PERF
+    perf.flag();
+#endif
 
     // now associate a frequence for each color
     // GSM frequences are in 900 - 1800 MHz bounds
@@ -188,34 +221,41 @@ void NetworkModel::updateColorization() {
         ant->setFreq(colFreq.at(ant->getColor().toInteger()));
     }
 
+#ifdef MEASURE_PERF
+    perf.end();
+#endif
 
 #ifdef DEBUG
     /* ==== HEADER ==== */
-    std::string header = "| idx";
+    std::string header = "│ idx";
     
     const auto ls = std::max((int)std::to_string(colorCount).size(), 3);
     const unsigned int l = ls - 2;
     
     header += repeat(' ', l);
 
-    header += "|  r  |  g  |  b  |   freq  |";
+    header += "│  r  │  g  │  b  │   freq  │";
 
     unsigned int headerSize = header.size() - 2;
 
-    header += "\n|";
-    header += repeat('-', headerSize);
-    header += "|";
+    header += "\n├";
+    header += "─────────────────────────────────";
+    header += "┤";
 
     headerSize = header.size() / 2;
 
     const std::string title = "GRAPHE COLORIZATION";
     const unsigned int titleSize = title.size();
-    const unsigned int tbl = (headerSize - titleSize - 2) / 2;
+    (void)headerSize;
+    (void)titleSize;
+    const unsigned int tbl = 6;
 
     std::cout
-        << repeat('-', tbl)
+        << "┌"
+        << repeat("─", tbl)
         << " " << title << " "
-        << repeat('-', tbl)
+        << repeat("─", tbl)
+        << "┐"
         << "\n" << header
         << std::endl;
 
@@ -233,10 +273,10 @@ void NetworkModel::updateColorization() {
             std::to_string(color.b)
         };
 
-        std::cout << "|";
+        std::cout << "│";
 
         /* ==== INDEX ==== */
-        std::cout << repeat(' ', l) << s << " |";
+        std::cout << repeat(' ', l) << s << " │";
 
         /* ==== COLOR ==== */
         for(unsigned int j=0; j < 3; j++) {
@@ -250,18 +290,28 @@ void NetworkModel::updateColorization() {
         const unsigned int freqL = std::to_string(freqEnd).size() - freq.size();
 
         std::cout
-            << " |   "
+            << " │   "
             << repeat(' ', freqL)
-            << freq << "  |"
+            << freq << "  │"
             << std::endl;
     }
 
 
     std::cout
-        << repeat('-', headerSize)
+        << "└"
+        << "─────────────────────────────────"
+        << "┘"
         << std::endl;
 #endif
 
+#ifdef MEASURE_PERF
+    std::cout << "\n┌────── Graphe loading performances log ──────┐"
+        << "\n│ construction     : " << perf.getTime(0)
+        << "\n│ coloration       : " << perf.getTime(1)
+        << "\n│ freq. assignment : " << perf.getTime(2)
+        << "\n└─────────────────────────────────────────────┘"
+        << std::endl;
+#endif
 }
 
 const std::vector<std::unique_ptr<Antenna>>& NetworkModel::getAntennas() const {
