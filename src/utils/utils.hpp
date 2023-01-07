@@ -3,6 +3,7 @@
 
 #include <string_view>
 #include <vector>
+#include <chrono>
 
 #ifdef WINDOWS
 #define DIRECTORY_SEPARATOR "\\"
@@ -68,6 +69,38 @@ std::vector<std::string> splitString(std::string sequence, const std::string sep
  * @param n The amount of time to repeat c
  */
 std::string repeat(char c, unsigned int n);
+
+/**
+ * Repeats a character c n times in a row.
+ * Returns the resulting string
+ * @param c The character to repeat
+ * @param n The amount of time to repeat c
+ */
+std::string repeat(std::string c, unsigned int n);
+
+/**
+ * Formats a duration in ms to the format 0h 0m 0s 0ms.
+ * @param dur The duration in milliseconds
+ */
+std::string msToTime(long dur);
+
+/**
+ * Formats a duration in ns to the format 0h 0m 0s 0ms 0ns.
+ * @param dur The duration in nanoseconds
+ */
+std::string nsToTime(long dur);
+
+/**
+ * Returns the timestamp of the current time in milliseconds,
+ * or another unit if precised.
+ */
+template <typename UNIT = std::chrono::milliseconds>
+int64_t now() {
+    return std::chrono::duration_cast<UNIT>(
+        std::chrono::system_clock::now().time_since_epoch()
+    ).count();
+}
+
 
 // namespace used to
 // isolate all stl random variables

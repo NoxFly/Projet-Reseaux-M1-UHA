@@ -19,8 +19,8 @@ void GeoPosition::defineMapLBT(const sf::Vector2i& top, const sf::Vector2i& bott
 
 sf::Vector2i GeoPosition::L2C(const sf::Vector2i& p) {
     return sf::Vector2i(
-        abs(p.x - BOT_RIGHT_LBT93.x) * MAP_SIZE_PX.x / MAP_SIZE_LBT93.x,
-        abs(p.y - BOT_RIGHT_LBT93.y) * MAP_SIZE_PX.y / MAP_SIZE_LBT93.y
+        abs(p.x - TOP_LEFT_LBT93.x) * MAP_SIZE_PX.x / MAP_SIZE_LBT93.x,
+        abs(p.y - TOP_LEFT_LBT93.y) * MAP_SIZE_PX.y / MAP_SIZE_LBT93.y
     );
 }
 

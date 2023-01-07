@@ -72,7 +72,60 @@ std::string repeat(char c, unsigned int n) {
     return s;
 }
 
+std::string repeat(std::string c, unsigned int n) {
+    std::string s = "";
 
+    for(unsigned int i=0; i < n; i++) {
+        s += c;
+    }
+
+    return s;
+}
+
+
+std::string msToTime(long dur) {
+    std::string time = "";
+
+    long hourRatio = 3600000;
+    long minRatio  =    6000;
+    long secRatio  =    1000;
+
+    auto hrs  = dur / hourRatio; dur -= hrs  * hourRatio;
+    auto mins = dur / minRatio;  dur -= mins * minRatio;
+    auto sec  = dur / secRatio;  dur -= sec  * secRatio;
+
+    if(hrs  > 0)               time += std::to_string(hrs)  + "h ";
+    if(mins > 0)               time += std::to_string(mins) + "m ";
+    if(sec  > 0)               time += std::to_string(sec)  + "s ";
+    if(dur  > 0 || time == "") time += std::to_string(dur)  + "ms";
+
+    return time;
+}
+
+std::string nsToTime(long dur) {
+    std::string time = "";
+
+    long hourRatio  = 3600000000000;
+    long minRatio   =   60000000000;
+    long secRatio   =   10000000000;
+    long milliRatio =       1000000;
+    long microRatio =          1000;
+
+    auto hrs  = dur / hourRatio;  dur -= hrs  * hourRatio;
+    auto mins = dur / minRatio;   dur -= mins * minRatio;
+    auto sec  = dur / secRatio;   dur -= sec  * secRatio;
+    auto mill = dur / milliRatio; dur -= mill * milliRatio;
+    auto mic  = dur / microRatio; dur -= mic  * microRatio;
+
+    if(hrs  > 0)               time += std::to_string(hrs)  + "h ";
+    if(mins > 0)               time += std::to_string(mins) + "m ";
+    if(sec  > 0)               time += std::to_string(sec)  + "s ";
+    if(mill > 0)               time += std::to_string(mill) + "ms ";
+    if(mic  > 0)               time += std::to_string(mic)  + "µs ";
+    if(dur  > 0 || time == "") time += std::to_string(dur)  + "ns";
+
+    return time;
+}
 
 
 
