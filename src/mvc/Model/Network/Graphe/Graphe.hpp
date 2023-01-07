@@ -72,6 +72,7 @@ class Graphe {
 
     private:
         void addColor();
+        void addColor(const sf::Color& color);
 
         unsigned int m_colorSize;
 };

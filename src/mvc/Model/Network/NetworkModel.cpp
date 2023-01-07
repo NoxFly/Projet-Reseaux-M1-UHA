@@ -207,6 +207,8 @@ void NetworkModel::updateColorization() {
 
     unsigned int freqVal = freqStart;
 
+    m_frequencies.clear();
+
     for(const auto& color : colors) {
         colFreq.emplace(
             color.toInteger(),

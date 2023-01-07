@@ -11,6 +11,10 @@ class GrapheBacktrack: public Graphe {
         void colorize();
 
     protected:
+        /**
+         * Colorize the graph recursivly.
+         * Returns either it colored all the nodes or not.
+         */
         bool colorize(unsigned int nodeIndex);
 };
 
