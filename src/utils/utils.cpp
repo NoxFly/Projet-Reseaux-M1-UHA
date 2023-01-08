@@ -1,7 +1,13 @@
+// Author : NoxFly
+// Copyrights 2017 - 2023
+
 #include "utils.hpp"
 
 #include <random>
 #include <sstream>
+
+#include "common.hpp"
+
 
 using namespace std;
 
@@ -121,7 +127,7 @@ std::string nsToTime(long dur) {
     if(mins > 0)               time += std::to_string(mins) + "m ";
     if(sec  > 0)               time += std::to_string(sec)  + "s ";
     if(mill > 0)               time += std::to_string(mill) + "ms ";
-    if(mic  > 0)               time += std::to_string(mic)  + "µs ";
+    if(mic  > 0)               time += std::to_string(mic)  + SBL_MICRO + "s ";
     if(dur  > 0 || time == "") time += std::to_string(dur)  + "ns";
 
     return time;

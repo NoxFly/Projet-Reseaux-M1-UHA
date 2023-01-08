@@ -1,3 +1,6 @@
+// Author : NoxFly
+// Copyrights 2017 - 2023
+
 #ifndef INPUT_HPP
 #define INPUT_HPP
 

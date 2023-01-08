@@ -4,6 +4,7 @@
 
 #include "utils/PerfMeasure/PerfMeasure.hpp"
 #include "common.hpp"
+#include "utils/utils.hpp"
 
 
 Model::Model():
@@ -36,10 +37,10 @@ void Model::loadFromConfig(const AppConfig& config) {
 #ifdef MEASURE_PERF
     perf.end();
 
-    std::cout << "\n┌─────── Model loading performances log ──────┐"
-        << "\n│ MapModel     : " << perf.getTime(0)
-        << "\n│ NetworkModel : " << perf.getTime(1)
-        << "\n└─────────────────────────────────────────────┘"
+    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 7) << " Model loading performances log " << repeat(BOX_HL, 6) << BOX_TR
+        << "\n" << BOX_VL << " MapModel     : " << perf.getTime(0)
+        << "\n" << BOX_VL << " NetworkModel : " << perf.getTime(1)
+        << "\n" << BOX_BL << repeat(BOX_HL, 46) << BOX_BR
         << std::endl;
 #endif
 }

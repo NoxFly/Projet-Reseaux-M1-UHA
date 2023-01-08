@@ -1,3 +1,6 @@
+// Author : NoxFly
+// Copyrights 2017 - 2023
+
 #ifndef INISET_HPP
 #define INISET_HPP
 

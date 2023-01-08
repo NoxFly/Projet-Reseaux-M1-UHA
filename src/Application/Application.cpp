@@ -38,11 +38,11 @@ Application::Application(int argc, char** argv):
 #ifdef MEASURE_PERF
     perf.end();
 
-    std::cout << "\n┌──────── Application performances log ───────┐"
-        << "\n│ Config reader : " << perf.getTime(0)
-        << "\n│ Model loading : " << perf.getTime(1)
-        << "\n│ Total time    : " << perf.getTotalTime()
-        << "\n└─────────────────────────────────────────────┘"
+    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 8) << " Application performances log " << repeat(BOX_HL, 7) << BOX_TR
+        << "\n" << BOX_VL << " Config reader : " << perf.getTime(0)
+        << "\n" << BOX_VL << " Model loading : " << perf.getTime(1)
+        << "\n" << BOX_VL << " Total time    : " << perf.getTotalTime()
+        << "\n" << BOX_BL << repeat(BOX_HL, 46) << BOX_BR
         << std::endl;
 #endif
 }
@@ -67,9 +67,9 @@ void Application::start() {
 #ifdef MEASURE_PERF
         perf.end();
 
-        std::cout << "┌───────── Renderer performances log ─────────┐"
-            << "\n│ Create window : " << nsToTime(perf.getDuration())
-            << "\n└─────────────────────────────────────────────┘"
+        std::cout << BOX_TL << repeat(BOX_HL, 9) << " Renderer performances log " << repeat(BOX_HL, 9) << BOX_TR
+            << "\n" << BOX_VL << " Create window : " << nsToTime(perf.getDuration())
+            << "\n" << BOX_BL << repeat(BOX_HL, 46) << BOX_BR
             << std::endl;
 #endif
 

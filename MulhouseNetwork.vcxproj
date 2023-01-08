@@ -218,6 +218,9 @@
     <None Include="bin\sfml-window-d-2.dll" />
     <None Include="bin\tgui-d.dll" />
     <None Include="bin\tgui.dll" />
+    <None Include="install\dependencies.sh" />
+    <None Include="install\sfml.sh" />
+    <None Include="install\tgui.sh" />
     <None Include="Makefile" />
     <None Include="README.md" />
     <None Include="run.sh" />
@@ -357,6 +360,8 @@
     <Text Include="bin\res\fonts\LICENSE.txt" />
     <Text Include="bin\res\sample1.txt" />
     <Text Include="bin\res\sample_coords.txt" />
+    <Text Include="logs\runtime_backtrack.log" />
+    <Text Include="logs\runtime_greedy.log" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\res\fonts\font.ttf" />

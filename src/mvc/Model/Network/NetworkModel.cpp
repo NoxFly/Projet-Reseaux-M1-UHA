@@ -67,10 +67,10 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 #ifdef MEASURE_PERF
     perf.end();
 
-    std::cout << "\n┌───── Network loading performances log ──────┐"
-        << "\n│ loadFile : " << perf.getTime(0)
-        << "\n│ graphe   : " << perf.getTime(1)
-        << "\n└─────────────────────────────────────────────┘"
+    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 5) << " Network loading performances log " << repeat(BOX_HL, 6) << BOX_TR
+        << "\n" << BOX_VL << " loadFile : " << perf.getTime(0)
+        << "\n" << BOX_VL << " graphe   : " << perf.getTime(1)
+        << "\n" << BOX_BL << repeat(BOX_HL, 46) << BOX_BR
         << std::endl;
 #endif
 }
@@ -231,20 +231,25 @@ void NetworkModel::updateColorization() {
 
 #ifdef DEBUG
     /* ==== HEADER ==== */
-    std::string header = "│ idx";
+    std::string header = BOX_VL" idx";
     
     const auto ls = std::max((int)std::to_string(colorCount).size(), 3);
     const unsigned int l = ls - 2;
     
     header += repeat(' ', l);
 
-    header += "│  r  │  g  │  b  │   freq  │";
+    header += BOX_VL"  r  ";
+    header += BOX_VL"  g  ";
+    header += BOX_VL"  b  ";
+    header += BOX_VL"   freq  ";
+    header += BOX_VL;
 
     unsigned int headerSize = header.size() - 2;
 
-    header += "\n├";
-    header += "─────────────────────────────────";
-    header += "┤";
+    header += "\n";
+    header += BOX_CR;
+    header += repeat(BOX_HL, 34);
+    header += BOX_CL;
 
     headerSize = header.size() / 2;
 
@@ -255,11 +260,11 @@ void NetworkModel::updateColorization() {
     const unsigned int tbl = 6;
 
     std::cout
-        << "┌"
-        << repeat("─", tbl)
+        << BOX_TL
+        << repeat(BOX_HL, tbl)
         << " " << title << " "
-        << repeat("─", tbl)
-        << "┐"
+        << repeat(BOX_HL, tbl)
+        << BOX_TR
         << "\n" << header
         << std::endl;
 
@@ -277,10 +282,10 @@ void NetworkModel::updateColorization() {
             std::to_string(color.b)
         };
 
-        std::cout << "│";
+        std::cout << BOX_VL;
 
         /* ==== INDEX ==== */
-        std::cout << repeat(' ', l) << s << " │";
+        std::cout << repeat(' ', l) << s << " " << BOX_VL;
 
         /* ==== COLOR ==== */
         for(unsigned int j=0; j < 3; j++) {
@@ -294,26 +299,29 @@ void NetworkModel::updateColorization() {
         const unsigned int freqL = std::to_string(freqEnd).size() - freq.size();
 
         std::cout
-            << " │   "
+            << " "
+            << BOX_VL
+            << "   "
             << repeat(' ', freqL)
-            << freq << "  │"
+            << freq << "  "
+            << BOX_VL
             << std::endl;
     }
 
 
     std::cout
-        << "└"
-        << "─────────────────────────────────"
-        << "┘"
+        << BOX_BL
+        << repeat(BOX_HL, 34)
+        << BOX_BR
         << std::endl;
 #endif
 
 #ifdef MEASURE_PERF
-    std::cout << "\n┌────── Graphe loading performances log ──────┐"
-        << "\n│ construction     : " << perf.getTime(0)
-        << "\n│ coloration       : " << perf.getTime(1)
-        << "\n│ freq. assignment : " << perf.getTime(2)
-        << "\n└─────────────────────────────────────────────┘"
+    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 6) << " Graphe loading performances log " << repeat(BOX_HL, 6) << BOX_TR
+        << "\n" << BOX_VL << " construction     : " << perf.getTime(0)
+        << "\n" << BOX_VL << " coloration       : " << perf.getTime(1)
+        << "\n" << BOX_VL << " freq. assignment : " << perf.getTime(2)
+        << "\n" << BOX_VL << repeat(BOX_HL, 46) << BOX_BR
         << std::endl;
 #endif
 }

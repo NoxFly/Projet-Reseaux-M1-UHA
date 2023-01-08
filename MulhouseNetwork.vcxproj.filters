@@ -163,6 +163,9 @@
     <None Include="bin\data\data100.csv" />
     <None Include="bin\data\data500.csv" />
     <None Include="bin\tgui-d.dll" />
+    <None Include="install\dependencies.sh" />
+    <None Include="install\sfml.sh" />
+    <None Include="install\tgui.sh" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bin\res\favicon.png">
@@ -551,6 +554,8 @@
     <Text Include="bin\data\debug.txt" />
     <Text Include="bin\data\sample1.txt" />
     <Text Include="bin\data\sample2.txt" />
+    <Text Include="logs\runtime_backtrack.log" />
+    <Text Include="logs\runtime_greedy.log" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\res\fonts\font.ttf" />

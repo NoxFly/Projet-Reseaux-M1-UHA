@@ -1,3 +1,6 @@
+# Author : NoxFly
+# Copyrights 2021-2023
+
 # MODIFIABLE
 CFLAGS 		:= -Werror -Wall -Wextra
 LDFLAGS		:=

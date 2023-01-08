@@ -1,4 +1,4 @@
-# Projet Réseaux M1 UHA
+# Master 1 Project - UHA - Mulhouse Networking
 
 ## Used Technologies
 
@@ -20,7 +20,7 @@ Of course a compiler (gcc or clang), and a bash support.
 
 ## Linux
 
-Install dependencies :
+Install dependencies (must be sudo) :
 
 ```sh
 ./install/dependencies.sh
@@ -43,13 +43,15 @@ Platform  | x64
 
 * To have execution trace in the console, you must run as Debug.
 
-* Libraries are provided directly in the repository, and the solution has already be setup. It means that you can directly launch the solution.
+* Libraries are provided directly in the repository, and the solution has already been setup. It means that you can directly launch the solution.
 
 ### MingW
 
 The project worked with MingW until we added TGUI library (loaded from sources).
 
 Now we have setup the project so it works on Visual Studio 2019.
+
+A branch named "portable" is running without TGUI. If you want to run the project with MingW, you should take a look.
 
 Required setup :
 
@@ -102,6 +104,6 @@ On Visual Studio Code :
 # Authors
 
 - Dorian Thivolle
-- Farouk Brahimi
 - Yanis Guezi
 - Amir Sali
+- Farouk Brahimi

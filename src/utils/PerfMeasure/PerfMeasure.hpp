@@ -1,3 +1,6 @@
+// Author : NoxFly
+// Copyrights 2017 - 2023
+
 #ifndef PERFMEASURE_HPP
 #define PERFMEASURE_HPP
 

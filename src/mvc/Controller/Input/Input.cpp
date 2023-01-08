@@ -1,3 +1,6 @@
+// Author : NoxFly
+// Copyrights 2017 - 2023
+
 #include "Input.hpp"
 
 Input::Input() {

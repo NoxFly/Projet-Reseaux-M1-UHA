@@ -1,5 +1,5 @@
-#ifndef CONFIGINTERFACES_HPP
-#define CONFIGINTERFACES_HPP
+#ifndef CONFIG_INTERFACES_HPP
+#define CONFIG_INTERFACES_HPP
 
 #include <string>
 #include <SFML/System/Vector2.hpp>
@@ -33,4 +33,4 @@ struct AppConfig {
     NetworkConfig network;
 };
 
-#endif // CONFIGINTERFACES_HPP
+#endif // CONFIG_INTERFACES_HPP
