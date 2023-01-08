@@ -71,6 +71,11 @@ void Controller::update(Renderer& renderer, Model& model) {
         renderer.setFreqFilter(newFreq);
     }
 
+    // toggle map
+    if(m_input.isKeyPressed(sf::Keyboard::M)) {
+        renderer.toggleMap();
+    }
+
 
     //////////////
     // --- map ---

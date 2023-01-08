@@ -1,9 +1,6 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
-// #define TILE_DEBUG
-
-
 #include <map>
 #include <memory>
 #include <SFML/Graphics.hpp>
@@ -42,6 +39,9 @@ class Renderer {
         void showOutline(const bool show);
         void toggleOutline();
 
+        void showMap(const bool show);
+        void toggleMap();
+
     protected:
         void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
         void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
@@ -64,6 +64,8 @@ class Renderer {
 
         bool m_isFullscreen;
         sf::Vector2u m_defaultWindowSize;
+
+        bool m_showMap;
 
         int m_showAntennasOfFreq; // -1 = disabled
 };

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "common.hpp"
+
 
 Renderer::Renderer():
     m_window(nullptr),
@@ -18,6 +20,7 @@ Renderer::Renderer():
     m_cursorGrabbing(),
     m_isFullscreen(false),
     m_defaultWindowSize(0, 0),
+    m_showMap(true),
     m_showAntennasOfFreq(-1)
 {
     // init font(s)
@@ -185,36 +188,38 @@ void Renderer::render(Model& model) {
 
     // after main menu > start
     if(!gui.isDrawingFullscreenMenu()) {
-        // map
-        const std::vector<Tile>& tiles = map.getTiles();
-
         const sf::Vector2i& mapPosition = map.getPosition();
 
         m_view.setCenter((sf::Vector2f)mapPosition);
         m_window->setView(m_view);
 
-        for(const Tile& t : tiles) {
-            if(t.hasLoaded) {
-                m_window->draw(t.tile);
-            }
+        // map
+        if(m_showMap) {
+            const std::vector<Tile>& tiles = map.getTiles();
+
+            for(const Tile& t : tiles) {
+                if(t.hasLoaded) {
+                    m_window->draw(t.tile);
+                }
 
         // red debug grid
 #ifdef TILE_DEBUG
-            const auto& tileSize = map.getTileSize();
+                const auto& tileSize = map.getTileSize();
 
-            sf::RectangleShape r;
-            r.setSize((sf::Vector2f)tileSize);
-            r.setPosition(t.tile.getPosition());
-            r.setOutlineColor(sf::Color::Red);
-            r.setOutlineThickness(1);
-            r.setFillColor(sf::Color::Transparent);
+                sf::RectangleShape r;
+                r.setSize((sf::Vector2f)tileSize);
+                r.setPosition(t.tile.getPosition());
+                r.setOutlineColor(sf::Color::Red);
+                r.setOutlineThickness(1);
+                r.setFillColor(sf::Color::Transparent);
 
-            m_window->draw(r);
+                m_window->draw(r);
 
-            std::string position = std::to_string(t.position.x) + ", " + std::to_string(t.position.y);
+                std::string position = std::to_string(t.position.x) + ", " + std::to_string(t.position.y);
 
-            fillText(position, t.tile.getPosition(), .2 * tileSize.y, sf::Color::Red);
+                fillText(position, t.tile.getPosition(), .2 * tileSize.y, sf::Color::Red);
 #endif
+            }
         }
 
 
@@ -235,7 +240,7 @@ void Renderer::render(Model& model) {
                     drawAntenna(map, antenna.get(), showA, showC, showR, true);
                 }
             }
-            else if(m_showAntennasOfFreq < (int)model.getNetwork().getFrequencies().size()) {
+            else if(m_showAntennasOfFreq >= 0 && m_showAntennasOfFreq < (int)model.getNetwork().getFrequencies().size()) {
                 const auto filterFreq = model.getNetwork().getFrequencies()[m_showAntennasOfFreq];
 
                 for(const auto& antenna : ants) {
@@ -511,7 +516,7 @@ void Renderer::drawAntennaMenu(const MapModel& map, Antenna* antenna) {
 }
 
 void Renderer::drawShortcuts() {
-    fillText("Shortcuts", m_window->getSize().x / 2, 50, 40, sf::Color(50, 50, 50), sf::Text::Bold, "center");
+    fillText("Raccourcis", m_window->getSize().x / 2, 50, 40, sf::Color(50, 50, 50), sf::Text::Bold, "center");
 
     std::pair<std::string, std::string> shortcuts[] = {
         { "Esc", "Ouvre le menu principal." },
@@ -519,6 +524,7 @@ void Renderer::drawShortcuts() {
         { "C", "Affiche / Cache les couleurs des antennes." },
         { "R", "Affiche / Cache les ranges des antennes." },
         { "G", "Affiche / Cache la grille de projection." },
+        { "M", "Affiche / Cache la carte." },
         { "1", "Filtre precedent pour les couleurs des antennes." },
         { "2", "Filtre suivant pour les couleurs des antennes." },
         { "Tab", "Switch entre le mode spectateur / editeur." }
@@ -566,4 +572,12 @@ int Renderer::getFreqFilter() const {
 
 void Renderer::setFreqFilter(const int freq) {
     m_showAntennasOfFreq = freq;
+}
+
+void Renderer::showMap(const bool show) {
+    m_showMap = show;
+}
+
+void Renderer::toggleMap() {
+    m_showMap = !m_showMap;
 }

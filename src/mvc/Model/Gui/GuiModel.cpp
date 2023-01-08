@@ -67,7 +67,7 @@ void GuiModel::showHomeMenu() {
     //Add buttons
     auto buttonStart = tgui::Button::create();
     buttonStart->setPosition(490, 400);
-    buttonStart->setText("Start");
+    buttonStart->setText("Commencer");
     buttonStart->setInheritedFont("res/fonts/font.ttf");
     buttonStart->setTextSize(30);
     buttonStart->setSize(300, 50);
@@ -81,7 +81,7 @@ void GuiModel::showHomeMenu() {
 
     auto buttonSettings = tgui::Button::create();
     buttonSettings->setPosition(490, 470);
-    buttonSettings->setText("Shortcuts");
+    buttonSettings->setText("Raccourcis");
     buttonSettings->setInheritedFont("res/fonts/font.ttf");
     buttonSettings->setTextSize(30);
     buttonSettings->setSize(300, 50);
@@ -96,7 +96,7 @@ void GuiModel::showHomeMenu() {
 
     auto buttonQuit = tgui::Button::create();
     buttonQuit->setPosition(490, 540);
-    buttonQuit->setText("Quit");
+    buttonQuit->setText("Quitter");
     buttonQuit->setInheritedFont("res/fonts/font.ttf");
     buttonQuit->setTextSize(30);
     buttonQuit->setSize(300, 50);
