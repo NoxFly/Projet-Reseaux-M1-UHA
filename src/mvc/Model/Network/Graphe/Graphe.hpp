@@ -23,8 +23,9 @@ struct GrapheVertex {
 class Graphe {
     public:
         Graphe(const unsigned int n);
+        ~Graphe();
 
-        void colorize();
+        virtual void colorize() = 0;
 
         /**
          * Creates a new vertex in the graph of value v.
@@ -46,8 +47,8 @@ class Graphe {
 
         const std::vector<sf::Color>& getColors() const;
 
-    private:
-        void addColor();
+    protected:
+        void setNodeColor(unsigned int nodeIndex, unsigned int colorIndex);
 
         /*
         
@@ -68,6 +69,12 @@ class Graphe {
         std::vector<GrapheVertex> m_adj;
         std::vector<sf::Color> m_colors;
         unsigned int m_size, m_linkCount;
+
+    private:
+        void addColor();
+        void addColor(const sf::Color& color);
+
+        unsigned int m_colorSize;
 };
 
 #endif // GRAPHE_HPP
