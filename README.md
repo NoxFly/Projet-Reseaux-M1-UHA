@@ -23,14 +23,7 @@ Of course a compiler (gcc or clang), and a bash support.
 Install dependencies :
 
 ```sh
-sudo apt-get install make libsfml-dev
-```
-
-
-To install TGUI :
-
-```
-./install/tgui.sh
+./install/dependencies.sh
 ```
 
 

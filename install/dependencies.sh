@@ -1,0 +1,1 @@
+./sfml.sh && ./tgui.sh
