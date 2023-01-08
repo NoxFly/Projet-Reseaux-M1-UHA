@@ -67,7 +67,7 @@ void NetworkModel::loadFromConfig(const NetworkConfig& config) {
 #ifdef MEASURE_PERF
     perf.end();
 
-    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 5) << " Network loading performances log " << repeat(BOX_HL, 6) << BOX_TR
+    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 6) << " Network loading performances log " << repeat(BOX_HL, 6) << BOX_TR
         << "\n" << BOX_VL << " loadFile : " << perf.getTime(0)
         << "\n" << BOX_VL << " graphe   : " << perf.getTime(1)
         << "\n" << BOX_BL << repeat(BOX_HL, 46) << BOX_BR
@@ -130,7 +130,7 @@ void NetworkModel::loadFromCsv(std::ifstream& file) {
     }
 }
 
-void NetworkModel::createAntenna(const std::string& name, int x, int y, unsigned int r) {
+void NetworkModel::createAntenna(const std::string& name, const int x, const int y, const unsigned int r) {
     auto ant = std::make_unique<Antenna>(name, sf::Vector2i(x, y), r, 0, 0);
 
     m_antennas.push_back(std::move(ant));
@@ -248,7 +248,7 @@ void NetworkModel::updateColorization() {
 
     header += "\n";
     header += BOX_CR;
-    header += repeat(BOX_HL, 34);
+    header += repeat(BOX_HL, 33);
     header += BOX_CL;
 
     headerSize = header.size() / 2;
@@ -311,17 +311,17 @@ void NetworkModel::updateColorization() {
 
     std::cout
         << BOX_BL
-        << repeat(BOX_HL, 34)
+        << repeat(BOX_HL, 33)
         << BOX_BR
         << std::endl;
 #endif
 
 #ifdef MEASURE_PERF
-    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 6) << " Graphe loading performances log " << repeat(BOX_HL, 6) << BOX_TR
+    std::cout << "\n" << BOX_TL << repeat(BOX_HL, 7) << " Graphe loading performances log " << repeat(BOX_HL, 6) << BOX_TR
         << "\n" << BOX_VL << " construction     : " << perf.getTime(0)
         << "\n" << BOX_VL << " coloration       : " << perf.getTime(1)
         << "\n" << BOX_VL << " freq. assignment : " << perf.getTime(2)
-        << "\n" << BOX_VL << repeat(BOX_HL, 46) << BOX_BR
+        << "\n" << BOX_BL << repeat(BOX_HL, 46) << BOX_BR
         << std::endl;
 #endif
 }
@@ -342,8 +342,9 @@ Antenna* NetworkModel::operator[](const unsigned int i) {
     return m_antennas[i].get();
 }
 
-void NetworkModel::clear() {
+void NetworkModel::clearNetwork() {
     m_antennas.clear();
+    m_frequencies.clear();
 }
 
 void NetworkModel::showAntennas(const bool state) {

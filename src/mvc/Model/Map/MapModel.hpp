@@ -90,7 +90,7 @@ class MapModel {
          * @param km The distance / length in kilometers to convert to px.
          * @return The same distance / length in pixels on the current zoom level.
          */
-        float kmToPx(float km) const;
+        unsigned int kmToPx(float km) const;
         
 
         /**

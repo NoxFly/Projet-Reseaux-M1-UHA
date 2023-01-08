@@ -15,7 +15,7 @@ class GrapheBacktrack: public Graphe {
          * Colorize the graph recursivly.
          * Returns either it colored all the nodes or not.
          */
-        bool colorize(unsigned int nodeIndex);
+        bool colorize(const unsigned int nodeIndex);
 };
 
 #endif // GRAPHEBACKTRACK_HPP

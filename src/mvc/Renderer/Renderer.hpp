@@ -28,8 +28,6 @@ class Renderer {
 
         sf::Vector2i getPixelToWorldCoords(const sf::Vector2i& p, MapModel& map);
 
-        void drawAntennaMenu(const MapModel& map, Antenna* antenna);
-
         int getFreqFilter() const;
         /**
          * If -1, disable the filter
@@ -46,6 +44,7 @@ class Renderer {
         void fillText(const std::string& str, const int x, const int y, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
         void fillText(const std::string& str, const sf::Vector2f& position, const int fontSize=20, const sf::Color& color=sf::Color::Black, const sf::Uint32 style=0, const std::string& alignment="left");
 
+        void drawAntennaMenu(const MapModel& map, Antenna* antenna);
         void drawAntenna(const MapModel& map, Antenna* antenna, bool showAntenna, bool showColor, bool showRange, bool dark);
         void drawShortcuts();
 

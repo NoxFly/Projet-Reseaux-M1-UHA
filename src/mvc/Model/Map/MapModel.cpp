@@ -107,7 +107,7 @@ float MapModel::pxToKm(unsigned int px) const {
     return px / (float)getMapDimension().x * m_config.km.x;
 }
 
-float MapModel::kmToPx(float km) const {
+unsigned int MapModel::kmToPx(float km) const {
     // for now we don't care of complex vectors, a length is considered here with X-Axis
     // because the map is square.
     return km / m_config.km.x * getMapDimension().x;

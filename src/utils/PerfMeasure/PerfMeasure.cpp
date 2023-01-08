@@ -62,7 +62,7 @@ int64_t PerfMeasure::getDuration() const {
 }
 
 
-int64_t PerfMeasure::getFlag(unsigned int i) const {
+int64_t PerfMeasure::getFlag(const unsigned int i) const {
     const unsigned int l = m_timestamps.size();
 
     if(l < 3 || i >= l - 2) {
@@ -73,7 +73,7 @@ int64_t PerfMeasure::getFlag(unsigned int i) const {
 }
 
 
-std::string PerfMeasure::getTime(unsigned int step) const {
+std::string PerfMeasure::getTime(const unsigned int step) const {
     if(step < m_timestamps.size() - 1) {
         return nsToTime(m_timestamps[step+1] - m_timestamps[step]);
     }

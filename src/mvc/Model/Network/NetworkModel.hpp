@@ -21,7 +21,7 @@ class NetworkModel {
         const std::vector<std::unique_ptr<Antenna>>& getAntennas() const;
         std::vector<std::unique_ptr<Antenna>>& getAntennas();
 
-        void clear();
+        void clearNetwork();
 
         // view modifiers
         void showAntennas(const bool state);
@@ -32,7 +32,7 @@ class NetworkModel {
         bool shouldShowRanges() const;
         bool shouldShowColors() const;
 
-        void createAntenna(const std::string& name, int x, int y, unsigned int r);
+        void createAntenna(const std::string& name, const int x, const int y, const unsigned int r);
 
         const std::vector<unsigned int>& getFrequencies() const;
 

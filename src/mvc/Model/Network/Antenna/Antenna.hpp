@@ -27,7 +27,7 @@ class Antenna: public Colorable {
         unsigned int getFreq() const;
         int getAltitude() const;
         const std::string& getName() const;
-        const std::string getUUID() const;
+        const std::string& getUUID() const;
 
         void setFreq(const int);
         void setAltitude(const int);

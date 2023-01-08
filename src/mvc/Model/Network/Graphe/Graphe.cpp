@@ -75,7 +75,7 @@ void Graphe::addColor(const sf::Color& color) {
     m_colorSize++;
 }
 
-void Graphe::setNodeColor(unsigned int nodeIndex, unsigned int colorIndex) {
+void Graphe::setNodeColor(const unsigned int nodeIndex, const unsigned int colorIndex) {
     if(m_colorSize <= colorIndex) {
         addColor();
     }

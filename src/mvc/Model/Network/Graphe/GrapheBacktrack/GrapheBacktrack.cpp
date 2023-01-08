@@ -16,7 +16,7 @@ void GrapheBacktrack::colorize() {
     }
 }
 
-bool GrapheBacktrack::colorize(unsigned int nodeIndex) {
+bool GrapheBacktrack::colorize(const unsigned int nodeIndex) {
     // if out of bounds or node isn't linked to an entity, we skip
     if(nodeIndex == m_size || !m_adj[nodeIndex].ptr) {
         return true;

@@ -79,7 +79,7 @@ const std::string& Antenna::getName() const {
     return m_name;
 }
 
-const std::string Antenna::getUUID() const {
+const std::string& Antenna::getUUID() const {
     return m_uuid;
 }
 

@@ -14,7 +14,7 @@
 
 
 struct GrapheVertex {
-    std::vector<int> edges = {};
+    std::vector<unsigned int> edges = {};
     Colorable* ptr = nullptr;
     int colorIdx = -1; // the index of the color this vertex is binded to, from its graphe's colors vector.
 };
@@ -48,7 +48,7 @@ class Graphe {
         const std::vector<sf::Color>& getColors() const;
 
     protected:
-        void setNodeColor(unsigned int nodeIndex, unsigned int colorIndex);
+        void setNodeColor(const unsigned int nodeIndex, const unsigned int colorIndex);
 
         /*
         

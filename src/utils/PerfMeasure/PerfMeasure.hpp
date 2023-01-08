@@ -23,9 +23,9 @@ class PerfMeasure {
         int64_t getEndTime() const;
         int64_t getDuration() const;
 
-        int64_t getFlag(unsigned int i) const;
+        int64_t getFlag(const unsigned int i) const;
 
-        std::string getTime(unsigned int step) const;
+        std::string getTime(const unsigned int step) const;
         std::string getTotalTime() const;
 
         friend ostream& operator<<(ostream& os, const PerfMeasure& perf);
