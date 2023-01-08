@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Application.hpp" />
+    <ClInclude Include="src\common.hpp" />
     <ClInclude Include="src\ConfigReader\ConfigReader.hpp" />
     <ClInclude Include="src\config_interfaces.hpp" />
     <ClInclude Include="src\mvc\Controller\Controller.hpp" />
@@ -168,9 +169,12 @@
     <ClInclude Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.hpp" />
     <ClInclude Include="src\mvc\Model\Network\Graphe\Colorable\Colorable.hpp" />
     <ClInclude Include="src\mvc\Model\Network\Graphe\Graphe.hpp" />
+    <ClInclude Include="src\mvc\Model\Network\Graphe\GrapheBacktrack\GrapheBacktrack.hpp" />
+    <ClInclude Include="src\mvc\Model\Network\Graphe\GrapheGreedy\GrapheGreedy.hpp" />
     <ClInclude Include="src\mvc\Model\Network\NetworkModel.hpp" />
     <ClInclude Include="src\mvc\Renderer\Renderer.hpp" />
     <ClInclude Include="src\utils\IniSet\IniSet.hpp" />
+    <ClInclude Include="src\utils\PerfMeasure\PerfMeasure.hpp" />
     <ClInclude Include="src\utils\utils.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,13 +191,19 @@
     <ClCompile Include="src\mvc\Model\Network\Antenna\GeoPosition\GeoPosition.cpp" />
     <ClCompile Include="src\mvc\Model\Network\Graphe\Colorable\Colorable.cpp" />
     <ClCompile Include="src\mvc\Model\Network\Graphe\Graphe.cpp" />
+    <ClCompile Include="src\mvc\Model\Network\Graphe\GrapheBacktrack\GrapheBacktrack.cpp" />
+    <ClCompile Include="src\mvc\Model\Network\Graphe\GrapheGreedy\GrapheGreedy.cpp" />
     <ClCompile Include="src\mvc\Model\Network\NetworkModel.cpp" />
     <ClCompile Include="src\mvc\Renderer\Renderer.cpp" />
     <ClCompile Include="src\utils\IniSet\IniSet.cpp" />
+    <ClCompile Include="src\utils\PerfMeasure\PerfMeasure.cpp" />
     <ClCompile Include="src\utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="bin\data\data100.csv" />
+    <None Include="bin\data\data30.csv" />
+    <None Include="bin\data\data500.csv" />
     <None Include="bin\openal32.dll" />
     <None Include="bin\res\config.ini" />
     <None Include="bin\sfml-audio-2.dll" />
@@ -206,6 +216,7 @@
     <None Include="bin\sfml-system-d-2.dll" />
     <None Include="bin\sfml-window-2.dll" />
     <None Include="bin\sfml-window-d-2.dll" />
+    <None Include="bin\tgui-d.dll" />
     <None Include="bin\tgui.dll" />
     <None Include="Makefile" />
     <None Include="README.md" />
@@ -340,6 +351,9 @@
     <Image Include="bin\res\map\tiles\level_3\MapTex3_F-5.png" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bin\data\debug.txt" />
+    <Text Include="bin\data\sample1.txt" />
+    <Text Include="bin\data\sample2.txt" />
     <Text Include="bin\res\fonts\LICENSE.txt" />
     <Text Include="bin\res\sample1.txt" />
     <Text Include="bin\res\sample_coords.txt" />

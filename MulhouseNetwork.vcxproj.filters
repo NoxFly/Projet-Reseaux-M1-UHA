@@ -66,6 +66,18 @@
     <ClInclude Include="src\mvc\Model\Network\Graphe\Graphe.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="src\common.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\PerfMeasure\PerfMeasure.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Network\Graphe\GrapheGreedy\GrapheGreedy.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\Model\Network\Graphe\GrapheBacktrack\GrapheBacktrack.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -119,6 +131,15 @@
     <ClCompile Include="src\mvc\Model\Network\Graphe\Graphe.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\PerfMeasure\PerfMeasure.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Network\Graphe\GrapheGreedy\GrapheGreedy.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mvc\Model\Network\Graphe\GrapheBacktrack\GrapheBacktrack.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -138,6 +159,10 @@
     <None Include="bin\sfml-window-d-2.dll" />
     <None Include="bin\tgui.dll" />
     <None Include="bin\res\config.ini" />
+    <None Include="bin\data\data30.csv" />
+    <None Include="bin\data\data100.csv" />
+    <None Include="bin\data\data500.csv" />
+    <None Include="bin\tgui-d.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bin\res\favicon.png">
@@ -523,6 +548,9 @@
     <Text Include="bin\res\sample_coords.txt" />
     <Text Include="bin\res\sample1.txt" />
     <Text Include="bin\res\fonts\LICENSE.txt" />
+    <Text Include="bin\data\debug.txt" />
+    <Text Include="bin\data\sample1.txt" />
+    <Text Include="bin\data\sample2.txt" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\res\fonts\font.ttf" />
